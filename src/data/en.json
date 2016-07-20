@@ -179,6 +179,7 @@
         "questions": "items",
         "answers": "numbers",
         "session_step": 10,
+        "step_score": 5,
         "bar_space_above": 0.2,
         "bar_length_constraint": 0.3,
         "type": "how_many",

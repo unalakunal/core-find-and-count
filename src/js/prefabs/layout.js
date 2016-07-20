@@ -52,7 +52,7 @@ export default class Layout extends Phaser.Group {
             }
         });
         for (let i = 0; i < this.questions.length; i++) {
-            //TODO: layout each of it
+            //TODO: layout each of it, find a way to do it randomly
         }
     }
 

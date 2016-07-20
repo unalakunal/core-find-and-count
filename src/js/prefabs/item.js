@@ -3,7 +3,6 @@ export default class Item extends Phaser.Sprite {
         super(game, x, y, item.image);
         this.world.x = 512;
         this.world.y = 300;
-        console.log("sprite", this.world);
         this.item = item;
         this.name = item.text;
         this.hidden = false;
