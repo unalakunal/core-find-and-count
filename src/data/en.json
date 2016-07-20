@@ -67,10 +67,121 @@
             "name": "clickSound",
             "type": "audio",
             "path": "audio/click.mp3"
+        },
+        {
+            "name": "elephant",
+            "type": "image",
+            "path": "img/item/elephant.png"
+        },
+        {
+            "name": "giraffe",
+            "type": "image",
+            "path": "img/item/giraffe.png"
+        },
+        {
+            "name": "hippo",
+            "type": "image",
+            "path": "img/item/hippo.png"
+        },
+        {
+            "name": "monkey",
+            "type": "image",
+            "path": "img/item/monkey.png"
+        },
+        {
+            "name": "panda",
+            "type": "image",
+            "path": "img/item/panda.png"
+        },
+        {
+            "name": "parrot",
+            "type": "image",
+            "path": "img/item/parrot.png"
         }
     ],
+    "items": [
+        {
+            "id": "elephant",
+            "kind": "item",
+            "audio": "elephant_audio",
+            "question": "elephant_question",
+            "tint": "0x0000FF",
+            "text": "elephant",
+            "image": "elephant",
+            "outline": "elephant"
+        },
+        {
+            "id": "giraffe",
+            "kind": "item",
+            "audio": "elephant_audio",
+            "question": "elephant_question",
+            "tint": "0x0000FF",
+            "text": "giraffe",
+            "image": "giraffe",
+            "outline": "giraffe"
+        },
+        {
+            "id": "hippo",
+            "kind": "item",
+            "audio": "elephant_audio",
+            "question": "elephant_question",
+            "tint": "0x0000FF",
+            "text": "hippo",
+            "image": "hippo",
+            "outline": "hippo"
+        },
+        {
+            "id": "monkey",
+            "kind": "item",
+            "audio": "elephant_audio",
+            "question": "elephant_question",
+            "tint": "0x0000FF",
+            "text": "monkey",
+            "image": "monkey",
+            "outline": "monkey"
+        },
+        {
+            "id": "panda",
+            "kind": "item",
+            "audio": "elephant_audio",
+            "question": "elephant_question",
+            "tint": "0x0000FF",
+            "text": "panda",
+            "image": "panda",
+            "outline": "panda"
+        },
+        {
+            "id": "parrot",
+            "kind": "item",
+            "audio": "elephant_audio",
+            "question": "elephant_question",
+            "tint": "0x0000FF",
+            "text": "parrot",
+            "image": "parrot",
+            "outline": "parrot"
+        }
+    ],
+    "numbers": {
+        
+    },
+    "layout": {
+        "fixed_size": false,
+        "max_item": 10,
+        "cell_anchor": {
+            "x": 0.5,
+            "y": 0.5
+        },
+        "width": 0.7,
+        "above_space": 0.12,
+        "bar_length": 0.3
+    },
     "game": {
+        "questions": "items",
+        "answers": "numbers",
         "session_step": 10,
+        "bar_space_above": 0.2,
+        "bar_length_constraint": 0.3,
+        "type": "how_many",
         "balloon_options": {
             "count": 15,
             "luminosity": "bright"

@@ -1,18 +1,18 @@
 import Session from '../session'
+import Scene from '../scene'
 import Balloon from '../prefabs/balloon'
 
 export default class Play extends Phaser.State {
     create() {
         let session = new Session({ state: this });
-        this.session = session
-        
-        this.game.add.button(25, 25, 'back', this.backAction, this);
-        Balloon.random()
+        let scene = new Scene({ delegate: this, session: session });
 
-        let self = this
-        setTimeout(function() {
-            self.sceneEnded();
-        }, 2000);
+        this.session = session
+        this.scene = scene
+
+        this.game.add.button(25, 25, 'back', this.backAction, this);
+        scene.init();
+
     }
 
     backAction(button) {
