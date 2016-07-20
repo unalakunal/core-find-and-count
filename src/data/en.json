@@ -1,0 +1,91 @@
+{
+    "settings/show_hint/title": "Show Hint",
+    "settings/show_hint/description": "Show hint",
+    "settings/hint_duration/title": "Hint Duration",
+    "settings/hint_duration/description": "Hint duration",
+    "loadingText": "Loading...",
+    "loadingFont": "60px Arial",
+    "loadingBackground": "#18B9F2",
+    "loadingColor": "#fff",
+    "preload": [
+        {
+            "name": "playButton",
+            "type": "image",
+            "path": "img/en/play.png"
+        },
+        {
+            "name": "back",
+            "type": "image",
+            "path": "img/back.png"
+        },
+        {
+            "name": "white_box",
+            "type": "image",
+            "path": "img/white_box.png"
+        },
+        {
+            "name": "hand",
+            "type": "image",
+            "path": "img/hand.png"
+        },
+        {
+            "name": "ballon_body",
+            "type": "image",
+            "path": "img/ballon/ballon_body.png"
+        },
+        {
+            "name": "ballon_light",
+            "type": "image",
+            "path": "img/ballon/ballon_light.png"
+        },
+        {
+            "name": "ballon_rope",
+            "type": "image",
+            "path": "img/ballon/ballon_rope.png"
+        },
+        {
+            "name": "ballon_star",
+            "type": "image",
+            "path": "img/ballon/ballon_star.png"
+        },
+        {
+            "name": "applause",
+            "type": "audio",
+            "path": "audio/applause.mp3"
+        },
+        {
+            "name": "balloon",
+            "type": "audio",
+            "path": "audio/balon.mp3"
+        },
+        {
+            "name": "backmusic",
+            "type": "audio",
+            "path": "audio/bg.mp3"
+        },
+        {
+            "name": "clickSound",
+            "type": "audio",
+            "path": "audio/click.mp3"
+        }
+    ],
+    "game": {
+        "session_step": 10,
+        "balloon_options": {
+            "count": 15,
+            "luminosity": "bright"
+        },
+        "balloon_sound": "balloon",
+        "correct_sound": "applause",
+        "click_sound": "clickSound"
+    },
+    "game_music": {
+        "music": "backmusic",
+        "volume": 1,
+        "loop": true,
+        "volume_load_screen": 1,
+        "volume_home_screen": 1,
+        "volume_play_screen": 0.3,
+        "volume_over_screen": 0.7
+    }
+}
