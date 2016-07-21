@@ -1,5 +1,5 @@
 export default class Item extends Phaser.Sprite {
-    constructor({game, x, y, item, scale}) {
+    constructor({game, x, y, item}) {
         super(game, x, y, item.image);
         this.world.x = 512;
         this.world.y = 300;
@@ -9,10 +9,6 @@ export default class Item extends Phaser.Sprite {
         this.tweenArray = [];
         this.oldX = x;
         this.oldY = y;
-        this.scale = scale;
-        this.sprite = this.game.add.sprite(x, y, item.id);
-        this.sprite.scale.x = scale.x
-        this.sprite.scale.y = scale.y
 
         if (otsimo.kv.game.add_outline) {
             var oimg = item.outline || otsimo.kv.game.outline_image;

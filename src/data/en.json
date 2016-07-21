@@ -165,6 +165,7 @@
         
     },
     "layout": {
+        "side_space_constant": 0.2,
         "fixed_size": false,
         "max_item": 10,
         "cell_anchor": {
@@ -180,9 +181,10 @@
         "answers": "numbers",
         "session_step": 10,
         "step_score": 5,
-        "bar_space_above": 0.2,
+        "bar_space_above_constant": 0.2,
         "bar_length_constraint": 0.3,
         "type": "how_many",
+        "add_outline": false,
         "balloon_options": {
             "count": 15,
             "luminosity": "bright"

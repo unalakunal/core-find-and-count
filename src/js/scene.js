@@ -30,8 +30,8 @@ export default class Scene {
 
         console.log("layout", layout);
 
-        layout.x = layout.hiddenPos.x;
-        layout.y = layout.hiddenPos.y;
+        //layout.x = layout.hiddenPos.x;
+        //layout.y = layout.hiddenPos.y;
 
         this.layout = layout;
         // TODO: this.gameStep = next;

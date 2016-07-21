@@ -1,1 +1,1 @@
-otsimo-game-template
+Game for learning numbers in an interactive way.
