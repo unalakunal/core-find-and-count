@@ -28,6 +28,7 @@ export default class Scene {
      */
     init() {
         let answers = [];
+        //TODO: answers: this.random.for("numbers"),
         let questions = this.random.for("items");
         let answer = this.random.items[0].id;
         console.log("this.random.items: ", this.random.items);
@@ -51,7 +52,6 @@ export default class Scene {
             game: otsimo.game,
             staged: staged,
             answers: answers,
-            //TODO: answers: this.random.for("numbers"),
             questions: questions
         });
 
@@ -81,9 +81,7 @@ export default class Scene {
      * @class Scene 
      * @param {string} [answer] - Name of the objects on the screen.
      * @param {number} [y_time] - The leave time of the animation on text.
-     *  
     */
-
     announce(answer, y_time) {
         let txt = sprintf(otsimo.kv.announce_text, answer, "s are there?");
         console.log("txt: ", txt);

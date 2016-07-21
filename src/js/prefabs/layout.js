@@ -1,18 +1,55 @@
 import Item from "./item"
 import Number from "./number"
 
+/**
+ * Creates a new Layout object with specifying the answers, questions and if it's a staged game.
+ * Layout class is not aware of item and number difference. It just knows answers and questions.
+ * Everything on gameplay screen is inside a layout object, which consists of items or numbers.
+ * 
+ * @class Layout
+ * @constructor
+ * @param {object} [game] - The game which the layout object belongs to.
+ * @param {boolean} [staged] - A staged game contains two types of on screen data: answers and questions.
+ *                             If a game is not staged, there are only interactive objects (answers) on the screen.
+ * @param {list} [answers] - The list of answer sprites. Answers are input enabled.
+ * @param {list} [questions] - The list of question sprites. Questions can not be touched or dragged.
+ */
+
 export default class Layout extends Phaser.Group {
     constructor({game, staged, answers, questions}) {
         super(game);
+        /**
+         * @property {boolean} staged - A staged game contains two types of on screen data: answers and questions.
+         *                              If a game is not staged, there are only interactive objects (answers) on the screen.
+         */
         this.staged = staged;
+
+        /**
+         * @property {Phaser.Signal} itemSelected - The signal input for answers on the layout.
+         */
         this.itemSelected = new Phaser.Signal();
+
+        /**
+         * @property {list} answers - The list of answer sprites. Answers are input enabled.
+         */
         this.answers = answers;
+
+        /**
+         * @property {list} questions - The list of question sprites. Questions can not be touched or dragged.
+         */
         this.questions = questions;
+
         console.log("layout.questions: ", questions);
-        this.layout();
+        this.init();
     }
 
-    layout() {
+    /**
+     * Initializes the layout object, creates hidden and visible position values to be used in scene announce.
+     * Decides the layout type according to the staged choice.
+     * 
+     * @method Layout.init
+     */
+    init() {
         this.hiddenPos = {
             x: otsimo.kv.game.hidden_pos.x * otsimo.game.width,
             //y: (otsimo.game.height + maxHeight),
@@ -31,21 +68,40 @@ export default class Layout extends Phaser.Group {
         }
     }
 
+    /**
+     * Calls the proper functions for staged games.
+     * 
+     * @method Layout.layoutBoth
+     */
     layoutBoth() {
         // background platform arrives
-        this.setBackGround();
+        this.setBackground();
         // questions reach above
         this.layoutQuestions();
         // answers come below
         this.layoutAnswers();
     }
-
-    setBackGround() {
+    
+    /**
+     * Sets background for staged games to display and highlight questions.
+     * 
+     * @method Layout.setBackground
+     * @return {Phaser.Image} image - Phaser image of background.
+     */
+    setBackground() {
         console.log("background set, pass for now");
+        // TODO: return background object
     }
-
+    
+    /**
+     * Adds questions to layout. Creates each question as a number or item.
+     * Specifies their coordinates and scale values according to their number.
+     * 
+     * @method Layout.layoutQuestions
+     */
     layoutQuestions() {
         // question and answer exist seperately
+        // TODO: question can be a number
         let len = this.questions.length;
         this.items = [];
         for (let i = 0; i < len; i++) {
@@ -75,8 +131,11 @@ export default class Layout extends Phaser.Group {
             let xk = otsimo.kv.layout.side_space_constant;
             let yk = otsimo.kv.layout.above_space * 1.5;
             if (total_width * 0.6 > avl_width) {
-                console.log("can't fit in av_space")
-                sc = (avl_width / total_width);
+                console.log("can't fit in av_space");
+                let width_ratio = (avl_width / total_width);
+                if (width_ratio < 0.45) {
+                    sc = width_ratio;
+                }
                 let inc_x = (item.width * sc) / otsimo.game.width;
                 xk = xk + inc_x * i;
                 if (i % 2 == 1) {
@@ -94,6 +153,7 @@ export default class Layout extends Phaser.Group {
             console.log("xk: ", xk, "yk: ", yk);
             item.x = xk * otsimo.game.width;
             item.y = yk * otsimo.game.height;
+            console.log("sc constant: ", sc);
             item.scale.x = sc;
             item.scale.y = sc;
             item.anchor.set(0.5, 0.5);
