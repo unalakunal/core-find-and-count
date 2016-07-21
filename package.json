@@ -4,11 +4,11 @@
   "description": "",
   "repository": {
     "type": "git",
-    "url": "https://github.com/otsimo/otsimo-game-template.git"
+    "url": "git@bitbucket.org:otsimo/learn-numbers.git"
   },
   "author": "",
   "license": "ISC",
-  "homepage": "https://github.com/otsimo/otsimo-game-template",
+  "homepage": "git@bitbucket.org:otsimo/learn-numbers.git",
   "dependencies": {
     "otsimo": "^1.0.0",
     "phaser": "^2.4.4",

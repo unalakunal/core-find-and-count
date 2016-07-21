@@ -7,6 +7,14 @@
     "loadingFont": "60px Arial",
     "loadingBackground": "#18B9F2",
     "loadingColor": "#fff",
+    "announce_text": "How many %s%s",
+    "announce_text_time": 500,
+    "announce_style": {
+        "strokeThickness": 4,
+        "stroke": "#FFFFFF",
+        "font": "65px mfont",
+        "align": "center"
+    },
     "preload": [
         {
             "name": "playButton",
@@ -161,9 +169,7 @@
             "outline": "parrot"
         }
     ],
-    "numbers": {
-        
-    },
+    "numbers": {},
     "layout": {
         "side_space_constant": 0.2,
         "fixed_size": false,
@@ -173,7 +179,7 @@
             "y": 0.5
         },
         "width": 0.7,
-        "above_space": 0.12,
+        "above_space": 0.18,
         "bar_length_constant": 0.25
     },
     "game": {
@@ -181,10 +187,17 @@
         "answers": "numbers",
         "session_step": 10,
         "step_score": 5,
-        "bar_space_above_constant": 0.2,
         "bar_length_constraint": 0.3,
         "type": "how_many",
         "add_outline": false,
+        "hidden_pos": {
+            "x": 0,
+            "y": 1.5
+        },
+        "visible_pos": {
+            "x": 0,
+            "y": 0
+        },
         "balloon_options": {
             "count": 15,
             "luminosity": "bright"

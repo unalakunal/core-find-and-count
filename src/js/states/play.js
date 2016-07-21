@@ -5,14 +5,13 @@ import Balloon from '../prefabs/balloon'
 export default class Play extends Phaser.State {
     create() {
         let session = new Session({ state: this });
-        let scene = new Scene({ delegate: this, session: session });
+        let scene = new Scene({ session: session });
 
         this.session = session
         this.scene = scene
 
         this.game.add.button(25, 25, 'back', this.backAction, this);
         scene.init();
-
     }
 
     backAction(button) {

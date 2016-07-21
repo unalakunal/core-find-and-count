@@ -14,9 +14,14 @@ export default class Layout extends Phaser.Group {
 
     layout() {
         this.hiddenPos = {
-            x: otsimo.game.world.centerX,
+            x: otsimo.kv.game.hidden_pos.x * otsimo.game.width,
             //y: (otsimo.game.height + maxHeight),
-            y: otsimo.game.height * 1.5
+            y: otsimo.kv.game.hidden_pos.y * otsimo.game.height
+        }
+
+        this.visiblePos = {
+            x: otsimo.kv.game.visible_pos.x * otsimo.game.width,
+            y: otsimo.kv.game.visible_pos.y * otsimo.game.height
         }
 
         if (this.staged) {
@@ -54,7 +59,6 @@ export default class Layout extends Phaser.Group {
                     y: 1
                 }
             });
-            //item.worldVisible = true;
             this.items.push(item);
             console.log("item.width", item.width, "item.height: ", item.height);
         }
@@ -87,13 +91,12 @@ export default class Layout extends Phaser.Group {
                     xk = xk + 0.25 * ((i + 1) % 2) * ((i + 2) * 0.5);
                 }
             }
-            //TODO: layout each of it, find a way to do it randomly
             console.log("xk: ", xk, "yk: ", yk);
             item.x = xk * otsimo.game.width;
             item.y = yk * otsimo.game.height;
             item.scale.x = sc;
             item.scale.y = sc;
-            //console.log("changed item: ", this.items[i]);
+            item.anchor.set(0.5, 0.5);
             this.add(item);
         }
     }
@@ -106,6 +109,12 @@ export default class Layout extends Phaser.Group {
 
     layoutOnce() {
         // questions are also answers
+    }
+
+    move(x, y, duration) {
+        let t = otsimo.game.add.tween(this)
+            .to({ x: x, y: y }, duration, Phaser.Easing.Back.Out);
+        t.start();
     }
 
     relayout() {

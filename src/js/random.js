@@ -15,7 +15,7 @@ export class Random {
 
         }
     }
-    
+
     itemAmount() {
         let amount = Math.floor(Math.random() * 10);
         while (amount == 0) {
@@ -24,7 +24,7 @@ export class Random {
         console.log("number of items on screen:", amount);
         return amount
     }
-    
+
     forKind(array) {
         console.log("array in forKind: ", array);
         let len = array.length;
@@ -34,34 +34,43 @@ export class Random {
         }
         return array[n];
     }
-    
+
     /**
      *  Provides count number of kinds in an array randomly.
      */
-    
+
     for(type) {
         let count = this.itemAmount();
         if (type == "items") {
-            var kind = this.forKind(this.items);        
+            var kind = this.forKind(this.items);
+            this.itemsCount = count;
         } else {
-            var kind = this.forKind(this.numbers);                    
+            var kind = this.forKind(this.numbers);
+            this.numbersCount = count;
         }
-        
+
         console.log("random kind returned with: ", kind, "and count is: ", count);
-        
+
         let res = [];
         for (let i = 0; i < count; i++) {
             res.push(kind);
         }
+        
+        if (type == "items") {
+            this.items = res; 
+        } else {
+            this.numbers = res;
+        }
+
         return res;
     }
-    
+
     forNumbers() {
         let count = this.itemAmount();
         let kind = this.forKind(this.numbers);
-        
+
         console.log("random kind returned with: ", kind, "and count is: ", count);
-        
+
         return {
             "count": count,
             "kind": kind
