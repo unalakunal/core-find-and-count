@@ -48,7 +48,11 @@ export default class Layout extends Phaser.Group {
                 game: otsimo.game,
                 x: this.hiddenPos.x,
                 y: this.hiddenPos.y,
-                item: this.questions[i]
+                item: this.questions[i],
+                scale: {
+                    x: 1,
+                    y: 1
+                }
             });
             //item.worldVisible = true;
             this.items.push(item);
@@ -58,41 +62,37 @@ export default class Layout extends Phaser.Group {
         console.log("total_width: ", total_width);
         let avl_width = otsimo.game.width * (1 - otsimo.kv.layout.side_space_constant * 2);
         console.log("avl_width: ", avl_width);
-        let inc_rate_x = 0.2;
+        let total_height = this.items[0].height * 2;
+        console.log("total_height: ", total_height);
+        let avl_height = otsimo.kv.layout.bar_length_constant * otsimo.game.height;
         for (let i = 0; i < len; i++) {
             let item = this.items[i];
-            // scale constants
-            let xs = 0.3;
-            let ys = 0.3;
-            // position constants
+            let sc = 0.4;
             let xk = otsimo.kv.layout.side_space_constant;
-            let yk = otsimo.kv.game.bar_space_above_constant * 1.2;
-            if (total_width > avl_width) {
-                console.log("items can't fit in av_space");
-                // items can't fit in the available space
-                xs = 0.3;
-                ys = 0.3;
-                inc_rate_x = (this.items[i].width / otsimo.game.width) * i * 0.35
-                xk = xk + inc_rate_x;
-                if (i % 2 == 0) {
-                    let inc_rate_y = (this.items[i].height / otsimo.game.height) * 0.3;
-                    yk = yk + inc_rate_y;
+            let yk = otsimo.kv.layout.above_space * 1.5;
+            if (total_width * 0.6 > avl_width) {
+                console.log("can't fit in av_space")
+                sc = (avl_width / total_width);
+                let inc_x = (item.width * sc) / otsimo.game.width;
+                xk = xk + inc_x * i;
+                if (i % 2 == 1) {
+                    let inc_y = (item.height * (avl_height / total_height)) / otsimo.game.height;
+                    yk = yk + inc_y;
                 }
             } else {
-                xs = 0.5;
-                ys = 0.5;
-                console.log("items can fit in av_space")
-                inc_rate_x = (this.items[i].width / otsimo.game.width) * i + 0.05
-                xk = xk + (inc_rate_x);
+                yk = yk + 0.05;
+                if (len % 2 == 0) {
+                    xk = (avl_width / otsimo.game.width) * 0.5 * (i + 1);
+                } else {
+                    xk = xk + 0.25 * ((i + 1) % 2) * ((i + 2) * 0.5);
+                }
             }
             //TODO: layout each of it, find a way to do it randomly
-            console.log("before change: ", this.items[i]);
-            console.log("w: ", xk * otsimo.game.width);
-            console.log("h: ", yk * otsimo.game.height);
+            console.log("xk: ", xk, "yk: ", yk);
             item.x = xk * otsimo.game.width;
             item.y = yk * otsimo.game.height;
-            item.scale.x = xs;
-            item.scale.y = ys;
+            item.scale.x = sc;
+            item.scale.y = sc;
             //console.log("changed item: ", this.items[i]);
             this.add(item);
         }
