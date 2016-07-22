@@ -14,7 +14,6 @@ import Number from "./number"
  * @param {list} [answers] - The list of answer sprites. Answers are input enabled.
  * @param {list} [questions] - The list of question sprites. Questions can not be touched or dragged.
  */
-
 export default class Layout extends Phaser.Group {
     constructor({game, staged, answers, questions}) {
         super(game);
@@ -92,7 +91,12 @@ export default class Layout extends Phaser.Group {
         // TODO: return background object
     }
 
-    //TODO
+    /**
+     * Puts questions on screen in zigzag formation.
+     * 
+     * @method Layout.zigzag
+     * @param {number} [start_x] - Starting x coordinate, calculated in layoutQuestions considering question objects in layout.  
+     */
     zigzag(start_x) {
         let len = this.items.length;
         let start_y = otsimo.game.height * otsimo.kv.layout.above_space;
@@ -109,6 +113,12 @@ export default class Layout extends Phaser.Group {
         }
     }
 
+    /**
+     * Puts questions on screen in line formation.
+     * 
+     * @method Layout.line
+     * @param {number} [start_x] - Starting x coordinate, calculated in layoutQuestions considering question objects in layout.  
+     */
     line(start_x) {
         let len = this.items.length;
         let start_y = otsimo.game.height * otsimo.kv.layout.above_space * 1.2;
@@ -122,6 +132,12 @@ export default class Layout extends Phaser.Group {
         }
     }
 
+    /**
+     * Puts questions on screen in square formation.
+     * 
+     * @method Layout.line
+     * @param {number} [start_x] - Starting x coordinate, calculated in layoutQuestions considering question objects in layout.  
+     */
     square(start_x) {
         // TODO
     }
@@ -129,7 +145,7 @@ export default class Layout extends Phaser.Group {
 
     /**
      * Adds questions to layout. Creates each question as a number or item.
-     * Specifies their coordinates and scale values according to their number.
+     * Randomly calls zigzag, line or square for specific coordinate. Edits permissions.
      * 
      * @method Layout.layoutQuestions
      */
@@ -176,6 +192,13 @@ export default class Layout extends Phaser.Group {
         this[func](start_x)
     }
 
+    /**
+     * Adds answers to layout. Creates each answer as numbers.
+     * Specifies their coordinates and scale values according to their number.
+     * Doesn't get called when there are no questions. Method "layoutOnce" is called in that case.
+     *
+     * @method Layout.layoutAnswers 
+     */
     layoutAnswers() {
         let len = this.answers.length;
         this.numbers = [];
@@ -208,6 +231,14 @@ export default class Layout extends Phaser.Group {
         // questions are also answers
     }
 
+    /**
+     * Moves layout on screen using tweens.
+     * 
+     * @method Layout.move
+     * @param {number} [x] - Arriving x coordinate of tween.
+     * @param {number} [y] - Arriving y coordinate of tween.
+     * @param {number} [duration] - Duration of tween.
+     */
     move(x, y, duration) {
         let t = otsimo.game.add.tween(this)
             .to({ x: x, y: y }, duration, Phaser.Easing.Back.Out);

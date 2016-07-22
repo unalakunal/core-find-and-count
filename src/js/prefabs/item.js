@@ -1,3 +1,14 @@
+/**
+ * Creates a new Item object specifying the x, y coordinates; scale values and metadata of item.
+ * Item is only used as question, never gets enabled in this project.
+ * 
+ * @class Item
+ * @constructor
+ * @param {object} [game] - The game which the layout object belongs to.
+ * @param {number} [x] - Item's x coordinate on world.
+ * @param {number} [y] - Item's y coordinate on world.
+ * @param {object} [item] - The metadata item, contains otsimo.kv.items' keys and values.
+ */
 export default class Item extends Phaser.Sprite {
     constructor({game, x, y, item, scale}) {
         super(game, x, y, item.image);
@@ -10,7 +21,7 @@ export default class Item extends Phaser.Sprite {
         this.oldX = x;
         this.oldY = y;
         this.scale.x = scale.x;
-        this.scale.y = scale.y;        
+        this.scale.y = scale.y;
 
         if (otsimo.kv.game.add_outline) {
             var oimg = item.outline || otsimo.kv.game.outline_image;
