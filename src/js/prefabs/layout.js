@@ -89,9 +89,22 @@ export default class Layout extends Phaser.Group {
      * @return {Phaser.Image} [image] - Phaser image of background.
      */
     setBackground() {
-        console.log("background set, pass for now");
         // TODO: return background object
     }
+
+    //TODO
+    zigzag() {
+
+    }
+
+    line() {
+
+    }
+
+    square() {
+
+    }
+
 
     /**
      * Adds questions to layout. Creates each question as a number or item.
@@ -100,6 +113,7 @@ export default class Layout extends Phaser.Group {
      * @method Layout.layoutQuestions
      */
     layoutQuestions() {
+        // TODO: list which numbers have which available formations
         // TODO: question can be a number
         // TODO: problems with 3,4,5 number of items
         let len = this.questions.length;
@@ -116,14 +130,14 @@ export default class Layout extends Phaser.Group {
                 }
             });
             this.items.push(item);
-            console.log("item.width", item.width, "item.height: ", item.height);
+            //console.log("item.width", item.width, "item.height: ", item.height);
         }
         let total_width = this.items[0].width * len;
-        console.log("total_width: ", total_width);
+        //console.log("total_width: ", total_width);
         let avl_width = otsimo.game.width * (1 - otsimo.kv.layout.side_space_constant_question * 2);
-        console.log("avl_width: ", avl_width);
+        //console.log("avl_width: ", avl_width);
         let total_height = this.items[0].height * 2;
-        console.log("total_height: ", total_height);
+        //console.log("total_height: ", total_height);
         let avl_height = otsimo.kv.layout.bar_length_constant * otsimo.game.height;
         for (let i = 0; i < len; i++) {
             let item = this.items[i];
@@ -131,7 +145,7 @@ export default class Layout extends Phaser.Group {
             let xk = otsimo.kv.layout.side_space_constant_question;
             let yk = otsimo.kv.layout.above_space * 1.5;
             if (total_width * 0.6 > avl_width) {
-                console.log("can't fit in av_space");
+                //console.log("can't fit in av_space");
                 let width_ratio = (avl_width / total_width);
                 if (width_ratio < 0.45) {
                     sc = width_ratio;
@@ -150,10 +164,10 @@ export default class Layout extends Phaser.Group {
                     xk = xk + 0.25 * ((i + 1) % 2) * ((i + 2) * 0.5);
                 }
             }
-            console.log("xk: ", xk, "yk: ", yk);
+            //console.log("xk: ", xk, "yk: ", yk);
             item.x = xk * otsimo.game.width;
             item.y = yk * otsimo.game.height;
-            console.log("sc constant: ", sc);
+            //console.log("sc constant: ", sc);
             item.scale.x = sc;
             item.scale.y = sc;
             item.anchor.set(0.5, 0.5);
@@ -164,14 +178,17 @@ export default class Layout extends Phaser.Group {
     layoutAnswers() {
         // question and answer exist both
         let len = this.answers.length;
-        console.log("this.answer in layout object: ", this.answers);
+        //console.log("this.answer in layout object: ", this.answers);
         if (len == 0) {
-            console.log("there are no answers to bind with layout object");
+            //console.log("there are no answers to bind with layout object");
         }
         // TODO: avl_width might be unnecessary
         let avl_width = otsimo.game.width * (1 - otsimo.kv.layout.side_space_constant_answer * 2);
         let yk = otsimo.kv.layout.answer_y_constant * otsimo.game.height;
         let center = otsimo.game.world.centerX;
+        console.log("this.answers: ", this.answers);
+        let leftmost = undefined;
+        let rightmost = undefined;
         if (len % 2 == 0) {
             // if there are even number of objects, put one of them left, one of them right of the center with a width/2 distance.
             for (let i = 0; i < 2; i++) {
@@ -185,15 +202,19 @@ export default class Layout extends Phaser.Group {
                         y: 0.8
                     }
                 });
-                let xk = center + num.width + item.width * 0.5;
+                let xk = center + num.width;
                 if (i % 2 == 0) {
-                    xk = center - num.width item.width * 0.5;
+                    xk = center - num.width;
+                    leftmost = num;
+                } else {
+                    rightmost = num;
                 }
-                console.log("answer xk: ", xk);
                 num.anchor.set(0.5, 0.5);
                 num.x = xk;
                 num.y = yk;
                 this.add(num);
+                console.log("even number answer xk: ", xk, num);
+                this.answers[i] = undefined;
             }
         } else {
             // if there are odd number of objects, put one in the center.
@@ -208,10 +229,40 @@ export default class Layout extends Phaser.Group {
                 }
             });
             num.anchor.set(0.5, 0.5);
-            console.log("answer xk: ", center);
-            num.x = center + item.width * 0.5;
+            num.x = center;
             num.y = yk;
             this.add(num);
+            leftmost = num;
+            rightmost = num;
+            console.log("odd number answer xk: ", center, num);
+            this.answers[0] = undefined;
+        }
+        let c = 0;
+        for (let i = 0; i < this.answers.length; i++) {
+            if (this.answers[i]) {
+                console.log("this.answers[i]: ", this.answers[i]);
+                let num = new Number({
+                    game: otsimo.game,
+                    x: this.hiddenPos.x,
+                    y: this.hiddenPos.y,
+                    num: this.answers[i],
+                    scale: {
+                        x: 0.8,
+                        y: 0.8
+                    }
+                });
+                num.anchor.set(0.5, 0.5);
+                num.y = yk;
+                if (c % 2 == 0) {
+                    num.x = leftmost.x - num.width * 1.2;
+                    leftmost = num;
+                } else {
+                    num.x = rightmost.x + num.width * 1.2;
+                    rightmost = num;
+                }
+                this.add(num);
+                c++;
+            }
         }
         // Update the leftmost and rightmost.
         //TODO: the difference from left and right has to be the same

@@ -216,7 +216,7 @@
     ],
     "numbers": [
         {
-            "id": "one",
+            "id": 1,
             "kind": "number",
             "audio": "one_audio",
             "question": "one_question",
@@ -226,7 +226,7 @@
             "outline": "one"
         },
         {
-            "id": "two",
+            "id": 2,
             "kind": "number",
             "audio": "one_audio",
             "question": "two_question",
@@ -236,7 +236,7 @@
             "outline": "two"
         },
         {
-            "id": "three",
+            "id": 3,
             "kind": "number",
             "audio": "one_audio",
             "question": "three_question",
@@ -246,7 +246,7 @@
             "outline": "one"
         },
         {
-            "id": "four",
+            "id": 4,
             "kind": "number",
             "audio": "one_audio",
             "question": "four_question",
@@ -256,7 +256,7 @@
             "outline": "one"
         },
         {
-            "id": "five",
+            "id": 5,
             "kind": "number",
             "audio": "one_audio",
             "question": "five_question",
@@ -266,7 +266,7 @@
             "outline": "one"
         },
         {
-            "id": "six",
+            "id": 6,
             "kind": "number",
             "audio": "one_audio",
             "question": "six_question",
@@ -276,7 +276,7 @@
             "outline": "one"
         },
         {
-            "id": "seven",
+            "id": 7,
             "kind": "number",
             "audio": "one_audio",
             "question": "seven_question",
@@ -286,7 +286,7 @@
             "outline": "one"
         },
         {
-            "id": "eight",
+            "id": 8,
             "kind": "number",
             "audio": "one_audio",
             "question": "eight_question",
@@ -296,7 +296,7 @@
             "outline": "one"
         },
         {
-            "id": "nine",
+            "id": 9,
             "kind": "number",
             "audio": "one_audio",
             "question": "nine_question",

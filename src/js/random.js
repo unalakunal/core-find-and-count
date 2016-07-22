@@ -19,7 +19,6 @@ export class Random {
          * @property {boolean} [notStaged] - If the game is staged or not. Changes according to game_type.
          */
         this.isStaged = true;
-        console.log("random constructor game type is: ", this.game_type);
         if (this.game_type == "compare") {
             this.isStaged = false;
             this.items = otsimo.kv[otsimo.kv.game.questions];
@@ -40,7 +39,6 @@ export class Random {
      * @param {boolean} [isAnswer] - If looking for answer amount, takes action accordingly.
      * @return {number} [amount] - Returns the amount of object specified.
      */
-
     amount(isAnswer) {
         let amount = Math.floor(Math.random() * 10);
         if (this.isStaged) {
@@ -72,7 +70,7 @@ export class Random {
                     break
             }
         }
-        console.log("number of things on screen which isAnswer is :", isAnswer, amount);
+        console.log("amount: ", amount, "isAnswer: ", isAnswer);
         return amount;
     }
 
@@ -84,29 +82,45 @@ export class Random {
      * @param {string} [answer] - If the type given is to be an answer, it should know the correct one beforehand.
      * @return {list} [res] - The result list, generated randomly. If answer is given, it puts it in a random place too.
      */
-
     for(type, answer) {
-        let count = this.amount(false);
+        let res = [];
+        console.log("in random for", answer);
+        if (answer) {
+            var answer_obj = this.numbers.filter(o => {
+                if (o.id == answer) {
+                    return true;
+                }
+                return false;
+            })[0];
+            console.log("answer_obj:  ", answer_obj);
+            var count = this.amount(true);
+        } else {
+            var count = this.amount(false);
+        }
         if (type == "items") {
             var kind = this.forKind(this.items);
-            this.itemsCount = count;
+            for (let i = 0; i < count; i++) {
+                res.push(kind);
+            }
         } else {
-            var kind = this.forKind(this.numbers);
-            this.numbersCount = count;
+            res[0] = answer_obj;
+            for (let i = 1; i < count; i++) {
+                let kind = this.forKind(this.numbers);
+                if (!(this.include(res, kind))) {
+                    console.log(res, " doesn't have ", kind, " in it.");
+                    res.push(kind);
+                }
+            }
         }
 
-        console.log("random kind returned with: ", kind, "and count is: ", count);
-
-        let res = [];
-        for (let i = 0; i < count; i++) {
-            res.push(kind);
-        }
+        res = this.shuffle(res);
 
         if (type == "items") {
             this.items = res;
         } else {
             this.numbers = res;
         }
+        console.log("returning res: ", res);
         return res;
     }
 
@@ -122,10 +136,21 @@ export class Random {
         console.log("array in forKind: ", array);
         let len = array.length;
         let n = Math.floor(Math.random() * len);
-        while (n == 0) {
-            n = Math.floor(Math.random() * len);
-        }
         return array[n];
     }
 
+    shuffle(o) {
+        for (var j, x, i = o.length; i; j = Math.floor(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x);
+        return o;
+    }
+
+    include(arr, member) {
+        for (let i = 0; i < arr.length; i++) {
+            if (arr[i] === member) {
+                // TODO: can't compare two objects
+                return true;
+            }
+        }
+        return false;
+    }
 }
