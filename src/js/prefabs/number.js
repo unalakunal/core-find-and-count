@@ -42,6 +42,5 @@ export default class Number extends Phaser.Sprite {
         let dur = 150;
         let ns = this.scale.x * 1.2;
         otsimo.game.add.tween(this.scale).to({ x: ns, y: ns }, dur, Phaser.Easing.Back.Out, true);
-        return dur;
     }
 }

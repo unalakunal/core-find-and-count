@@ -1,3 +1,4 @@
+import Scene from "./scene"
 
 export default class Session {
     constructor({state}) {
@@ -39,7 +40,7 @@ export default class Session {
         otsimo.customevent("game:failure", payload);
     }
 
-    correctInput(item, answerItem) {
+    correctInput(item, delay) {
         console.log("correct input");
         let now = Date.now();
         let payload = {
@@ -49,7 +50,11 @@ export default class Session {
             delta: now - this.previousInput
         }
         this.previousInput = now;
-        otsimo.customevent("game:failure", payload);
+        otsimo.customevent("game:success", payload);
+        let scene = new Scene({
+            session: this
+        })
+        scene.init(delay);
     }
 
     decrementScore() {

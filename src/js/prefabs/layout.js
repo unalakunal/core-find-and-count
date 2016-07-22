@@ -240,10 +240,10 @@ export default class Layout extends Phaser.Group {
      * @param {number} [y] - Arriving y coordinate of tween.
      * @param {number} [duration] - Duration of tween.
      */
-    move(x, y, duration) {
+    move(x, y, duration, delay) {
         console.log("tween duration: ", duration);
         let t = otsimo.game.add.tween(this)
-            .to({ x: x, y: y }, duration, Phaser.Easing.Back.Out);
+            .to({ x: x, y: y }, duration, Phaser.Easing.Back.Out, false, delay);
         t.start();
     }
 

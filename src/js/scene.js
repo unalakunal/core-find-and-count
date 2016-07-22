@@ -26,7 +26,7 @@ export default class Scene {
      * 
      * @method Scene.init 
      */
-    init() {
+    init(delay) {
         let questions = this.random.for("items");
         let answer = questions.length;
         let answers = this.random.for("numbers", answer);
@@ -59,7 +59,7 @@ export default class Scene {
         this.layout = layout;
 
         // TODO: this.gameStep = next;
-        this.announce(item_type, otsimo.kv.announce_text_time);
+        this.announce(item_type, otsimo.kv.announce_text_time, delay);
     }
 
     /**
@@ -73,15 +73,17 @@ export default class Scene {
         console.log("correct answer: ", this.random.answer.text);
         if (obj.num.id == this.random.answer.id) {
             //if the answer is true
-            let delay = obj.highlight() + 1000;
+            obj.highlight()
+            let delay = otsimo.kv.layout.move_away_duration;
             obj.playSound();
             if (otsimo.correctSound) {
                 otsimo.correctSound.play(null, null, 0.5)
             }
             this.layout.relayout({
                 delay: delay,
-                answer_name : this.random.answer.text
+                answer_name: this.random.answer.text
             });
+            this.session.correctInput(this.random.answer, delay);
         } else {
 
         }
@@ -97,7 +99,8 @@ export default class Scene {
      * @param {string} [answer] - Name of the objects on the screen.
      * @param {number} [y_time] - The leave time of the animation on text.
     */
-    announce(item_type, y_time) {
+    announce(item_type, y_time, delay) {
+        console.log("delay of announce: ", delay);
         let txt = sprintf(otsimo.kv.announce_text, item_type, "s are there?");
         console.log("txt: ", txt);
         let text = otsimo.game.add.text(otsimo.game.world.centerX, otsimo.game.world.centerY * (-0.1), txt, otsimo.kv.announce_font);
@@ -106,14 +109,14 @@ export default class Scene {
         text.alpha = 0.1;
         this.announceText = text;
 
-        otsimo.game.add.tween(text).to({ alpha: 1 }, 100, "Linear", true);
-        let a = otsimo.game.add.tween(text).to({ y: otsimo.game.world.centerY }, 500, Phaser.Easing.Circular.Out, false);
+        otsimo.game.add.tween(text).to({ alpha: 1 }, 100, "Linear", true, delay);
+        let a = otsimo.game.add.tween(text).to({ y: otsimo.game.world.centerY }, 500, Phaser.Easing.Circular.Out, false, delay);
         let b = otsimo.game.add.tween(text).to({ y: otsimo.game.height * (-0.3) }, y_time, Phaser.Easing.Circular.In, false, 1200);
         a.chain(b);
         a.start();
 
         setTimeout(() => {
-            this.layout.move(this.layout.visiblePos.x, this.layout.visiblePos.y, otsimo.kv.layout.show_layout_duration);
+            this.layout.move(this.layout.visiblePos.x, this.layout.visiblePos.y, otsimo.kv.layout.show_layout_duration, delay);
         }, 2000)
 
     }
