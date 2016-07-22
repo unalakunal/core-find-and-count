@@ -27,22 +27,17 @@ export default class Scene {
      * @method Scene.init 
      */
     init() {
-        let answers = [];
-        //TODO: answers: this.random.for("numbers"),
         let questions = this.random.for("items");
-        let answer = this.random.items[0].id;
+        let answer = questions.length;
+        let answers = this.random.for("numbers", answer);
+        let item_type = this.random.items[0].id;
         console.log("this.random.items: ", this.random.items);
         let staged = true;
-        console.log("answer: ", answer);
         if (otsimo.kv.game.type == "how_many") {
             // get random number of items to screen
-            console.log("it's a how_many game");
+            console.log("it's a how_many game with answer: ", answer);
             // TODO: add numbers under the bar after seeing the items above
         } else if (otsimo.kv.game.type == "compare") {
-            answers = this.random.for("numbers");
-            staged = false;
-        } else if (otsimo.kv.game.type == "sort") {
-            answers = this.random.for("numbers");
             staged = false;
         } else if (otsimo.kv.game.type == "find_next") {
             questions = this.random.for("numbers");
@@ -62,11 +57,15 @@ export default class Scene {
 
         this.layout = layout;
         // TODO: this.gameStep = next;
-        this.announce(answer, otsimo.kv.announce_text_time);
+        this.announce(item_type, otsimo.kv.announce_text_time);
     }
 
-
-
+    /**
+     * The input handler of the scene. Only enabled in answers.
+     * 
+     * @method Scene.onSelected
+     * @param {object} [item] - The item or number that takes the input.
+     */
     onSelected(item) {
         if (this.gameStep.done) {
             return;
@@ -82,8 +81,8 @@ export default class Scene {
      * @param {string} [answer] - Name of the objects on the screen.
      * @param {number} [y_time] - The leave time of the animation on text.
     */
-    announce(answer, y_time) {
-        let txt = sprintf(otsimo.kv.announce_text, answer, "s are there?");
+    announce(item_type, y_time) {
+        let txt = sprintf(otsimo.kv.announce_text, item_type, "s are there?");
         console.log("txt: ", txt);
         let text = otsimo.game.add.text(otsimo.game.world.centerX, otsimo.game.world.centerY * (-0.1), txt, otsimo.kv.announce_font);
 
