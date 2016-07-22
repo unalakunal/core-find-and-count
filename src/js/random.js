@@ -90,6 +90,7 @@ export class Random {
                 }
                 return false;
             })[0];
+            this.answer = answer_obj;
             console.log("answer_obj:  ", answer_obj);
             var count = this.amount(true);
         } else {

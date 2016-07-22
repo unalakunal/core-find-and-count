@@ -166,6 +166,7 @@ export default class Layout extends Phaser.Group {
                     y: 0.3
                 }
             });
+            item.inputEnabled = false;
             this.items.push(item);
             let w = this.items[0].width;
             var start_x = center_x - (len * w) * 0.5;
@@ -212,6 +213,8 @@ export default class Layout extends Phaser.Group {
                     y: 0.8
                 }
             });
+            num.inputEnabled = true;
+            num.events.onInputDown.add(this.clickListener, this);
             this.numbers.push(num);
             let w = this.numbers[0].width;
             let start_x = center_x - (len * w) * 0.5;
@@ -221,6 +224,7 @@ export default class Layout extends Phaser.Group {
             num.x = xk;
             num.y = yk;
             this.add(num);
+            num.events.onInputDown.add(this.clickListener, this, 0, num);
         }
     }
 
@@ -237,13 +241,22 @@ export default class Layout extends Phaser.Group {
      * @param {number} [duration] - Duration of tween.
      */
     move(x, y, duration) {
+        console.log("tween duration: ", duration);
         let t = otsimo.game.add.tween(this)
             .to({ x: x, y: y }, duration, Phaser.Easing.Back.Out);
         t.start();
     }
 
-    relayout() {
-
+    relayout({delay, answer_name}) {
+        let len = this.children.length;
+        for (let i = 0; i < len; i++) {
+            console.log("adding tween to: ", this.children[i], "where answer_name is: ", answer_name);
+            if (answer_name != this.children[i].name) {
+                otsimo.game.add.tween(this.children[i]).to({ alpha: 0.3 }, 300, "Linear", true);
+            }
+        }
+        console.log("delay: ", delay, "dur: ", otsimo.kv.layout.move_away_duration);
+        otsimo.game.add.tween(this).to({x: this.hiddenPos.x, y: this.hiddenPos.y}, otsimo.kv.layout.move_away_duration, Phaser.Easing.Back.In, true, delay);
     }
 
     moveOutItem() {
@@ -254,11 +267,15 @@ export default class Layout extends Phaser.Group {
 
     }
 
-    clickListener(sig) {
-        if (this.item.hidden) {
+    clickListener(num) {
+        console.log("this: ", this);
+        console.log("this.layout: ", this.layout);
+        console.log("num: ", num);
+        if (num.hidden) {
             return;
         }
-        console.log("clicked to: ", sig);
+        console.log(this.itemSelected);
+        this.itemSelected.dispatch(num);
     }
 
 }

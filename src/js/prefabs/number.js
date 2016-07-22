@@ -11,6 +11,7 @@ export default class Number extends Phaser.Sprite {
         this.oldY = y;
         this.scale.x = scale.x;
         this.scale.y = scale.y;
+        this.hidden = false;
 
         if (otsimo.kv.game.add_outline) {
             var oimg = num.outline || otsimo.kv.game.outline_image;
@@ -26,6 +27,7 @@ export default class Number extends Phaser.Sprite {
     }
 
     playSound() {
+        console.log("playsound");
         this.game.sound.play(this.num.audio);
     }
 
@@ -36,8 +38,10 @@ export default class Number extends Phaser.Sprite {
     }
 
     highlight() {
+        console.log("highlight");
         let dur = 150;
         let ns = this.scale.x * 1.2;
         otsimo.game.add.tween(this.scale).to({ x: ns, y: ns }, dur, Phaser.Easing.Back.Out, true);
+        return dur;
     }
 }

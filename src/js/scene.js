@@ -55,7 +55,9 @@ export default class Scene {
         layout.x = layout.hiddenPos.x;
         layout.y = layout.hiddenPos.y;
 
+        layout.itemSelected.add(this.onSelected, this);
         this.layout = layout;
+
         // TODO: this.gameStep = next;
         this.announce(item_type, otsimo.kv.announce_text_time);
     }
@@ -66,10 +68,24 @@ export default class Scene {
      * @method Scene.onSelected
      * @param {object} [item] - The item or number that takes the input.
      */
-    onSelected(item) {
-        if (this.gameStep.done) {
-            return;
+    onSelected(obj) {
+        console.log("object selected: ", obj);
+        console.log("correct answer: ", this.random.answer.text);
+        if (obj.num.id == this.random.answer.id) {
+            //if the answer is true
+            let delay = obj.highlight() + 1000;
+            obj.playSound();
+            if (otsimo.correctSound) {
+                otsimo.correctSound.play(null, null, 0.5)
+            }
+            this.layout.relayout({
+                delay: delay,
+                answer_name : this.random.answer.text
+            });
+        } else {
+
         }
+
     }
 
     /**
@@ -97,7 +113,7 @@ export default class Scene {
         a.start();
 
         setTimeout(() => {
-            this.layout.move(this.layout.visiblePos.x, this.layout.visiblePos.y, otsimo.kv.show_layout_duration);
+            this.layout.move(this.layout.visiblePos.x, this.layout.visiblePos.y, otsimo.kv.layout.show_layout_duration);
         }, 2000)
 
     }

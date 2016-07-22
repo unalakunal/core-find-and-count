@@ -312,6 +312,8 @@
         "fixed_size": false,
         "answer_y_constant": 0.6, 
         "max_item": 10,
+        "move_away_duration": 1000,
+        "show_layout_duration": 1000,
         "cell_anchor": {
             "x": 0.5,
             "y": 0.5
