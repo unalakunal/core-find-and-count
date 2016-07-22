@@ -31,12 +31,10 @@ export default class Scene {
         let answer = questions.length;
         let answers = this.random.for("numbers", answer);
         let item_type = this.random.items[0].id;
-        console.log("this.random.items: ", this.random.items);
+        //console.log("this.random.items: ", this.random.items);
         let staged = true;
         if (otsimo.kv.game.type == "how_many") {
             // get random number of items to screen
-            console.log("it's a how_many game with answer: ", answer);
-            // TODO: add numbers under the bar after seeing the items above
         } else if (otsimo.kv.game.type == "compare") {
             staged = false;
         } else if (otsimo.kv.game.type == "find_next") {
@@ -49,8 +47,6 @@ export default class Scene {
             answers: answers,
             questions: questions
         });
-
-        console.log("layout: ", layout);
 
         layout.x = layout.hiddenPos.x;
         layout.y = layout.hiddenPos.y;
@@ -81,12 +77,20 @@ export default class Scene {
             }
             this.layout.relayout({
                 delay: delay,
-                answer_name: this.random.answer.text
+                answer_name: this.random.answer.text,
+                isTrue: true,
+                obj: undefined
             });
             delay = delay * 2;
             this.session.correctInput(this.random.answer, delay);
         } else {
-
+            this.layout.relayout({
+                delay: 0,
+                answer_name: this.random.answer.text,
+                isTrue: false,
+                obj: obj
+            });
+            this.session.wrongInput(obj.num, this.random.answer);
         }
 
     }
@@ -101,9 +105,7 @@ export default class Scene {
      * @param {number} [y_time] - The leave time of the animation on text.
     */
     announce(item_type, y_time, delay) {
-        console.log("delay of announce: ", delay);
         let txt = sprintf(otsimo.kv.announce_text, item_type, "s are there?");
-        console.log("txt: ", txt);
         let text = otsimo.game.add.text(otsimo.game.world.centerX, otsimo.game.world.centerY * (-0.1), txt, otsimo.kv.announce_font);
 
         text.anchor.set(0.5, 0.5);

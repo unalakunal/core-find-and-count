@@ -38,7 +38,6 @@ export default class Layout extends Phaser.Group {
          */
         this.questions = questions;
 
-        //console.log("layout.questions: ", questions);
         this.init();
     }
 
@@ -241,41 +240,74 @@ export default class Layout extends Phaser.Group {
      * @param {number} [duration] - Duration of tween.
      */
     move(x, y, duration, delay) {
-        console.log("tween duration: ", duration);
         let t = otsimo.game.add.tween(this)
             .to({ x: x, y: y }, duration, Phaser.Easing.Back.Out, false, delay);
         t.start();
     }
 
-    relayout({delay, answer_name}) {
+    relayout({delay, answer_name, isTrue, obj}) {
+        if (isTrue) {
+            this.clean(delay, answer_name);
+        } else {
+            if (otsimo.kv.layout.on_wrong == "hide") {
+                //hide object and relayout
+                this.hide(obj, delay);
+            } else {
+                //move object away and relayout
+                this.moveAway(obj, delay);
+                this.numbers = this.numbers.filter(f => {
+                    if (f.num.text == obj.num.text) {
+                        return false;
+                    }
+                    return true;
+                });
+                setTimeout(() => {
+                    let len = this.numbers.length;
+                    let center_x = otsimo.game.world.centerX;
+                    let w = this.numbers[0].width;
+                    let start_x = center_x - (len * w) * 0.5;
+                    for (let i = 0; i < len; i++) {
+                        let num = this.numbers[i];
+                        let xk = start_x + num.width * i * 1.3;
+                        otsimo.game.add.tween(num).to({ x: xk }, 600, Phaser.Easing.Back.Out, true);
+                    }
+                }, 500);
+            }
+        }
+    }
+
+    clean(delay, answer_name) {
         let len = this.children.length;
         for (let i = 0; i < len; i++) {
-            console.log("adding tween to: ", this.children[i], "where answer_name is: ", answer_name);
             if (answer_name != this.children[i].name) {
                 otsimo.game.add.tween(this.children[i]).to({ alpha: 0.3 }, 300, "Linear", true);
             }
         }
-        console.log("delay: ", delay, "dur: ", otsimo.kv.layout.move_away_duration);
         let t = otsimo.game.add.tween(this).to({ x: this.hiddenPos.x, y: this.hiddenPos.y }, otsimo.kv.layout.move_away_duration, Phaser.Easing.Back.In, false, delay);
         t.start();
     }
 
-    moveOutItem() {
-
+    moveAway(obj, delay) {
+        obj.inputEnabled = false;
+        otsimo.game.add.tween(obj).to({ y: this.hiddenPos.y }, 1000, Phaser.Easing.Sinusoidal.In, true, delay);
     }
 
-    hideItem() {
-
+    hide(obj, delay) {
+        obj.inputEnabled = false;
+        let a = otsimo.game.add.tween(obj).to({ alpha: 0.3 }, 800, "Linear", false, delay);
+        let ret = obj.scale.x;
+        let b = otsimo.game.add.tween(obj.scale).to({ x: ret, y: ret }, 500, Phaser.Easing.Back.In, false);
+        a.chain(b);
+        a.start();
     }
 
     clickListener(num) {
-        console.log("this: ", this);
-        console.log("this.layout: ", this.layout);
-        console.log("num: ", num);
+        //console.log("this: ", this);
+        //console.log("this.layout: ", this.layout);
+        //console.log("num: ", num);
         if (num.hidden) {
             return;
         }
-        console.log(this.itemSelected);
         this.itemSelected.dispatch(num);
     }
 
