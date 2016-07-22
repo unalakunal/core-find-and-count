@@ -256,7 +256,8 @@ export default class Layout extends Phaser.Group {
             }
         }
         console.log("delay: ", delay, "dur: ", otsimo.kv.layout.move_away_duration);
-        otsimo.game.add.tween(this).to({x: this.hiddenPos.x, y: this.hiddenPos.y}, otsimo.kv.layout.move_away_duration, Phaser.Easing.Back.In, true, delay);
+        let t = otsimo.game.add.tween(this).to({ x: this.hiddenPos.x, y: this.hiddenPos.y }, otsimo.kv.layout.move_away_duration, Phaser.Easing.Back.In, false, delay);
+        t.start();
     }
 
     moveOutItem() {

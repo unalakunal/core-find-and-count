@@ -73,8 +73,8 @@ export default class Scene {
         console.log("correct answer: ", this.random.answer.text);
         if (obj.num.id == this.random.answer.id) {
             //if the answer is true
+            let delay = 1000;
             obj.highlight()
-            let delay = otsimo.kv.layout.move_away_duration;
             obj.playSound();
             if (otsimo.correctSound) {
                 otsimo.correctSound.play(null, null, 0.5)
@@ -83,6 +83,7 @@ export default class Scene {
                 delay: delay,
                 answer_name: this.random.answer.text
             });
+            delay = delay * 2;
             this.session.correctInput(this.random.answer, delay);
         } else {
 
