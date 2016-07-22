@@ -140,7 +140,7 @@ export default class Layout extends Phaser.Group {
         let len = this.questions.length;
         this.items = [];
         let center_x = otsimo.game.world.centerX;
-        let yk = 200;
+        let yk = otsimo.kv.layout.above_space;
         for (let i = 0; i < len; i++) {
             let item = new Item({
                 game: otsimo.game,
@@ -177,100 +177,31 @@ export default class Layout extends Phaser.Group {
     }
 
     layoutAnswers() {
-        // question and answer exist both
         let len = this.answers.length;
-        //console.log("this.answer in layout object: ", this.answers);
-        if (len == 0) {
-            //console.log("there are no answers to bind with layout object");
-        }
-        // TODO: avl_width might be unnecessary
-        let avl_width = otsimo.game.width * (1 - otsimo.kv.layout.side_space_constant_answer * 2);
-        let yk = otsimo.kv.layout.answer_y_constant * otsimo.game.height;
-        let center = otsimo.game.world.centerX;
-        console.log("this.answers: ", this.answers);
-        let leftmost = undefined;
-        let rightmost = undefined;
-        if (len % 2 == 0) {
-            // if there are even number of objects, put one of them left, one of them right of the center with a width/2 distance.
-            for (let i = 0; i < 2; i++) {
-                let num = new Number({
-                    game: otsimo.game,
-                    x: this.hiddenPos.x,
-                    y: this.hiddenPos.y,
-                    num: this.answers[i],
-                    scale: {
-                        x: 0.8,
-                        y: 0.8
-                    }
-                });
-                let xk = center + num.width;
-                if (i % 2 == 0) {
-                    xk = center - num.width;
-                    leftmost = num;
-                } else {
-                    rightmost = num;
-                }
-                num.anchor.set(0.5, 0.5);
-                num.x = xk;
-                num.y = yk;
-                this.add(num);
-                console.log("even number answer xk: ", xk, num);
-                this.answers[i] = undefined;
-            }
-        } else {
-            // if there are odd number of objects, put one in the center.
+        this.numbers = [];
+        let center_x = otsimo.game.world.centerX;
+        let yk = otsimo.kv.layout.answer_y_constant;
+        for (let i = 0; i < len; i++) {
             let num = new Number({
                 game: otsimo.game,
                 x: this.hiddenPos.x,
                 y: this.hiddenPos.y,
-                num: this.answers[0],
+                num: this.answers[i],
                 scale: {
                     x: 0.8,
                     y: 0.8
                 }
             });
-            num.anchor.set(0.5, 0.5);
-            num.x = center;
+            this.numbers.push(num);
+            let w = this.numbers[0].width;
+            let start_x = center_x - (len * w) * 0.5;
+            let start_y = otsimo.game.height * otsimo.kv.layout.answer_y_constant;
+            let xk = start_x + num.width * i * 1.3;
+            let yk = start_y;
+            num.x = xk;
             num.y = yk;
             this.add(num);
-            leftmost = num;
-            rightmost = num;
-            console.log("odd number answer xk: ", center, num);
-            this.answers[0] = undefined;
         }
-        let c = 0;
-        for (let i = 0; i < this.answers.length; i++) {
-            if (this.answers[i]) {
-                console.log("this.answers[i]: ", this.answers[i]);
-                let num = new Number({
-                    game: otsimo.game,
-                    x: this.hiddenPos.x,
-                    y: this.hiddenPos.y,
-                    num: this.answers[i],
-                    scale: {
-                        x: 0.8,
-                        y: 0.8
-                    }
-                });
-                num.anchor.set(0.5, 0.5);
-                num.y = yk;
-                if (c % 2 == 0) {
-                    num.x = leftmost.x - num.width * 1.2;
-                    leftmost = num;
-                } else {
-                    num.x = rightmost.x + num.width * 1.2;
-                    rightmost = num;
-                }
-                this.add(num);
-                c++;
-            }
-        }
-        // Update the leftmost and rightmost.
-        //TODO: the difference from left and right has to be the same
-        //TODO: the difference (x coordinate) between the items has to be the same
-        // Then place one left and one right.
-        //TODO: remember to add clicklistener to every one of them
-        console.log("layout answers: ", this.answers);
     }
 
     layoutOnce() {

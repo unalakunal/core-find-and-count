@@ -310,7 +310,7 @@
         "side_space_constant_question": 0.2,
         "side_space_constant_answer": 0.35,
         "fixed_size": false,
-        "answer_y_constant": 0.65, 
+        "answer_y_constant": 0.6, 
         "max_item": 10,
         "cell_anchor": {
             "x": 0.5,
