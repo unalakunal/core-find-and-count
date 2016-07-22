@@ -93,16 +93,37 @@ export default class Layout extends Phaser.Group {
     }
 
     //TODO
-    zigzag() {
-
+    zigzag(start_x) {
+        let len = this.items.length;
+        let start_y = otsimo.game.height * otsimo.kv.layout.above_space;
+        for (let i = 0; i < len; i++) {
+            let item = this.items[i];
+            let xk = start_x + item.width * i;
+            let yk = start_y;
+            if (i % 2 == 1) {
+                yk = start_y + item.height;
+            }
+            item.x = xk;
+            item.y = yk;
+            this.add(item);
+        }
     }
 
-    line() {
-
+    line(start_x) {
+        let len = this.items.length;
+        let start_y = otsimo.game.height * otsimo.kv.layout.above_space * 1.2;
+        for (let i = 0; i < len; i++) {
+            let item = this.items[i];
+            let xk = start_x + item.width * i * 1.3;
+            let yk = start_y;
+            item.x = xk;
+            item.y = yk;
+            this.add(item);
+        }
     }
 
-    square() {
-
+    square(start_x) {
+        // TODO
     }
 
 
@@ -118,6 +139,8 @@ export default class Layout extends Phaser.Group {
         // TODO: problems with 3,4,5 number of items
         let len = this.questions.length;
         this.items = [];
+        let center_x = otsimo.game.world.centerX;
+        let yk = 200;
         for (let i = 0; i < len; i++) {
             let item = new Item({
                 game: otsimo.game,
@@ -125,54 +148,32 @@ export default class Layout extends Phaser.Group {
                 y: this.hiddenPos.y,
                 item: this.questions[i],
                 scale: {
-                    x: 1,
-                    y: 1
+                    x: 0.3,
+                    y: 0.3
                 }
             });
+            //item.anchor.set(0.5, 0.5);
             this.items.push(item);
+            let w = this.items[0].width;
+            var start_x = center_x - (len * w) * 0.5;
             //console.log("item.width", item.width, "item.height: ", item.height);
         }
-        let total_width = this.items[0].width * len;
-        //console.log("total_width: ", total_width);
-        let avl_width = otsimo.game.width * (1 - otsimo.kv.layout.side_space_constant_question * 2);
-        //console.log("avl_width: ", avl_width);
-        let total_height = this.items[0].height * 2;
-        //console.log("total_height: ", total_height);
-        let avl_height = otsimo.kv.layout.bar_length_constant * otsimo.game.height;
-        for (let i = 0; i < len; i++) {
-            let item = this.items[i];
-            let sc = 0.4;
-            let xk = otsimo.kv.layout.side_space_constant_question;
-            let yk = otsimo.kv.layout.above_space * 1.5;
-            if (total_width * 0.6 > avl_width) {
-                //console.log("can't fit in av_space");
-                let width_ratio = (avl_width / total_width);
-                if (width_ratio < 0.45) {
-                    sc = width_ratio;
-                }
-                let inc_x = (item.width * sc) / otsimo.game.width;
-                xk = xk + inc_x * i;
-                if (i % 2 == 1) {
-                    let inc_y = (item.height * (avl_height / total_height)) / otsimo.game.height;
-                    yk = yk + inc_y;
-                }
-            } else {
-                yk = yk + 0.05;
-                if (len % 2 == 0) {
-                    xk = (avl_width / otsimo.game.width) * 0.5 * (i + 1);
-                } else {
-                    xk = xk + 0.25 * ((i + 1) % 2) * ((i + 2) * 0.5);
-                }
-            }
-            //console.log("xk: ", xk, "yk: ", yk);
-            item.x = xk * otsimo.game.width;
-            item.y = yk * otsimo.game.height;
-            //console.log("sc constant: ", sc);
-            item.scale.x = sc;
-            item.scale.y = sc;
-            item.anchor.set(0.5, 0.5);
-            this.add(item);
-        }
+        this.permission = [
+            [], //0
+            ["line"], //1
+            ["line"], //2
+            ["line"], //3
+            ["line", "zigzag", "square"], //4
+            ["zigzag"], //5
+            ["zigzag"], //6
+            ["zigzag"], //7
+            ["zigzag"], //8
+            ["zigzag"] //9
+        ]
+        let perm_arr = this.permission[len];
+        let rand = Math.floor(Math.random() * perm_arr.length);
+        let func = perm_arr[rand];
+        this[func](start_x)
     }
 
     layoutAnswers() {

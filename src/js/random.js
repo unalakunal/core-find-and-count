@@ -75,7 +75,7 @@ export class Random {
     }
 
     /**
-     *  Provides count number of kinds in an array randomly. Answer should be known for some cases.
+     *  Provides count number of kinds in an array randomly. Answer should be known if answers are to be returned.
      * 
      * @method Random.for
      * @param {string} [type] - Could be item or number, defines behaviour of method.

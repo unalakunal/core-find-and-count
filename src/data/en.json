@@ -317,7 +317,7 @@
             "y": 0.5
         },
         "width": 0.7,
-        "above_space": 0.18,
+        "above_space": 0.2,
         "bar_length_constant": 0.25
     },
     "game": {
