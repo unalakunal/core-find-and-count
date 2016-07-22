@@ -38,7 +38,7 @@ export default class Layout extends Phaser.Group {
          */
         this.questions = questions;
 
-        console.log("layout.questions: ", questions);
+        //console.log("layout.questions: ", questions);
         this.init();
     }
 
@@ -51,7 +51,6 @@ export default class Layout extends Phaser.Group {
     init() {
         this.hiddenPos = {
             x: otsimo.kv.game.hidden_pos.x * otsimo.game.width,
-            //y: (otsimo.game.height + maxHeight),
             y: otsimo.kv.game.hidden_pos.y * otsimo.game.height
         }
 
@@ -140,6 +139,7 @@ export default class Layout extends Phaser.Group {
      */
     square(start_x) {
         // TODO
+        console.log("in square function");
     }
 
 
@@ -150,9 +150,7 @@ export default class Layout extends Phaser.Group {
      * @method Layout.layoutQuestions
      */
     layoutQuestions() {
-        // TODO: list which numbers have which available formations
         // TODO: question can be a number
-        // TODO: problems with 3,4,5 number of items
         let len = this.questions.length;
         this.items = [];
         let center_x = otsimo.game.world.centerX;
@@ -168,11 +166,9 @@ export default class Layout extends Phaser.Group {
                     y: 0.3
                 }
             });
-            //item.anchor.set(0.5, 0.5);
             this.items.push(item);
             let w = this.items[0].width;
             var start_x = center_x - (len * w) * 0.5;
-            //console.log("item.width", item.width, "item.height: ", item.height);
         }
         this.permission = [
             [], //0
@@ -189,6 +185,7 @@ export default class Layout extends Phaser.Group {
         let perm_arr = this.permission[len];
         let rand = Math.floor(Math.random() * perm_arr.length);
         let func = perm_arr[rand];
+        console.log("layout func for questions: ", func);
         this[func](start_x)
     }
 

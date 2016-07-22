@@ -1,6 +1,5 @@
 export default class Number extends Phaser.Sprite {
     constructor({game, x, y, num, scale}) {
-        console.log("num: ", num);
         super(game, x, y, num.image);
         this.world.x = x;
         this.world.y = y;

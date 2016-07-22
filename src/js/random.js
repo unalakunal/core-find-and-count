@@ -24,10 +24,8 @@ export class Random {
             this.items = otsimo.kv[otsimo.kv.game.questions];
         } else {
             this.items = otsimo.kv[otsimo.kv.game.questions];
-            console.log("this.items: ", this.items);
             // TODO: add some numbers to data
             this.numbers = otsimo.kv[otsimo.kv.game.answers];
-            console.log("this.numbers: ", this.numbers);
         }
     }
 
@@ -70,7 +68,7 @@ export class Random {
                     break
             }
         }
-        console.log("amount: ", amount, "isAnswer: ", isAnswer);
+        console.log("amount returns", amount);
         return amount;
     }
 
@@ -106,10 +104,10 @@ export class Random {
             res[0] = answer_obj;
             for (let i = 1; i < count; i++) {
                 let kind = this.forKind(this.numbers);
-                if (!(this.include(res, kind))) {
-                    console.log(res, " doesn't have ", kind, " in it.");
-                    res.push(kind);
+                while ((this.include(res, kind))) {
+                    kind = this.forKind(this.numbers);
                 }
+                res.push(kind);
             }
         }
 
