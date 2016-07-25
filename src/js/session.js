@@ -41,7 +41,9 @@ export default class Session {
         });
         if (gameOver) {
             console.log("session over");
-            this.game.state.start('Over');
+            setTimeout(() => {
+                this.game.state.start('Over');
+            }, otsimo.kv.layout.relayout_duration + delay);
             return;
         }
         let scene = new Scene({

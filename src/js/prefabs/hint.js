@@ -89,7 +89,7 @@ export default class Hint {
     }
 
     jump() {
-
+        // TODO 
     }
 
     killArrow() {

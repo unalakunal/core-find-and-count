@@ -24,7 +24,6 @@ export class Random {
             this.items = otsimo.kv[otsimo.kv.game.questions];
         } else {
             this.items = otsimo.kv[otsimo.kv.game.questions];
-            // TODO: add some numbers to data
             this.numbers = otsimo.kv[otsimo.kv.game.answers];
         }
     }

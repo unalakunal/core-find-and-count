@@ -15,6 +15,8 @@ export default class Play extends Phaser.State {
     }
 
     backAction(button) {
+        this.scene.hint.kill();
+        this.scene.hint.removeTimer();        
         this.game.state.start('Home');
     }
 
