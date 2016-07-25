@@ -1,9 +1,12 @@
 import Scene from "./scene"
 
 export default class Session {
-    constructor({state}) {
+    constructor({game, state}) {
+        this.game = game;
         this.score = 0;
         this.stepScore = otsimo.kv.game.step_score;
+        this.end = otsimo.kv.game.session_step;
+        this.step = 0;
         this.startTime = new Date();
         this.state = state;
         this.wrongAnswerTotal = 0;
@@ -49,7 +52,14 @@ export default class Session {
             time: now - this.stepStartTime,
             delta: now - this.previousInput
         }
+        this.step++;
         this.previousInput = now;
+        if (this.step == this.end) {
+            console.log("session over");
+            this.game.state.start('Over');
+        } else {
+            console.log("session continues, step: ", this.step);
+        }
         otsimo.customevent("game:success", payload);
         let scene = new Scene({
             session: this

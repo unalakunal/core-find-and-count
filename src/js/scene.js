@@ -65,6 +65,7 @@ export default class Scene {
      * @param {object} [item] - The item or number that takes the input.
      */
     onSelected(obj) {
+        obj.inputEnabled = false;
         console.log("object selected: ", obj);
         console.log("correct answer: ", this.random.answer.text);
         if (obj.num.id == this.random.answer.id) {
