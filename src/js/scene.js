@@ -45,7 +45,15 @@ export default class Scene {
             game: otsimo.game,
             staged: staged,
             answers: answers,
-            questions: questions
+            questions: questions,
+            answer_text: this.random.answer.text
+        });
+        
+        console.log("answer object: ", this.random.answer);
+        
+        let hint = new Hint({
+            game: otsimo.game,
+            answer: layout.answer_sprite
         });
 
         layout.x = layout.hiddenPos.x;
@@ -53,6 +61,7 @@ export default class Scene {
 
         layout.itemSelected.add(this.onSelected, this);
         this.layout = layout;
+        this.hint = hint;
 
         // TODO: this.gameStep = next;
         this.announce(item_type, otsimo.kv.announce_text_time, delay);
@@ -93,7 +102,6 @@ export default class Scene {
             });
             this.session.wrongInput(obj.num, this.random.answer);
         }
-
     }
 
     /**
@@ -121,15 +129,9 @@ export default class Scene {
 
         setTimeout(() => {
             this.layout.move(this.layout.visiblePos.x, this.layout.visiblePos.y, otsimo.kv.layout.show_layout_duration, delay);
-        }, 2000)
-
+        }, otsimo.kv.game.announce_layout_time)
+        this.hint.call(2000, otsimo.kv.game.announce_layout_time);
     }
-
-    hideLayout() {
-
-    }
-
-
 
 }
 

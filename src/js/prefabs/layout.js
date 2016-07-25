@@ -15,7 +15,7 @@ import Number from "./number"
  * @param {list} [questions] - The list of question sprites. Questions can not be touched or dragged.
  */
 export default class Layout extends Phaser.Group {
-    constructor({game, staged, answers, questions}) {
+    constructor({game, staged, answers, questions, answer_text}) {
         super(game);
         /**
          * @property {boolean} [staged] - A staged game contains two types of on screen data: answers and questions.
@@ -37,6 +37,8 @@ export default class Layout extends Phaser.Group {
          * @property {list} [questions] - The list of question sprites. Questions can not be touched or dragged.
          */
         this.questions = questions;
+        //TODO: update documentation
+        this.answer_text = answer_text;
 
         this.init();
     }
@@ -212,6 +214,9 @@ export default class Layout extends Phaser.Group {
                     y: 0.8
                 }
             });
+            if (this.answer_text == num.num.text) {
+                this.answer_sprite = num;
+            }
             num.inputEnabled = true;
             num.events.onInputDown.add(this.clickListener, this);
             this.numbers.push(num);

@@ -82,7 +82,11 @@ export class Random {
      */
     for(type, answer) {
         let res = [];
-        console.log("in random for", answer);
+        if (answer) {
+            console.log("in random for", answer);
+        } else {
+            console.log("in random for questions");
+        }
         if (answer) {
             var answer_obj = this.numbers.filter(o => {
                 if (o.id == answer) {

@@ -330,6 +330,9 @@
         "step_score": 5,
         "bar_length_constraint": 0.3,
         "type": "how_many",
+        "hint_type": "hand",
+        "announce_layout_time": 2000,
+        "hint_hand_duration": 500,
         "add_outline": false,
         "hidden_pos": {
             "x": 0,
