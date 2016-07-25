@@ -4,7 +4,6 @@ import Hint from "./prefabs/hint"
 import Layout from "./prefabs/layout"
 import {Random} from "./random"
 
-
 /**
  * Creates a new scene in the session. Deals with layout object.
  * 
@@ -12,12 +11,19 @@ import {Random} from "./random"
  * @param {object} - The session that this scene belongs to.
  */
 export default class Scene {
-    constructor({session}) {
+    constructor({session, score}) {
         this.session = session;
         /**
-         * @property {object} random - The Random objects that contains items and numbers according to that game type.
+         * @property {object} [random] - The Random objects that contains items and numbers according to that game type.
         */
         this.random = new Random({ game: otsimo.game, game_type: otsimo.kv.game.type });
+        /**
+         * Creates a score system for this scene.
+         * 
+         * @property {object} [score] - The score object that contains step score and limit specialized in key values of the game.
+         */
+        this.score = score;
+        this.score.initStep();
     }
 
     /**
@@ -51,7 +57,8 @@ export default class Scene {
 
         let hint = new Hint({
             game: otsimo.game,
-            answer: layout.answer_sprite
+            answer: layout.answer_sprite,
+            score: this.score
         });
 
         layout.x = layout.hiddenPos.x;
@@ -75,17 +82,19 @@ export default class Scene {
         if (otsimo.kv.game.hint_type == "hand") {
             this.hint.kill();
         }
+        let correctInput = (obj.num.id == this.random.answer.id);
         this.hint.removeTimer();
         obj.inputEnabled = false;
-        if (obj.num.id == this.random.answer.id) {
+
+        if (correctInput) {
             this.hint.kill();
             this.hint.removeTimer();
             //if the answer is true
             let delay = 1000;
-            obj.highlight()
+            obj.highlight();
             obj.playSound();
             if (otsimo.correctSound) {
-                otsimo.correctSound.play(null, null, 0.5)
+                otsimo.correctSound.play(null, null, 0.5);
             }
             this.layout.relayout({
                 delay: delay,

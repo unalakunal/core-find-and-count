@@ -5,7 +5,7 @@ import Balloon from '../prefabs/balloon'
 export default class Play extends Phaser.State {
     create() {
         let session = new Session({ game: this.game, state: this });
-        let scene = new Scene({ session: session });
+        let scene = new Scene({ session: session, score: session.score });
 
         this.session = session
         this.scene = scene

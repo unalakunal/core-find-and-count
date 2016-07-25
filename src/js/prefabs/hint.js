@@ -1,7 +1,8 @@
 export default class Hint {
-    constructor({game, answer}) {
+    constructor({game, answer, score}) {
         this.game = game;
         this.answer = answer;
+        this.score = score;
         this.arrow = undefined;
         this.tweenArr = [];
         this.step = 0;
@@ -13,15 +14,20 @@ export default class Hint {
         }
         console.log("hint called with answer: ", this.answer);
         this.removeTimer();
+        this.timer = setTimeout(this.create.bind(this), delay + (otsimo.settings.hint_duration * 1000));
+    }
+
+    create() {
+        this.score.decrement();
         switch (otsimo.kv.game.hint_type) {
             case ("jump"):
-                this.timer = setTimeout(this.jump.bind(this), delay + (otsimo.settings.hint_duration * 1000));
+                this.jump();
                 break;
             case ("hand"):
-                this.timer = setTimeout(this.hand.bind(this), delay + (otsimo.settings.hint_duration * 1000));
+                this.hand();
                 break;
             default:
-                this.timer = setTimeout(this.jump.bind(this), delay + (otsimo.settings.hint_duration * 1000));
+                this.hand();                
                 break;
         }
     }

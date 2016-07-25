@@ -1,18 +1,14 @@
 import Scene from "./scene"
+import Score from "./prefabs/score"
 
 export default class Session {
     constructor({game, state}) {
+        this.score = new Score();
         this.game = game;
-        this.score = 0;
-        this.stepScore = otsimo.kv.game.step_score;
-        this.end = otsimo.kv.game.session_step;
-        this.step = 0;
         this.startTime = new Date();
         this.state = state;
         this.wrongAnswerTotal = 0;
         this.wrongAnswerStep = 0;
-        this.stepStartTime = Date.now();
-        this.previousInput = Date.now();
     }
 
     end() {
@@ -22,63 +18,45 @@ export default class Session {
     startStep() {
         this.wrongAnswerStep = 0;
         console.log("start step");
-        this.stepScore = otsimo.kv.game.step_score;
-        this.stepStartTime = Date.now();
-        this.previousInput = Date.now();
     }
 
     wrongInput(item, amount) {
-        this.wrongAnswerStep += 1
-        this.wrongAnswerTotal += 1
-        this.decrementScore();
+        this.wrongAnswerStep += 1;
+        this.wrongAnswerTotal += 1;
+        this.score.decrement();
         console.log("wrong input");
-        let now = Date.now();
-        let payload = {
-            item: item.id,
-            kind: item.kind,
-            time: now - this.stepStartTime,
-            delta: now - this.previousInput
-        }
-        this.previousInput = now;
-        otsimo.customevent("game:failure", payload);
+        this.score.createPayload({
+            itemID: item.id,
+            itemKind: item.kind,
+            isSuccess: false
+        });
     }
 
     correctInput(item, delay) {
         console.log("correct input");
-        let now = Date.now();
-        let payload = {
-            item: item.id,
-            kind: item.kind,
-            time: now - this.stepStartTime,
-            delta: now - this.previousInput
-        }
-        this.step++;
-        this.previousInput = now;
-        otsimo.customevent("game:success", payload);
-        if (this.step == this.end) {
+        let gameOver = this.score.createPayload({
+            itemID: item.id,
+            itemKind: item.kind,
+            isSuccess: true
+        });
+        if (gameOver) {
             console.log("session over");
             this.game.state.start('Over');
             return;
         }
         let scene = new Scene({
-            session: this
-        })
+            session: this,
+            score: this.score
+        });
         scene.init(delay);
     }
 
-    decrementScore() {
-        //TODO: add score system to clicklisteners
-        if (this.stepScore > 0) {
-            this.stepScore--;
-        }
-    }
-
     debug(game) {
-        game.debug.text("score: " + this.score, 2, 28, "#00ff00");
+        game.debug.text("total score: " + this.score.total, 2, 28, "#00ff00");
         game.debug.text("wrongAnswerTotal: " + this.wrongAnswerTotal, 2, 42, "#00ff00");
         game.debug.text("wrongAnswerStep: " + this.wrongAnswerStep, 2, 54, "#00ff00");
-        game.debug.text("hintStep: " + this.hintStep, 2, 66, "#00ff00");
-        game.debug.text("hintTotal: " + this.hintTotal, 2, 78, "#00ff00");
-        game.debug.text("stepScore: " + this.stepScore, 2, 90, "#00ff00");
+        //game.debug.text("hintStep: " + this.hintStep, 2, 66, "#00ff00");
+        //game.debug.text("hintTotal: " + this.hintTotal, 2, 78, "#00ff00");
+        game.debug.text("stepScore: " + this.score.step, 2, 90, "#00ff00");
     }
 }
