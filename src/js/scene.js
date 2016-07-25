@@ -49,8 +49,6 @@ export default class Scene {
             answer_text: this.random.answer.text
         });
 
-        console.log("answer object: ", this.random.answer);
-
         let hint = new Hint({
             game: otsimo.game,
             answer: layout.answer_sprite
@@ -79,8 +77,6 @@ export default class Scene {
         }
         this.hint.removeTimer();
         obj.inputEnabled = false;
-        console.log("object selected: ", obj);
-        console.log("correct answer: ", this.random.answer.text);
         if (obj.num.id == this.random.answer.id) {
             this.hint.kill();
             this.hint.removeTimer();
@@ -144,6 +140,7 @@ export default class Scene {
 
     /**
      * Gives current coordinates of answer sprite on screen via layout object.
+     * Used in killTween in jump hint.
      * 
      * @method Scene.answerPos
      * @return {tuple(number, number)} [ans.x, ans.y] - x and y coordinates of answer sprite. 

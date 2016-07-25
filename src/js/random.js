@@ -123,7 +123,6 @@ export class Random {
         } else {
             this.numbers = res;
         }
-        console.log("returning res: ", res);
         return res;
     }
 
@@ -136,7 +135,6 @@ export class Random {
      */
 
     forKind(array) {
-        console.log("array in forKind: ", array);
         let len = array.length;
         let n = Math.floor(Math.random() * len);
         return array[n];

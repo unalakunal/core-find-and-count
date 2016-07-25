@@ -68,9 +68,6 @@ export default class Hint {
     handTween() {
         this.arrow = otsimo.game.add.sprite(this.answer.x, this.answer.y, 'hand');
         this.arrow.anchor.set(-0.1, -0.5);
-        console.log("arrow: ", this.arrow);
-        console.log("answer: ", this.answer);
-        console.log("hint_hand_duration test", otsimo.kv.game.hint_hand_duration);
         let t = otsimo.game.add.tween(this.arrow.scale).to({ x: 0.66, y: 0.66 }, otsimo.kv.game.hint_hand_duration, Phaser.Easing.Back.Out, false);
         let t2 = otsimo.game.add.tween(this.arrow)
             .to({ y: this.answer.y, x: this.answer.x }, otsimo.kv.game.hint_hand_duration, Phaser.Easing.Sinusoidal.In, false);

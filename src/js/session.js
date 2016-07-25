@@ -54,13 +54,12 @@ export default class Session {
         }
         this.step++;
         this.previousInput = now;
+        otsimo.customevent("game:success", payload);
         if (this.step == this.end) {
             console.log("session over");
             this.game.state.start('Over');
-        } else {
-            console.log("session continues, step: ", this.step);
+            return;
         }
-        otsimo.customevent("game:success", payload);
         let scene = new Scene({
             session: this
         })
