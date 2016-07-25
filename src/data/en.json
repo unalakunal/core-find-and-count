@@ -311,6 +311,7 @@
         "side_space_constant_answer": 0.35,
         "fixed_size": false,
         "answer_y_constant": 0.6, 
+        "relayout_duration": 500,
         "max_item": 10,
         "move_away_duration": 1000,
         "show_layout_duration": 1000,

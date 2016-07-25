@@ -48,9 +48,9 @@ export default class Scene {
             questions: questions,
             answer_text: this.random.answer.text
         });
-        
+
         console.log("answer object: ", this.random.answer);
-        
+
         let hint = new Hint({
             game: otsimo.game,
             answer: layout.answer_sprite
@@ -74,10 +74,16 @@ export default class Scene {
      * @param {object} [item] - The item or number that takes the input.
      */
     onSelected(obj) {
+        if (otsimo.kv.game.hint_type == "hand") {
+            this.hint.kill();
+        }
+        this.hint.removeTimer();
         obj.inputEnabled = false;
         console.log("object selected: ", obj);
         console.log("correct answer: ", this.random.answer.text);
         if (obj.num.id == this.random.answer.id) {
+            this.hint.kill();
+            this.hint.removeTimer();
             //if the answer is true
             let delay = 1000;
             obj.highlight()
@@ -94,6 +100,8 @@ export default class Scene {
             delay = delay * 2;
             this.session.correctInput(this.random.answer, delay);
         } else {
+            this.hint.kill();
+            this.hint.removeTimer();
             this.layout.relayout({
                 delay: 0,
                 answer_name: this.random.answer.text,
@@ -101,6 +109,7 @@ export default class Scene {
                 obj: obj
             });
             this.session.wrongInput(obj.num, this.random.answer);
+            this.hint.call(otsimo.kv.layout.relayout_duration);
         }
     }
 
@@ -130,7 +139,20 @@ export default class Scene {
         setTimeout(() => {
             this.layout.move(this.layout.visiblePos.x, this.layout.visiblePos.y, otsimo.kv.layout.show_layout_duration, delay);
         }, otsimo.kv.game.announce_layout_time)
-        this.hint.call(2000, otsimo.kv.game.announce_layout_time);
+        this.hint.call(otsimo.kv.game.announce_layout_time);
+    }
+
+    /**
+     * Gives current coordinates of answer sprite on screen via layout object.
+     * 
+     * @method Scene.answerPos
+     * @return {tuple(number, number)} [ans.x, ans.y] - x and y coordinates of answer sprite. 
+     */
+
+    answerPos() {
+        let ans = this.layout.answer_sprite;
+        console.log("answer.sprite: ", ans);
+        return (ans.x, ans.y);
     }
 
 }

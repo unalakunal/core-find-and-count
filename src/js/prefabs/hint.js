@@ -11,8 +11,7 @@ export default class Hint {
         if (!otsimo.settings.show_hint) {
             return;
         }
-        console.log("answer: ", this.answer);
-        console.log("hint called");
+        console.log("hint called with answer: ", this.answer);
         this.removeTimer();
         switch (otsimo.kv.game.hint_type) {
             case ("jump"):
@@ -28,6 +27,7 @@ export default class Hint {
     }
 
     kill() {
+        console.log("hint killed");
         switch (otsimo.kv.game.hint_type) {
             case ("jump"):
                 this.killTweenIn();
@@ -54,7 +54,6 @@ export default class Hint {
     }
 
     hand() {
-        console.log("this: ", this);
         this.incrementStep();
         if (this.step > 3 && this.arrow) {
             return;
@@ -72,17 +71,15 @@ export default class Hint {
         console.log("arrow: ", this.arrow);
         console.log("answer: ", this.answer);
         console.log("hint_hand_duration test", otsimo.kv.game.hint_hand_duration);
-        let t = otsimo.game.add.tween(this.arrow.scale).to({ x: 0.66, y: 0.66 }, otsimo.kv.game.hint_hand_duration, Phaser.Easing.Cubic.Out, false);
+        let t = otsimo.game.add.tween(this.arrow.scale).to({ x: 0.66, y: 0.66 }, otsimo.kv.game.hint_hand_duration, Phaser.Easing.Back.Out, false);
         let t2 = otsimo.game.add.tween(this.arrow)
             .to({ y: this.answer.y, x: this.answer.x }, otsimo.kv.game.hint_hand_duration, Phaser.Easing.Sinusoidal.In, false);
-        let t3 = otsimo.game.add.tween(this.arrow.scale).to({ x: 0.8, y: 0.8}, otsimo.kv.game.hint_hand_duration/8, Phaser.Easing.Cubic.In, false);
         this.arrow.anchor.set(-0.3, -0.5);
-        t.chain(t3);
         t.start();
         t2.start();
-        /*if (this.step < 3) {
+        if (this.step < 3) {
             t2.onComplete.add(this.kill, this);
-        }*/
+        }
         let delay = 2 * otsimo.kv.game.hint_hand_duration;
         this.call(delay);
         this.answer.tweenArray = this.tweenArr;
@@ -90,5 +87,12 @@ export default class Hint {
 
     jump() {
 
+    }
+
+    killArrow() {
+        if (this.arrow) {
+            this.arrow.kill();
+            this.arrow = undefined;
+        }
     }
 }
