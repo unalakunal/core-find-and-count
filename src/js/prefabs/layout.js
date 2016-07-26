@@ -90,13 +90,12 @@ export default class Layout extends Phaser.Group {
     setBackground() {
         // TODO: return background object
         this.gray = this.game.add.image(
-            0,
+            otsimo.game.width * 3,
             otsimo.game.height * otsimo.kv.layout.above_space * 0.65,
             'gray'
         );
         this.gray.alpha = 0.2;
         this.gray.scale.y = 0.5;
-        this.add(this.gray);
     }
 
     /**
@@ -302,6 +301,8 @@ export default class Layout extends Phaser.Group {
                 otsimo.game.add.tween(this.children[i]).to({ alpha: 0.3 }, 300, "Linear", true);
             }
         }
+        otsimo.game.add.tween(this.gray)
+            .to({ x: otsimo.game.width * 3 }, otsimo.kv.layout.move_away_duration * 3, Phaser.Easing.Back.Out, true);
         let t = otsimo.game.add.tween(this).to({ x: this.hiddenPos.x, y: this.hiddenPos.y }, otsimo.kv.layout.move_away_duration, Phaser.Easing.Back.In, false, delay);
         t.start();
     }

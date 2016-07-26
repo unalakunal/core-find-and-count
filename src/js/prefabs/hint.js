@@ -7,6 +7,7 @@ export default class Hint {
         this.score = score;
         this.arrow = undefined;
         this.tweenArr = [];
+        this.timerArr = [];
         this.step = 0;
     }
 

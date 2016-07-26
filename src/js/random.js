@@ -80,44 +80,45 @@ export class Random {
      * @return {list} [res] - The result list, generated randomly. If answer is given, it puts it in a random place too.
      */
     for(type, answer) {
-        let res = [];
-        if (answer) {
-            console.log("in random for", answer);
-            console.log("this.numbers: ", this.numbers);
-            var answer_obj = this.numbers.filter(o => {
-                if (o.id == answer) {
-                    return true;
-                }
-                return false;
-            })[0];
-            this.answer = answer_obj;
-            console.log("answer_obj:  ", answer_obj);
-            var count = this.amount(true);
-        } else {
-            console.log("in random for questions");
-            var count = this.amount(false);
-        }
+        let res = []
         if (type == "items") {
-            var kind = this.forKind(this.items);
+            // question for items
+            let count = this.amount(false);
+            let kind = this.forKind(this.items);
             for (let i = 0; i < count; i++) {
                 res.push(kind);
             }
-        } else {
-            res[0] = answer_obj;
-            for (let i = 1; i < count; i++) {
-                let kind = this.forKind(this.numbers);
-                while ((this.include(res, kind))) {
-                    kind = this.forKind(this.numbers);
-                }
-                res.push(kind);
-            }
-        }
-
-        res = this.shuffle(res);
-
-        if (type == "items") {
             this.items = res;
         } else {
+            //dealing with numbers
+            if (answer) {
+                // answer for numbers
+                var answer_obj = this.numbers.filter(o => {
+                    if (o.id == answer) {
+                        return true;
+                    }
+                    return false;
+                })[0];
+                this.answer = answer_obj;
+                console.log("answer_obj:  ", answer_obj);
+                let count = this.amount(true);
+
+                res[0] = answer_obj;
+                for (let i = 1; i < count; i++) {
+                    let kind = this.forKind(this.numbers);
+                    while ((this.include(res, kind))) {
+                        kind = this.forKind(this.numbers);
+                    }
+                    res.push(kind);
+                }
+            } else {
+                // question for numbers
+                let count = this.amount(false);
+                let kind = this.forKind(this.items);
+                for (let i = 0; i < count; i++) {
+                    res.push(kind);
+                }
+            }
             this.numbers = res;
         }
         return res;

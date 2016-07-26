@@ -16,7 +16,7 @@ export default class Scene {
         /**
          * @property {object} [random] - The Random objects that contains items and numbers according to that game type.
         */
-        this.random = new Random({ game: otsimo.game, game_type: otsimo.kv.game.type });
+        this.random = new Random({ game: otsimo.game });
         /**
          * Creates a score system for this scene.
          * 
@@ -33,18 +33,23 @@ export default class Scene {
      * @method Scene.init 
      */
     init(delay) {
-        let questions = this.random.for("items");
-        let answer = questions.length;
-        let answers = this.random.for("numbers", answer);
-        let item_type = this.random.items[0].id;
         //console.log("this.random.items: ", this.random.items);
         let staged = true;
         if (otsimo.kv.game.type == "how_many") {
             // get random number of items to screen
+            var questions = this.random.for("items");
+            var answer = questions.length;
+            var answers = this.random.for("numbers", answer);
+            var item_type = this.random.items[0].id;
         } else if (otsimo.kv.game.type == "compare") {
+            var answers = this.random.for("numbers", answer);
+            var item_type = this.random.items[0].id;
             staged = false;
         } else if (otsimo.kv.game.type == "find_next") {
-            questions = this.random.for("numbers");
+            var questions = this.random.for("numbers", false);
+            var answer = questions.length;
+            var answers = this.random.for("numbers", answer);
+            var item_type = this.random.items[0].id;
         }
 
         let layout = new Layout({
@@ -82,8 +87,8 @@ export default class Scene {
         if (otsimo.kv.game.hint_type == "hand") {
             this.hint.kill();
         }
-        let correctInput = (obj.num.id == this.random.answer.id);
         this.hint.removeTimer();
+        let correctInput = (obj.num.id == this.random.answer.id);
         obj.inputEnabled = false;
 
         if (correctInput) {
@@ -142,6 +147,18 @@ export default class Scene {
         a.start();
 
         setTimeout(() => {
+            otsimo.game.add.tween(this.layout.gray).to(
+                {
+                    x: 0,
+                    y: otsimo.game.height * otsimo.kv.layout.above_space * 0.65
+                },
+                otsimo.kv.game.announce_layout_time,
+                Phaser.Easing.Exponential.Out,
+                true
+            )
+        }, delay);
+
+        setTimeout(() => {
             this.layout.move(this.layout.visiblePos.x, this.layout.visiblePos.y, otsimo.kv.layout.show_layout_duration, delay);
         }, otsimo.kv.game.announce_layout_time)
         this.hint.call(otsimo.kv.game.announce_layout_time);
@@ -154,7 +171,6 @@ export default class Scene {
      * @method Scene.answerPos
      * @return {tuple(number, number)} [ans.x, ans.y] - x and y coordinates of answer sprite. 
      */
-
     answerPos() {
         let ans = this.layout.answer_sprite;
         console.log("answer.sprite: ", ans);
