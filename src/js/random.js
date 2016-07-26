@@ -83,10 +83,7 @@ export class Random {
         let res = [];
         if (answer) {
             console.log("in random for", answer);
-        } else {
-            console.log("in random for questions");
-        }
-        if (answer) {
+            console.log("this.numbers: ", this.numbers);
             var answer_obj = this.numbers.filter(o => {
                 if (o.id == answer) {
                     return true;
@@ -97,6 +94,7 @@ export class Random {
             console.log("answer_obj:  ", answer_obj);
             var count = this.amount(true);
         } else {
+            console.log("in random for questions");
             var count = this.amount(false);
         }
         if (type == "items") {

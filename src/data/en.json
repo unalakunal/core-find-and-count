@@ -27,6 +27,11 @@
             "path": "img/back.png"
         },
         {
+            "name": "gray",
+            "type": "image",
+            "path": "img/gray.png"
+        },
+        {
             "name": "white_box",
             "type": "image",
             "path": "img/white_box.png"
@@ -315,7 +320,7 @@
         "max_item": 10,
         "move_away_duration": 1000,
         "show_layout_duration": 1000,
-        "on_wrong": "move",
+        "on_wrong": "hide",
         "cell_anchor": {
             "x": 0.5,
             "y": 0.5
@@ -348,7 +353,7 @@
             "count": 15,
             "luminosity": "bright"
         },
-        "hint_color": "0xffff4c",
+        "hint_color": "0xffcd94",
         "balloon_sound": "balloon",
         "correct_sound": "applause",
         "click_sound": "clickSound"

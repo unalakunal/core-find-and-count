@@ -89,6 +89,14 @@ export default class Layout extends Phaser.Group {
      */
     setBackground() {
         // TODO: return background object
+        this.gray = this.game.add.image(
+            0,
+            otsimo.game.height * otsimo.kv.layout.above_space * 0.65,
+            'gray'
+        );
+        this.gray.alpha = 0.2;
+        this.gray.scale.y = 0.5;
+        this.add(this.gray);
     }
 
     /**
