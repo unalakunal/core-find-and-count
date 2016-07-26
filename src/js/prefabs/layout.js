@@ -167,10 +167,11 @@ export default class Layout extends Phaser.Group {
                     y: 0.3
                 }
             });
+            item.anchor.set(0.5, 0.5);
             item.inputEnabled = false;
             this.items.push(item);
             let w = this.items[0].width;
-            var start_x = center_x - (len * w) * 0.5;
+            var start_x = center_x - (len * w) * 0.4;
         }
         this.permission = [
             [], //0
@@ -214,6 +215,7 @@ export default class Layout extends Phaser.Group {
                     y: 0.8
                 }
             });
+            num.anchor.set(0.5, 0.5);
             if (this.answer_text == num.num.text) {
                 this.answer_sprite = num;
             }
@@ -221,11 +223,13 @@ export default class Layout extends Phaser.Group {
             num.events.onInputDown.add(this.clickListener, this);
             this.numbers.push(num);
             let w = this.numbers[0].width;
-            let start_x = center_x - (len * w) * 0.5;
+            let start_x = center_x - (len * w) * (len + 1) * 0.1;
             let start_y = otsimo.game.height * otsimo.kv.layout.answer_y_constant;
             let xk = start_x + num.width * i * 1.3;
+            console.log("layout w: ", w, "start_x: ", start_x);
             let yk = start_y;
             num.x = xk;
+            console.log("num.x: ", num.x, "for i: ", i);
             num.y = yk;
             this.add(num);
             num.events.onInputDown.add(this.clickListener, this, 0, num);
@@ -268,9 +272,11 @@ export default class Layout extends Phaser.Group {
                 });
                 setTimeout(() => {
                     let len = this.numbers.length;
+                    console.log("len: ", len);
                     let center_x = otsimo.game.world.centerX;
                     let w = this.numbers[0].width;
-                    let start_x = center_x - (len * w) * 0.5;
+                    let start_x = center_x - (len * w) * (len + 1) * 0.1;
+                    console.log("relayout w: ", w, "start_x: ", start_x);
                     for (let i = 0; i < len; i++) {
                         let num = this.numbers[i];
                         let xk = start_x + num.width * i * 1.3;

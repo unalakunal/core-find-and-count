@@ -310,7 +310,7 @@
         "side_space_constant_question": 0.2,
         "side_space_constant_answer": 0.35,
         "fixed_size": false,
-        "answer_y_constant": 0.6, 
+        "answer_y_constant": 0.6,
         "relayout_duration": 500,
         "max_item": 10,
         "move_away_duration": 1000,
@@ -348,6 +348,7 @@
             "count": 15,
             "luminosity": "bright"
         },
+        "hint_color": "0xffff4c",
         "balloon_sound": "balloon",
         "correct_sound": "applause",
         "click_sound": "clickSound"
