@@ -74,14 +74,16 @@ export default class Hint {
     handTween() {
         this.arrow = otsimo.game.add.sprite(this.answer.x, this.answer.y, 'hand');
         this.arrow.anchor.set(-0.1, -0.5);
-        let t = otsimo.game.add.tween(this.arrow.scale).to({ x: 0.66, y: 0.66 }, otsimo.kv.game.hint_hand_duration, Phaser.Easing.Back.Out, false);
+        let t = otsimo.game.add.tween(this.arrow.scale).to({ x: 0.66, y: 0.66 }, otsimo.kv.game.hint_hand_duration, Phaser.Easing.Cubic.Out, false);
         let t2 = otsimo.game.add.tween(this.arrow)
             .to({ y: this.answer.y, x: this.answer.x }, otsimo.kv.game.hint_hand_duration, Phaser.Easing.Sinusoidal.In, false);
+        let t3 = otsimo.game.add.tween(this.arrow.scale).to({ x: 0.75, y: 0.75 }, otsimo.kv.game.hint_hand_duration * 0.5, Phaser.Easing.Cubic.Out, false, 50);
         this.arrow.anchor.set(-0.3, -0.5);
+        t.chain(t3);
         t.start();
         t2.start();
         if (this.step < 3) {
-            t2.onComplete.add(this.kill, this);
+            t3.onComplete.add(this.kill, this);
         }
         let delay = 2 * otsimo.kv.game.hint_hand_duration;
         this.call(delay);

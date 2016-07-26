@@ -57,8 +57,6 @@ export default class Session {
         game.debug.text("total score: " + this.score.total, 2, 28, "#00ff00");
         game.debug.text("wrongAnswerTotal: " + this.wrongAnswerTotal, 2, 42, "#00ff00");
         game.debug.text("wrongAnswerStep: " + this.wrongAnswerStep, 2, 54, "#00ff00");
-        //game.debug.text("hintStep: " + this.hintStep, 2, 66, "#00ff00");
-        //game.debug.text("hintTotal: " + this.hintTotal, 2, 78, "#00ff00");
         game.debug.text("stepScore: " + this.score.step, 2, 90, "#00ff00");
     }
 }
