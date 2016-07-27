@@ -53,12 +53,19 @@ export default class Scene {
             var item_type = this.random.items[0].id;
         }
 
+        //let tempParent = otsimo.game.add.group()
+        let gray = otsimo.game.add.sprite(
+            otsimo.game.width * 1.2,
+            otsimo.game.height * otsimo.kv.layout.above_space * 0.6,
+            'gray'
+        );
         let layout = new Layout({
             game: otsimo.game,
             staged: staged,
             answers: answers,
             questions: questions,
-            answer_text: this.random.answer.text
+            answer_text: this.random.answer.text,
+            gray: gray
         });
 
         let hint = new Hint({
@@ -167,6 +174,12 @@ export default class Scene {
             this.layout.move(this.layout.visiblePos.x, this.layout.visiblePos.y, otsimo.kv.layout.show_layout_duration, delay);
         }, otsimo.kv.game.announce_layout_time)
         this.hint.call(otsimo.kv.game.announce_layout_time);
+        setTimeout(() => {
+            console.log(this.layout.topObjects);
+            console.log("bringToTop");
+            let k = this.layout.tempParent.bringToTop(this.layout.topObjects);
+            console.log("k: ", k);
+        }, 4000);
     }
 
     /**

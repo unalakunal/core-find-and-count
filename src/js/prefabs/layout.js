@@ -15,7 +15,7 @@ import Number from "./number"
  * @param {list} [questions] - The list of question sprites. Questions can not be touched or dragged.
  */
 export default class Layout extends Phaser.Group {
-    constructor({game, staged, answers, questions, answer_text}) {
+    constructor({game, staged, answers, questions, answer_text, gray}) {
         super(game);
         /**
          * @property {boolean} [staged] - A staged game contains two types of on screen data: answers and questions.
@@ -39,7 +39,7 @@ export default class Layout extends Phaser.Group {
         this.questions = questions;
         //TODO: update documentation
         this.answer_text = answer_text;
-
+        this.gray = gray;
         this.init();
     }
 
@@ -67,6 +67,16 @@ export default class Layout extends Phaser.Group {
         }
     }
 
+    /*traverse(c, tree) {
+        for (let ch of c) {
+            let t = [`${ch.name} ${ch.constructor.name}`]
+            if (ch.children) {
+                this.traverse(ch.children, t)
+            }
+            tree.push(t)
+        }
+    }*/
+
     /**
      * Calls the proper functions for staged games.
      * 
@@ -79,6 +89,11 @@ export default class Layout extends Phaser.Group {
         this.layoutQuestions();
         // answers come below
         this.layoutAnswers();
+
+        let c = otsimo.game.world.children
+        let tree = []
+        //this.traverse(c, tree)
+        console.log(tree)
     }
 
     /**
@@ -88,14 +103,11 @@ export default class Layout extends Phaser.Group {
      * @return {Phaser.Image} [image] - Phaser image of background.
      */
     setBackground() {
-        // TODO: return background object
-        this.gray = this.game.add.image(
-            otsimo.game.width * 1.2,
-            otsimo.game.height * otsimo.kv.layout.above_space * 0.6,
-            'gray'
-        );
+        
+        //this.gray.name = "gray";
         this.gray.alpha = 0.2;
         this.gray.scale.y = 0.52;
+        //this.tempParent.add(this.gray);
     }
 
     /**
@@ -105,6 +117,7 @@ export default class Layout extends Phaser.Group {
      * @param {number} [start_x] - Starting x coordinate, calculated in layoutQuestions considering question objects in layout.  
      */
     zigzag() {
+        this.topObjects = otsimo.game.add.group();
         let center_x = otsimo.game.world.centerX;
         let len = this.questionObjects.length;
         let w = this.questionObjects[0].width;
@@ -120,8 +133,9 @@ export default class Layout extends Phaser.Group {
             }
             item.x = xk;
             item.y = yk;
-            this.add(item);
+            this.topObjects.add(item);
         }
+        this.add(this.topObjects);
     }
 
     /**
@@ -131,7 +145,7 @@ export default class Layout extends Phaser.Group {
      * @param {number} [start_x] - Starting x coordinate, calculated in layoutQuestions considering question objects in layout.  
      */
     line() {
-
+        this.topObjects = otsimo.game.add.group();
         let center_x = otsimo.game.world.centerX;
         let len = this.questionObjects.length;
         let w = this.questionObjects[0].width;
@@ -153,8 +167,9 @@ export default class Layout extends Phaser.Group {
             let yk = start_y;
             item.x = xk;
             item.y = yk;
-            this.add(item);
+            this.topObjects.add(item);
         }
+        this.add(this.topObjects);
     }
 
     /**
@@ -176,7 +191,6 @@ export default class Layout extends Phaser.Group {
      * @method Layout.layoutQuestions
      */
     layoutQuestions() {
-        // TODO: question can be a number
         let len = this.questions.length;
         this.questionObjects = [];
         let yk = otsimo.kv.layout.above_space;
