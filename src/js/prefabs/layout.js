@@ -67,16 +67,6 @@ export default class Layout extends Phaser.Group {
         }
     }
 
-    /*traverse(c, tree) {
-        for (let ch of c) {
-            let t = [`${ch.name} ${ch.constructor.name}`]
-            if (ch.children) {
-                this.traverse(ch.children, t)
-            }
-            tree.push(t)
-        }
-    }*/
-
     /**
      * Calls the proper functions for staged games.
      * 
@@ -89,11 +79,6 @@ export default class Layout extends Phaser.Group {
         this.layoutQuestions();
         // answers come below
         this.layoutAnswers();
-
-        let c = otsimo.game.world.children
-        let tree = []
-        //this.traverse(c, tree)
-        console.log(tree)
     }
 
     /**
@@ -103,11 +88,8 @@ export default class Layout extends Phaser.Group {
      * @return {Phaser.Image} [image] - Phaser image of background.
      */
     setBackground() {
-        
-        //this.gray.name = "gray";
         this.gray.alpha = 0.2;
         this.gray.scale.y = 0.52;
-        //this.tempParent.add(this.gray);
     }
 
     /**
@@ -191,6 +173,7 @@ export default class Layout extends Phaser.Group {
      * @method Layout.layoutQuestions
      */
     layoutQuestions() {
+        //TODO: center the y coordinate according to background
         let len = this.questions.length;
         this.questionObjects = [];
         let yk = otsimo.kv.layout.above_space;
@@ -378,9 +361,6 @@ export default class Layout extends Phaser.Group {
     }
 
     clickListener(num) {
-        //console.log("this: ", this);
-        //console.log("this.layout: ", this.layout);
-        //console.log("num: ", num);
         if (num.hidden) {
             return;
         }

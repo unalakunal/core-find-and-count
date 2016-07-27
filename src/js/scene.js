@@ -174,12 +174,6 @@ export default class Scene {
             this.layout.move(this.layout.visiblePos.x, this.layout.visiblePos.y, otsimo.kv.layout.show_layout_duration, delay);
         }, otsimo.kv.game.announce_layout_time)
         this.hint.call(otsimo.kv.game.announce_layout_time);
-        setTimeout(() => {
-            console.log(this.layout.topObjects);
-            console.log("bringToTop");
-            let k = this.layout.tempParent.bringToTop(this.layout.topObjects);
-            console.log("k: ", k);
-        }, 4000);
     }
 
     /**

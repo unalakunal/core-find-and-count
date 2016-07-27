@@ -22,6 +22,7 @@ export default class Hint {
         console.log("hint called with answer: ", this.answer);
         this.removeTimer();
         this.timer = setTimeout(this.create.bind(this), delay + (otsimo.settings.hint_duration * 1000));
+        this.timerArr.push(this.timer);
     }
 
     create() {
@@ -59,6 +60,9 @@ export default class Hint {
             console.log("clearing timeout");
             clearTimeout(this.timer);
             this.timer = undefined;
+        }
+        for (let i of this.timerArr) {
+            clearTimeout(i);
         }
     }
 
