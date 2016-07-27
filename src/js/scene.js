@@ -40,15 +40,18 @@ export default class Scene {
             var questions = this.random.for("items");
             var answer = questions.length;
             var answers = this.random.for("numbers", answer);
-            var item_type = this.random.items[0].id;
+            //var item_type = this.random.items[0].id;
+            var item_type = questions[0].id;
         } else if (otsimo.kv.game.type == "compare") {
             var answers = this.random.for("numbers", answer);
             var item_type = this.random.items[0].id;
             staged = false;
         } else if (otsimo.kv.game.type == "find_next") {
             var questions = this.random.for("numbers", false);
-            var answer = questions.length;
+            var answer = questions[2].id + 1;
             var answers = this.random.for("numbers", answer);
+            console.log("answer: ", answer);            
+            console.log("answers: ", answers);
             var item_type = this.random.items[0].id;
         }
 
@@ -152,11 +155,11 @@ export default class Scene {
                     x: 0,
                     y: otsimo.game.height * otsimo.kv.layout.above_space * 0.65
                 },
-                otsimo.kv.game.announce_layout_time,
-                Phaser.Easing.Exponential.Out,
+                otsimo.kv.game.announce_layout_time * 0.35,
+                Phaser.Easing.Sinusoidal.Out,
                 true
             )
-        }, delay);
+        }, delay + 1500);
 
         setTimeout(() => {
             this.layout.move(this.layout.visiblePos.x, this.layout.visiblePos.y, otsimo.kv.layout.show_layout_duration, delay);

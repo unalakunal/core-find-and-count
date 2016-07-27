@@ -93,7 +93,8 @@ export class Random {
             //dealing with numbers
             if (answer) {
                 // answer for numbers
-                var answer_obj = this.numbers.filter(o => {
+                console.log("answer for numbers, where numbers are: ", this.numbers);
+                let answer_obj = this.numbers.filter(o => {
                     if (o.id == answer) {
                         return true;
                     }
@@ -102,24 +103,46 @@ export class Random {
                 this.answer = answer_obj;
                 console.log("answer_obj:  ", answer_obj);
                 let count = this.amount(true);
-
+                console.log("count: ", count);
                 res[0] = answer_obj;
                 for (let i = 1; i < count; i++) {
                     let kind = this.forKind(this.numbers);
+                    // TODO: get rid of the limit
+                    let limit = 50;
                     while ((this.include(res, kind))) {
+                        if (limit < 0) {
+                            //break;
+                        }
+                        limit--;
+                        console.log("while", res, "includes", kind);
                         kind = this.forKind(this.numbers);
                     }
                     res.push(kind);
                 }
             } else {
-                // question for numbers
-                let count = this.amount(false);
-                let kind = this.forKind(this.items);
-                for (let i = 0; i < count; i++) {
-                    res.push(kind);
+                // question for numbers, game type must be find_next
+                console.log("question for numbers, where numbers are: ", this.numbers);
+                let count = 3;
+                console.log("count: ", count);
+                let kind = this.forKind(this.numbers);
+                while (kind.id > 7) {
+                    kind = this.forKind(this.numbers);
                 }
+                console.log("kind: ", kind);
+                let plus_one = this.numbers.find(f => {
+                    return (f.id == kind.id + 1);
+                });
+                console.log("plus_one: ", plus_one);
+                let plus_two = this.numbers.find(f => {
+                    return f.id == kind.id + 2;
+                });
+                console.log("plus_two: ", plus_two);
+                res.push(kind);
+                res.push(plus_one);
+                res.push(plus_two);
+                this.questions = res;
             }
-            this.numbers = res;
+            console.log("res: ", res);
         }
         return res;
     }
@@ -133,8 +156,10 @@ export class Random {
      */
 
     forKind(array) {
+        console.log("forkind array: ", array);
         let len = array.length;
         let n = Math.floor(Math.random() * len);
+        console.log("forkind returns: ", array[n]);
         return array[n];
     }
 

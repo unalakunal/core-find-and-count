@@ -32,6 +32,11 @@
             "path": "img/gray.png"
         },
         {
+            "name": "question_mark",
+            "type": "image",
+            "path": "img/qm.png"
+        },
+        {
             "name": "white_box",
             "type": "image",
             "path": "img/white_box.png"
@@ -330,13 +335,13 @@
         "bar_length_constant": 0.25
     },
     "game": {
-        "questions": "items",
+        "questions": "numbers",
         "answers": "numbers",
         "session_step": 10,
         "step_score": 5,
         "limit_score": 0,
         "bar_length_constraint": 0.3,
-        "type": "how_many",
+        "type": "find_next",
         "hint_type": "hand",
         "announce_layout_time": 2000,
         "hint_hand_duration": 1000,

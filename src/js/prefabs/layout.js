@@ -90,7 +90,7 @@ export default class Layout extends Phaser.Group {
     setBackground() {
         // TODO: return background object
         this.gray = this.game.add.image(
-            otsimo.game.width * 3,
+            otsimo.game.width * 1.2,
             otsimo.game.height * otsimo.kv.layout.above_space * 0.65,
             'gray'
         );
@@ -105,10 +105,10 @@ export default class Layout extends Phaser.Group {
      * @param {number} [start_x] - Starting x coordinate, calculated in layoutQuestions considering question objects in layout.  
      */
     zigzag(start_x) {
-        let len = this.items.length;
+        let len = this.questionObjects.length;
         let start_y = otsimo.game.height * otsimo.kv.layout.above_space;
         for (let i = 0; i < len; i++) {
-            let item = this.items[i];
+            let item = this.questionObjects[i];
             let xk = start_x + item.width * i;
             let yk = start_y;
             if (i % 2 == 1) {
@@ -127,10 +127,12 @@ export default class Layout extends Phaser.Group {
      * @param {number} [start_x] - Starting x coordinate, calculated in layoutQuestions considering question objects in layout.  
      */
     line(start_x) {
-        let len = this.items.length;
+        // TODO: fix center issue
+        let len = this.questionObjects.length;
+        console.log("len in line: ", len);
         let start_y = otsimo.game.height * otsimo.kv.layout.above_space * 1.2;
         for (let i = 0; i < len; i++) {
-            let item = this.items[i];
+            let item = this.questionObjects[i];
             let xk = start_x + item.width * i * 1.3;
             let yk = start_y;
             item.x = xk;
@@ -160,32 +162,66 @@ export default class Layout extends Phaser.Group {
     layoutQuestions() {
         // TODO: question can be a number
         let len = this.questions.length;
-        this.items = [];
+        this.questionObjects = [];
         let center_x = otsimo.game.world.centerX;
         let yk = otsimo.kv.layout.above_space;
-        for (let i = 0; i < len; i++) {
-            let item = new Item({
-                game: otsimo.game,
-                x: this.hiddenPos.x,
-                y: this.hiddenPos.y,
-                item: this.questions[i],
-                scale: {
-                    x: 0.3,
-                    y: 0.3
-                }
-            });
-            item.anchor.set(0.5, 0.5);
-            item.inputEnabled = false;
-            this.items.push(item);
-            let w = this.items[0].width;
-            var start_x = center_x - (len * w) * 0.4;
+        let four_arr = [];        
+        if (otsimo.kv.game.type == "how_many") {
+            four_arr = ["line", "zigzag", "square"];
+            for (let i = 0; i < len; i++) {
+                let item = new Item({
+                    game: otsimo.game,
+                    x: this.hiddenPos.x,
+                    y: this.hiddenPos.y,
+                    item: this.questions[i],
+                    scale: {
+                        x: 0.3,
+                        y: 0.3
+                    }
+                });
+                item.anchor.set(0.5, 0.5);
+                item.inputEnabled = false;
+                this.questionObjects.push(item);
+            }
+        } else {
+            four_arr.push("line");
+            console.log("len for find_next game: ", len);
+            for (let i = 0; i < len; i++) {
+                let num = new Number({
+                    game: otsimo.game,
+                    x: this.hiddenPos.x,
+                    y: this.hiddenPos.y,
+                    num: this.questions[i],
+                    scale: {
+                        x: 0.9,
+                        y: 0.9
+                    }
+                });
+                num.anchor.set(0.5, 0.5);
+                num.inputEnabled = false;
+                this.questionObjects.push(num);
+            }
+            let q_mark = this.game.add.sprite(
+                this.hiddenPos.x,
+                this.hiddenPos.y,
+                "question_mark"                
+            );
+            let sc = this.questionObjects[0].width / q_mark.width;
+            q_mark.scale.x = sc;
+            q_mark.scale.y = sc;
+            q_mark.anchor.set(0.5, 0.5);            
+            this.questionObjects.push(q_mark);
+            console.log("this.questionobjects: ", this.questionObjects);
         }
+        len = this.questionObjects.length;
+        let w = this.questionObjects[0].width;
+        let start_x = center_x - (len * w) * 0.4;
         this.permission = [
             [], //0
             ["line"], //1
             ["line"], //2
             ["line"], //3
-            ["line", "zigzag", "square"], //4
+            four_arr, //4
             ["zigzag"], //5
             ["zigzag"], //6
             ["zigzag"], //7
@@ -257,7 +293,7 @@ export default class Layout extends Phaser.Group {
      */
     move(x, y, duration, delay) {
         let t = otsimo.game.add.tween(this)
-            .to({ x: x, y: y }, duration, Phaser.Easing.Back.Out, false, delay);
+            .to({ x: x, y: y }, duration, Phaser.Easing.Quintic.Out, false, delay);
         t.start();
     }
 
