@@ -91,11 +91,11 @@ export default class Layout extends Phaser.Group {
         // TODO: return background object
         this.gray = this.game.add.image(
             otsimo.game.width * 1.2,
-            otsimo.game.height * otsimo.kv.layout.above_space * 0.65,
+            otsimo.game.height * otsimo.kv.layout.above_space * 0.6,
             'gray'
         );
         this.gray.alpha = 0.2;
-        this.gray.scale.y = 0.5;
+        this.gray.scale.y = 0.52;
     }
 
     /**
@@ -104,8 +104,12 @@ export default class Layout extends Phaser.Group {
      * @method Layout.zigzag
      * @param {number} [start_x] - Starting x coordinate, calculated in layoutQuestions considering question objects in layout.  
      */
-    zigzag(start_x) {
+    zigzag() {
+        let center_x = otsimo.game.world.centerX;
         let len = this.questionObjects.length;
+        let w = this.questionObjects[0].width;
+        let start_x = center_x - (len * w) * 0.5;
+        start_x += this.questionObjects[0].width * 0.5;
         let start_y = otsimo.game.height * otsimo.kv.layout.above_space;
         for (let i = 0; i < len; i++) {
             let item = this.questionObjects[i];
@@ -126,14 +130,26 @@ export default class Layout extends Phaser.Group {
      * @method Layout.line
      * @param {number} [start_x] - Starting x coordinate, calculated in layoutQuestions considering question objects in layout.  
      */
-    line(start_x) {
-        // TODO: fix center issue
+    line() {
+
+        let center_x = otsimo.game.world.centerX;
         let len = this.questionObjects.length;
+        let w = this.questionObjects[0].width;
+        let start_x = center_x - (len * w) * 0.5;
+        if (len == 1) {
+            start_x = center_x;
+        }
         console.log("len in line: ", len);
         let start_y = otsimo.game.height * otsimo.kv.layout.above_space * 1.2;
         for (let i = 0; i < len; i++) {
+            if (otsimo.kv.game.type == "find_next") {
+                start_x = center_x - 0.25 * w - (len * w) * 0.5;
+            }
             let item = this.questionObjects[i];
-            let xk = start_x + item.width * i * 1.3;
+            let xk = start_x + item.width * i * 1.5;
+            if (len % 2 == 0 && otsimo.kv.game.type != "find_next") {
+                xk = start_x + item.width * i * 2;
+            }
             let yk = start_y;
             item.x = xk;
             item.y = yk;
@@ -163,11 +179,10 @@ export default class Layout extends Phaser.Group {
         // TODO: question can be a number
         let len = this.questions.length;
         this.questionObjects = [];
-        let center_x = otsimo.game.world.centerX;
         let yk = otsimo.kv.layout.above_space;
         let four_arr = [];
         if (otsimo.kv.game.type == "how_many") {
-            four_arr = ["line", "zigzag", "square"];
+            four_arr = ["zigzag", "square"];
             for (let i = 0; i < len; i++) {
                 let item = new Item({
                     game: otsimo.game,
@@ -185,7 +200,6 @@ export default class Layout extends Phaser.Group {
             }
         } else {
             four_arr.push("line");
-            console.log("len for find_next game: ", len);
             for (let i = 0; i < len; i++) {
                 let num = new Number({
                     game: otsimo.game,
@@ -211,11 +225,7 @@ export default class Layout extends Phaser.Group {
             dotted.scale.y = sc;
             dotted.anchor.set(0.5, 0.5);
             this.questionObjects.push(dotted);
-            console.log("this.questionobjects: ", this.questionObjects);
         }
-        len = this.questionObjects.length;
-        let w = this.questionObjects[0].width;
-        let start_x = center_x - (len * w) * 0.4;
         this.permission = [
             [], //0
             ["line"], //1
@@ -232,7 +242,7 @@ export default class Layout extends Phaser.Group {
         let rand = Math.floor(Math.random() * perm_arr.length);
         let func = perm_arr[rand];
         console.log("layout func for questions: ", func);
-        this[func](start_x);
+        this[func]();
     }
 
     /**
@@ -266,13 +276,11 @@ export default class Layout extends Phaser.Group {
             num.events.onInputDown.add(this.clickListener, this);
             this.numbers.push(num);
             let w = this.numbers[0].width;
-            let start_x = center_x - (len * w) * (len + 1) * 0.1;
+            let start_x = center_x - (len * w) * 0.5;
             let start_y = otsimo.game.height * otsimo.kv.layout.answer_y_constant;
-            let xk = start_x + num.width * i * 1.3;
-            console.log("layout w: ", w, "start_x: ", start_x);
+            let xk = start_x + num.width * i * 1.5;
             let yk = start_y;
             num.x = xk;
-            console.log("num.x: ", num.x, "for i: ", i);
             num.y = yk;
             this.add(num);
             num.events.onInputDown.add(this.clickListener, this, 0, num);
@@ -315,11 +323,9 @@ export default class Layout extends Phaser.Group {
                 });
                 setTimeout(() => {
                     let len = this.numbers.length;
-                    console.log("len: ", len);
                     let center_x = otsimo.game.world.centerX;
                     let w = this.numbers[0].width;
                     let start_x = center_x - (len * w) * (len + 1) * 0.1;
-                    console.log("relayout w: ", w, "start_x: ", start_x);
                     for (let i = 0; i < len; i++) {
                         let num = this.numbers[i];
                         let xk = start_x + num.width * i * 1.3;
@@ -350,7 +356,7 @@ export default class Layout extends Phaser.Group {
 
     hide(obj, delay) {
         obj.inputEnabled = false;
-        let a = otsimo.game.add.tween(obj).to({ alpha: 0.3 }, 800, "Linear", false, delay);
+        let a = otsimo.game.add.tween(obj).to({ alpha: 0.3 }, 500, Phaser.Easing.Exponential.Out, false, delay);
         let ret = obj.scale.x;
         let b = otsimo.game.add.tween(obj.scale).to({ x: ret, y: ret }, 500, Phaser.Easing.Back.In, false);
         a.chain(b);
