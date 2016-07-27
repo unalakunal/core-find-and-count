@@ -50,8 +50,6 @@ export default class Scene {
             var questions = this.random.for("numbers", false);
             var answer = questions[2].id + 1;
             var answers = this.random.for("numbers", answer);
-            console.log("answer: ", answer);            
-            console.log("answers: ", answers);
             var item_type = this.random.items[0].id;
         }
 
@@ -136,9 +134,13 @@ export default class Scene {
      * @param {number} [y_time] - The leave time of the animation on text.
     */
     announce(item_type, y_time, delay) {
-        let txt = sprintf(otsimo.kv.announce_text, item_type, "s are there?");
-        let text = otsimo.game.add.text(otsimo.game.world.centerX, otsimo.game.world.centerY * (-0.1), txt, otsimo.kv.announce_font);
+        if (otsimo.kv.game.type == "how_many") {
+            var txt = sprintf(otsimo.kv.announce_text_how_many, item_type, "s are there?");
+        } else {
+            var txt = otsimo.kv.announce_text_find_next;
+        }
 
+        let text = otsimo.game.add.text(otsimo.game.world.centerX, otsimo.game.world.centerY * (-0.1), txt, otsimo.kv.announce_font);
         text.anchor.set(0.5, 0.5);
         text.alpha = 0.1;
         this.announceText = text;
@@ -176,7 +178,6 @@ export default class Scene {
      */
     answerPos() {
         let ans = this.layout.answer_sprite;
-        console.log("answer.sprite: ", ans);
         return (ans.x, ans.y);
     }
 

@@ -7,7 +7,8 @@
     "loadingFont": "60px Arial",
     "loadingBackground": "#18B9F2",
     "loadingColor": "#fff",
-    "announce_text": "How many %s%s",
+    "announce_text_how_many": "How many %s%s",
+    "announce_text_find_next": "What comes next?",
     "announce_text_time": 500,
     "announce_style": {
         "strokeThickness": 4,
@@ -35,6 +36,11 @@
             "name": "question_mark",
             "type": "image",
             "path": "img/qm.png"
+        },
+        {
+            "name": "dotted",
+            "type": "image",
+            "path": "img/dotted_empty.png"
         },
         {
             "name": "white_box",
