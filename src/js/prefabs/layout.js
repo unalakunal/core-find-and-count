@@ -271,14 +271,17 @@ export default class Layout extends Phaser.Group {
             }
             num.inputEnabled = true;
             num.events.onInputDown.add(this.clickListener, this);
-            this.numbers.push(num);
-            let w = this.numbers[0].width;
+            let w = num.width;
             let start_x = center_x - (len * w) * 0.5;
+            if (len % 2 == 0) {
+                start_x = center_x - 0.25 * w - Math.pow((len * 0.5), 2) * w * 0.5;
+            }
             let start_y = otsimo.game.height * otsimo.kv.layout.answer_y_constant;
             let xk = start_x + num.width * i * 1.5;
             let yk = start_y;
             num.x = xk;
             num.y = yk;
+            this.numbers.push(num);
             this.add(num);
             num.events.onInputDown.add(this.clickListener, this, 0, num);
         }
@@ -323,6 +326,9 @@ export default class Layout extends Phaser.Group {
                     let center_x = otsimo.game.world.centerX;
                     let w = this.numbers[0].width;
                     let start_x = center_x - (len * w) * (len + 1) * 0.1;
+                    if (len == 1) {
+                        start_x = center_x;
+                    }
                     for (let i = 0; i < len; i++) {
                         let num = this.numbers[i];
                         let xk = start_x + num.width * i * 1.3;

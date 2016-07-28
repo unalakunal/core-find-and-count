@@ -170,7 +170,7 @@ export default class Scene {
         setTimeout(() => {
             this.layout.move(this.layout.visiblePos.x, this.layout.visiblePos.y, otsimo.kv.layout.show_layout_duration, delay);
         }, otsimo.kv.game.announce_layout_time)
-        this.hint.call(otsimo.kv.game.announce_layout_time);
+        this.hint.call(otsimo.kv.game.announce_layout_time + otsimo.kv.layout.show_layout_duration);
     }
 
     /**

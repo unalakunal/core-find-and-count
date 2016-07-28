@@ -38,36 +38,25 @@ export class Random {
      */
     amount(isAnswer) {
         let amount = Math.floor(Math.random() * 10);
-        if (this.isStaged) {
-            if (isAnswer) {
-                switch (otsimo.settings.difficulty) {
-                    case "easy":
-                        amount = 2;
-                        break
-                    case "medium":
-                        amount = 3;
-                        break
-                    case "hard":
-                        amount = 4;
-                        break
-                }
-            } else {
-                while (amount == 0) {
-                    amount = Math.floor(Math.random() * 10);
-                }
-            }
+
+
+        while (amount == 0) {
+            amount = Math.floor(Math.random() * 10);
         }
-        else {
+
+        if (isAnswer) {
             switch (otsimo.settings.difficulty) {
                 case "easy":
+                    amount = 2;
                     break
                 case "medium":
+                    amount = 3;
                     break
                 case "hard":
+                    amount = 4;
                     break
             }
         }
-        console.log("amount returns", amount);
         return amount;
     }
 
@@ -103,6 +92,7 @@ export class Random {
                 this.answer = answer_obj;
                 console.log("answer_obj:  ", answer_obj);
                 let count = this.amount(true);
+                console.log("answers count: ", count);
                 res[0] = answer_obj;
                 for (let i = 1; i < count; i++) {
                     let kind = this.forKind(this.numbers);
@@ -112,7 +102,7 @@ export class Random {
                     res.push(kind);
                 }
             } else {
-                // question for numbers, game type must be find_next
+                // question for numbers (game type == find_next)
                 let count = 3;
                 let kind = this.forKind(this.numbers);
                 while (kind.id > 6) {
@@ -141,7 +131,6 @@ export class Random {
      * @param {list} [array] - The list at hand.
      * @return {object} [array[n]] - A random value in the array.
      */
-
     forKind(array) {
         let len = array.length;
         let n = Math.floor(Math.random() * len);

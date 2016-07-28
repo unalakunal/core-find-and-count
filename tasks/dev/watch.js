@@ -8,6 +8,8 @@ gulp.task('watch', () => {
     gulp.watch(config.paths.src.audio, ['audio:dev'],{debounceDelay:1000});
     gulp.watch(config.paths.src.i18n_img, ['i18n_img:dev'],{debounceDelay:1000});
     gulp.watch(config.paths.src.i18n_data, ['i18n_data:dev'],{debounceDelay:1000});
-    gulp.watch(config.paths.src.general_data, ['general_data:dev'],{debounceDelay:1000});    
+    gulp.watch(config.paths.src.otsimojson, ['otsimojson:dev'],{debounceDelay:1000});  
+    gulp.watch(config.paths.src.settingsjson, ['settingsjson:dev'],{debounceDelay:1000});  
+      
     gulp.watch(config.paths.src.root + '**/*.html', ['html:dev'],{debounceDelay:1000});
 });
