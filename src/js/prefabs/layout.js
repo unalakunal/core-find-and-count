@@ -93,8 +93,6 @@ export default class Layout extends Phaser.Group {
         this.gray.alpha = 0.2;
         this.gray.scale.y = 0.52;
         this.tapeParent.add(this.gray);
-        console.log("tapeParent: ", this.tapeParent);
-        console.log("gray: ", this.gray);
         this.tapeParent.x = this.gray.x;
         this.tapeParent.y = this.gray.y;
         this.gray.x = 0;
@@ -140,7 +138,6 @@ export default class Layout extends Phaser.Group {
         if (len == 1) {
             start_x = center_x;
         }
-        console.log("len in line: ", len);
         let start_y = otsimo.game.height * otsimo.kv.layout.above_space + this.gray.height * 0.5;
         for (let i = 0; i < len; i++) {
             if (otsimo.kv.game.type == "find_next") {

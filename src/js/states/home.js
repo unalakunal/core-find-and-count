@@ -10,7 +10,6 @@ export default class Home extends Phaser.State {
         this.game.add.button(25, 25, 'back', this.quitGame, this);
 
         if (otsimo.currentMusic) {
-            console.log("game has a currentmusic");
             otsimo.currentMusic.volume = otsimo.kv.game_music.volume_home_screen;
         }
 

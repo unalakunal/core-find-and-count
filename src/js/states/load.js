@@ -37,11 +37,9 @@ export default class Load extends Phaser.State {
     loadAssets() {
         let loader = this.game.load;
         for (let asset of otsimo.kv.preload) {
-            //console.log("loading item: ", asset);
             if (asset.type === "atlas") {
                 loader.atlas(asset.name, asset.path, asset.data);
             } else {
-                //console.log("not atlas");
                 loader[asset.type](asset.name, asset.path);
             }
         }

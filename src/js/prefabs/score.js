@@ -26,12 +26,10 @@ export default class Score {
         this._totalScore += this._stepScore;
         this.game_step++;
         let gameOver = (this.game_step == otsimo.kv.game.session_step);
-        console.log("??gameover: ", gameOver);
         return gameOver;
     }
 
     decrement() {
-        console.log("decrement with: ", this._stepScore, this.limit);
         if (this._stepScore > this.limit) {
             this._stepScore--;
         }

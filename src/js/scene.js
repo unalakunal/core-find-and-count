@@ -33,7 +33,6 @@ export default class Scene {
      * @method Scene.init 
      */
     init(delay) {
-        //console.log("this.random.items: ", this.random.items);
         let staged = true;
         if (otsimo.kv.game.type == "how_many") {
             // get random number of items to screen
@@ -94,18 +93,17 @@ export default class Scene {
         if (otsimo.kv.game.hint_type == "hand") {
             this.hint.kill();
         }
-        console.log("gray position: ", this.layout.gray.x, this.layout.gray.y);
-        console.log("tapeParent position: ", this.layout.tapeParent.x, this.layout.tapeParent.y);
         this.hint.removeTimer();
         let correctInput = (obj.num.id == this.random.answer.id);
         obj.inputEnabled = false;
-
         if (correctInput) {
-            this.hint.kill();
-            this.hint.removeTimer();
             //if the answer is true
-            let delay = 1000;
-            obj.highlight();
+            let slot = this.layout.questionObjects[this.layout.questionObjects.length - 1];
+            let delay = obj.correct({
+                slot: slot,
+                layout: this.layout,
+                delay: obj.highlight()
+            });
             obj.playSound();
             if (otsimo.correctSound) {
                 otsimo.correctSound.play(null, null, 0.5);
@@ -119,8 +117,6 @@ export default class Scene {
             delay = delay * 2;
             this.session.correctInput(this.random.answer, delay);
         } else {
-            this.hint.kill();
-            this.hint.removeTimer();
             this.layout.relayout({
                 delay: 0,
                 answer_name: this.random.answer.text,
