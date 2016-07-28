@@ -21,7 +21,7 @@ export default class Home extends Phaser.State {
         }
         this.game.state.start('Play');
     }
-    
+
     quitGame() {
         if (otsimo.clickSound) {
             otsimo.clickSound.play()
@@ -30,7 +30,9 @@ export default class Home extends Phaser.State {
     }
 
     render() {
-        this.game.debug.text(this.game.time.fps || '--', 2, 14, "#00ff00");
+        if (otsimo.debug) {
+            this.game.debug.text(this.game.time.fps || '--', 2, 14, "#00ff00");
+        }
     }
 }
 

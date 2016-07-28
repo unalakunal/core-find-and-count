@@ -11,7 +11,7 @@
   "homepage": "git@bitbucket.org:otsimo/learn-numbers.git",
   "dependencies": {
     "otsimo": "^1.0.0",
-    "phaser": "^2.4.4",
+    "phaser": "~2.4.4",
     "sprintf-js": "^1.0.3"
   },
   "scripts": {
