@@ -60,6 +60,8 @@ export default class Layout extends Phaser.Group {
             y: otsimo.kv.game.visible_pos.y * otsimo.game.height
         }
 
+        this.tapeParent = new Phaser.Group(otsimo.game);
+
         if (this.staged) {
             this.layoutBoth();
         } else {
@@ -90,6 +92,12 @@ export default class Layout extends Phaser.Group {
     setBackground() {
         this.gray.alpha = 0.2;
         this.gray.scale.y = 0.52;
+        this.tapeParent.add(this.gray);
+        console.log("tapeParent: ", this.tapeParent);
+        console.log("gray: ", this.gray);
+        this.tapeParent.x = this.gray.x;
+        this.tapeParent.y = this.gray.y;
+        this.gray.x = 0;
     }
 
     /**
@@ -99,13 +107,12 @@ export default class Layout extends Phaser.Group {
      * @param {number} [start_x] - Starting x coordinate, calculated in layoutQuestions considering question objects in layout.  
      */
     zigzag() {
-        this.topObjects = otsimo.game.add.group();
         let center_x = otsimo.game.world.centerX;
         let len = this.questionObjects.length;
         let w = this.questionObjects[0].width;
         let start_x = center_x - (len * w) * 0.5;
         start_x += this.questionObjects[0].width * 0.5;
-        let start_y = otsimo.game.height * otsimo.kv.layout.above_space;
+        let start_y = otsimo.game.height * otsimo.kv.layout.above_space + this.gray.height * 0.5 - this.questionObjects[0].height * 0.5;
         for (let i = 0; i < len; i++) {
             let item = this.questionObjects[i];
             let xk = start_x + item.width * i;
@@ -115,9 +122,8 @@ export default class Layout extends Phaser.Group {
             }
             item.x = xk;
             item.y = yk;
-            this.topObjects.add(item);
+            this.tapeParent.add(item);
         }
-        this.add(this.topObjects);
     }
 
     /**
@@ -127,7 +133,6 @@ export default class Layout extends Phaser.Group {
      * @param {number} [start_x] - Starting x coordinate, calculated in layoutQuestions considering question objects in layout.  
      */
     line() {
-        this.topObjects = otsimo.game.add.group();
         let center_x = otsimo.game.world.centerX;
         let len = this.questionObjects.length;
         let w = this.questionObjects[0].width;
@@ -136,7 +141,7 @@ export default class Layout extends Phaser.Group {
             start_x = center_x;
         }
         console.log("len in line: ", len);
-        let start_y = otsimo.game.height * otsimo.kv.layout.above_space * 1.2;
+        let start_y = otsimo.game.height * otsimo.kv.layout.above_space + this.gray.height * 0.5;
         for (let i = 0; i < len; i++) {
             if (otsimo.kv.game.type == "find_next") {
                 start_x = center_x - 0.25 * w - (len * w) * 0.5;
@@ -149,9 +154,8 @@ export default class Layout extends Phaser.Group {
             let yk = start_y;
             item.x = xk;
             item.y = yk;
-            this.topObjects.add(item);
+            this.tapeParent.add(item);
         }
-        this.add(this.topObjects);
     }
 
     /**
@@ -176,7 +180,6 @@ export default class Layout extends Phaser.Group {
         //TODO: center the y coordinate according to background
         let len = this.questions.length;
         this.questionObjects = [];
-        let yk = otsimo.kv.layout.above_space;
         let four_arr = [];
         if (otsimo.kv.game.type == "how_many") {
             four_arr = ["zigzag", "square"];
@@ -340,9 +343,9 @@ export default class Layout extends Phaser.Group {
                 otsimo.game.add.tween(this.children[i]).to({ alpha: 0.3 }, 300, "Linear", true);
             }
         }
-        otsimo.game.add.tween(this.gray)
-            .to({ x: otsimo.game.width * 1.2 }, otsimo.kv.layout.move_away_duration * 0.35, Phaser.Easing.Sinusoidal.In, true, 600);
-        let t = otsimo.game.add.tween(this).to({ x: this.hiddenPos.x, y: this.hiddenPos.y }, otsimo.kv.layout.move_away_duration, Phaser.Easing.Back.In, false, delay);
+        otsimo.game.add.tween(this.tapeParent)
+            .to({ x: otsimo.game.width * 1.2 }, otsimo.kv.layout.move_away_duration * 0.35, Phaser.Easing.Sinusoidal.In, true, delay);
+        let t = otsimo.game.add.tween(this).to({ x: this.hiddenPos.x, y: this.hiddenPos.y }, otsimo.kv.layout.move_away_duration, Phaser.Easing.Back.In, false, delay * 1.3);
         t.start();
     }
 

@@ -53,10 +53,9 @@ export default class Scene {
             var item_type = this.random.items[0].id;
         }
 
-        //let tempParent = otsimo.game.add.group()
         let gray = otsimo.game.add.sprite(
             otsimo.game.width * 1.2,
-            otsimo.game.height * otsimo.kv.layout.above_space * 0.6,
+            otsimo.game.height * otsimo.kv.layout.above_space,
             'gray'
         );
         let layout = new Layout({
@@ -95,6 +94,8 @@ export default class Scene {
         if (otsimo.kv.game.hint_type == "hand") {
             this.hint.kill();
         }
+        console.log("gray position: ", this.layout.gray.x, this.layout.gray.y);
+        console.log("tapeParent position: ", this.layout.tapeParent.x, this.layout.tapeParent.y);
         this.hint.removeTimer();
         let correctInput = (obj.num.id == this.random.answer.id);
         obj.inputEnabled = false;
@@ -159,16 +160,16 @@ export default class Scene {
         a.start();
 
         setTimeout(() => {
-            otsimo.game.add.tween(this.layout.gray).to(
+            otsimo.game.add.tween(this.layout.tapeParent).to(
                 {
                     x: 0,
-                    y: otsimo.game.height * otsimo.kv.layout.above_space * 0.65
+                    y: otsimo.game.height * otsimo.kv.layout.above_space
                 },
                 otsimo.kv.game.announce_layout_time * 0.35,
                 Phaser.Easing.Sinusoidal.Out,
                 true
             )
-        }, delay + 1500);
+        }, delay + 2000);
 
         setTimeout(() => {
             this.layout.move(this.layout.visiblePos.x, this.layout.visiblePos.y, otsimo.kv.layout.show_layout_duration, delay);
