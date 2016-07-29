@@ -124,6 +124,7 @@ export default class Scene {
                 obj: obj
             });
             this.session.wrongInput(obj.num, this.random.answer);
+            console.log("wrong answer hint call");
             this.hint.call(otsimo.kv.layout.relayout_duration);
         }
     }
@@ -169,8 +170,9 @@ export default class Scene {
 
         setTimeout(() => {
             this.layout.move(this.layout.visiblePos.x, this.layout.visiblePos.y, otsimo.kv.layout.show_layout_duration, delay);
-        }, otsimo.kv.game.announce_layout_time)
-        this.hint.call(otsimo.kv.game.announce_layout_time + otsimo.kv.layout.show_layout_duration);
+        }, otsimo.kv.game.announce_layout_time);
+        console.log("announce hint call");
+        this.hint.call(otsimo.kv.game.announce_layout_time + otsimo.kv.layout.show_layout_duration + otsimo.kv.layout.relayout_duration + delay);
     }
 
     /**

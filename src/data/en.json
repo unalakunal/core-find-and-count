@@ -33,11 +33,6 @@
             "path": "img/gray.png"
         },
         {
-            "name": "question_mark",
-            "type": "image",
-            "path": "img/qm.png"
-        },
-        {
             "name": "dotted",
             "type": "image",
             "path": "img/dotted_empty.png"
@@ -347,7 +342,7 @@
         "step_score": 5,
         "limit_score": 0,
         "bar_length_constraint": 0.3,
-        "type": "how_many",
+        "type": "find_next",
         "hint_type": "hand",
         "announce_layout_time": 2000,
         "hint_hand_duration": 1000,

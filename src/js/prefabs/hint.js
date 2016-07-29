@@ -6,7 +6,6 @@ export default class Hint {
         this.answer = answer;
         this.score = score;
         this.arrow = undefined;
-        this.tweenArr = [];
         this.timerArr = [];
         this.step = 0;
     }
@@ -22,6 +21,7 @@ export default class Hint {
         console.log("hint called with answer: ", this.answer);
         this.removeTimer();
         this.timer = setTimeout(this.create.bind(this), delay + (otsimo.settings.hint_duration * 1000));
+        console.log("created timer with number: ", this.timer);
         this.timerArr.push(this.timer);
     }
 
@@ -57,13 +57,14 @@ export default class Hint {
 
     removeTimer() {
         if (this.timer) {
-            console.log("clearing timeout");
             clearTimeout(this.timer);
             this.timer = undefined;
         }
         for (let i of this.timerArr) {
+            console.log("clearing timeout with number: ", i);
             clearTimeout(i);
         }
+        this.timerArr = [];
     }
 
     incrementStep() {

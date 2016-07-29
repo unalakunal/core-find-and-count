@@ -247,7 +247,7 @@ export default class Layout extends Phaser.Group {
      * Specifies their coordinates and scale values according to their number.
      * Doesn't get called when there are no questions. Method "layoutOnce" is called in that case.
      *
-     * @method Layout.layoutAnswers 
+     * @method Layout.layoutAnswers
      */
     layoutAnswers() {
         let len = this.answers.length;
