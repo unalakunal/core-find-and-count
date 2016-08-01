@@ -13,13 +13,15 @@ import Number from "./number"
  *                             If a game is not staged, there are only interactive objects (answers) on the screen.
  * @param {list} [answers] - The list of answer sprites. Answers are input enabled.
  * @param {list} [questions] - The list of question sprites. Questions can not be touched or dragged.
+ * @param {string} [answer_text] - The answer text that this layout belongs to.
+ * @param {number} [gray] - The gray background that was created on scene.
  */
 export default class Layout extends Phaser.Group {
     constructor({game, staged, answers, questions, answer_text, gray}) {
         super(game);
         /**
          * @property {boolean} [staged] - A staged game contains two types of on screen data: answers and questions.
-         *                              If a game is not staged, there are only interactive objects (answers) on the screen.
+         *                                If a game is not staged, there are only interactive objects (answers) on the screen.
          */
         this.staged = staged;
 
@@ -37,9 +39,17 @@ export default class Layout extends Phaser.Group {
          * @property {list} [questions] - The list of question sprites. Questions can not be touched or dragged.
          */
         this.questions = questions;
-        //TODO: update documentation
+
+        /**
+         * @param {string} [answer_text] - The answer text that this layout belongs to.
+         */
         this.answer_text = answer_text;
+
+        /**
+         * @param {number} [gray] - The gray background that was created on scene.
+         */
         this.gray = gray;
+
         this.init();
     }
 
@@ -87,7 +97,6 @@ export default class Layout extends Phaser.Group {
      * Sets background for staged games to display and highlight questions.
      * 
      * @method Layout.setBackground
-     * @return {Phaser.Image} [image] - Phaser image of background.
      */
     setBackground() {
         this.gray.alpha = 0.2;
@@ -102,7 +111,6 @@ export default class Layout extends Phaser.Group {
      * Puts questions on screen in zigzag formation.
      * 
      * @method Layout.zigzag
-     * @param {number} [start_x] - Starting x coordinate, calculated in layoutQuestions considering question objects in layout.  
      */
     zigzag() {
         let center_x = otsimo.game.world.centerX;
@@ -128,7 +136,6 @@ export default class Layout extends Phaser.Group {
      * Puts questions on screen in line formation.
      * 
      * @method Layout.line
-     * @param {number} [start_x] - Starting x coordinate, calculated in layoutQuestions considering question objects in layout.  
      */
     line() {
         let center_x = otsimo.game.world.centerX;
@@ -159,9 +166,8 @@ export default class Layout extends Phaser.Group {
      * Puts questions on screen in square formation.
      * 
      * @method Layout.line
-     * @param {number} [start_x] - Starting x coordinate, calculated in layoutQuestions considering question objects in layout.  
      */
-    square(start_x) {
+    square() {
         // TODO
         console.log("in square function");
     }
@@ -176,6 +182,9 @@ export default class Layout extends Phaser.Group {
     layoutQuestions() {
         //TODO: center the y coordinate according to background
         let len = this.questions.length;
+        /**
+         * @property {list} [questionObjects] - The questions on layout, bound to gray background.
+         */
         this.questionObjects = [];
         let four_arr = [];
         if (otsimo.kv.game.type == "how_many") {
@@ -305,6 +314,11 @@ export default class Layout extends Phaser.Group {
         t.start();
     }
 
+    /**
+     * 
+     * 
+     * @
+     */
     relayout({delay, answer_name, isTrue, obj}) {
         if (isTrue) {
             this.clean(delay, answer_name);
@@ -359,6 +373,7 @@ export default class Layout extends Phaser.Group {
 
     hide(obj, delay) {
         obj.inputEnabled = false;
+        obj.hidden = true;
         let a = otsimo.game.add.tween(obj).to({ alpha: 0.3 }, 500, Phaser.Easing.Exponential.Out, false, delay);
         let ret = obj.scale.x;
         let b = otsimo.game.add.tween(obj.scale).to({ x: ret, y: ret }, 500, Phaser.Easing.Back.In, false);

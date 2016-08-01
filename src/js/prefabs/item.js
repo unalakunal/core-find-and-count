@@ -12,14 +12,11 @@
 export default class Item extends Phaser.Sprite {
     constructor({game, x, y, item, scale}) {
         super(game, x, y, item.image);
-        this.world.x = x;
-        this.world.y = y;
+        this.x = x;
+        this.y = y;
         this.item = item;
         this.name = item.text;
         this.hidden = false;
-        this.tweenArray = [];
-        this.oldX = x;
-        this.oldY = y;
         this.scale.x = scale.x;
         this.scale.y = scale.y;
 

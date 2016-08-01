@@ -18,21 +18,20 @@ export default class Scene {
         */
         this.random = new Random({ game: otsimo.game });
         /**
-         * Creates a score system for this scene.
-         * 
          * @property {object} [score] - The score object that contains step score and limit specialized in key values of the game.
          */
         this.score = score;
-        this.score.initStep();
     }
 
     /**
      * Initializes the scene using the random object.
      * Creates a layout in a hidden position. Lastly announces the layout by calling the announce function.
      * 
-     * @method Scene.init 
+     * @method Scene.init
+     * @param {number} [delay] - The delay for announce trigger.  
      */
     init(delay) {
+        this.score.initStep();
         let staged = true;
         if (otsimo.kv.game.type == "how_many") {
             // get random number of items to screen
@@ -57,6 +56,7 @@ export default class Scene {
             otsimo.game.height * otsimo.kv.layout.above_space,
             'gray'
         );
+
         let layout = new Layout({
             game: otsimo.game,
             staged: staged,
@@ -76,10 +76,17 @@ export default class Scene {
         layout.y = layout.hiddenPos.y;
 
         layout.itemSelected.add(this.onSelected, this);
+
+        /**
+         * @property {object} [layout] - The layout group that contains answers as children. 
+         */
         this.layout = layout;
+
+        /**
+         * @property {object} [hint] - The hint used in this scene. Removed at the end with timers.
+         */
         this.hint = hint;
 
-        // TODO: this.gameStep = next;
         this.announce(item_type, otsimo.kv.announce_text_time, delay);
     }
 
@@ -87,7 +94,7 @@ export default class Scene {
      * The input handler of the scene. Only enabled in answers.
      * 
      * @method Scene.onSelected
-     * @param {object} [item] - The item or number that takes the input.
+     * @param {object} [obj] - The object that takes the input, it can only be a number.
      */
     onSelected(obj) {
         if (otsimo.kv.game.hint_type == "hand") {
@@ -135,8 +142,9 @@ export default class Scene {
      * After the text, layout is placed considering the game type.
      * 
      * @class Scene 
-     * @param {string} [answer] - Name of the objects on the screen.
+     * @param {string} [item_type] - Name of the objects on the screen.
      * @param {number} [y_time] - The leave time of the animation on text.
+     * @param {number} [delay] - Delay time passed to the announce tweens.
     */
     announce(item_type, y_time, delay) {
         if (otsimo.kv.game.type == "how_many") {
@@ -148,7 +156,6 @@ export default class Scene {
         let text = otsimo.game.add.text(otsimo.game.world.centerX, otsimo.game.world.centerY * (-0.1), txt, otsimo.kv.announce_font);
         text.anchor.set(0.5, 0.5);
         text.alpha = 0.1;
-        this.announceText = text;
 
         otsimo.game.add.tween(text).to({ alpha: 1 }, 100, "Linear", true, delay);
         let a = otsimo.game.add.tween(text).to({ y: otsimo.game.world.centerY }, 500, Phaser.Easing.Circular.Out, false, delay);
@@ -174,18 +181,5 @@ export default class Scene {
         console.log("announce hint call");
         this.hint.call(otsimo.kv.game.announce_layout_time + otsimo.kv.layout.show_layout_duration + otsimo.kv.layout.relayout_duration + delay);
     }
-
-    /**
-     * Gives current coordinates of answer sprite on screen via layout object.
-     * Used in killTween in jump hint.
-     * 
-     * @method Scene.answerPos
-     * @return {tuple(number, number)} [ans.x, ans.y] - x and y coordinates of answer sprite. 
-     */
-    answerPos() {
-        let ans = this.layout.answer_sprite;
-        return (ans.x, ans.y);
-    }
-
 }
 

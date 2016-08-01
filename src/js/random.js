@@ -77,6 +77,9 @@ export class Random {
             for (let i = 0; i < count; i++) {
                 res.push(kind);
             }
+            /**
+             * @property {list} [items] - Only if the questions are items, the object contains them in items property.
+             */
             this.items = res;
         } else {
             //dealing with numbers
@@ -89,6 +92,9 @@ export class Random {
                     }
                     return false;
                 })[0];
+                /**
+                 * @property {list} [answers] - Answers list, needed to be reached from scene.
+                 */
                 this.answer = answer_obj;
                 console.log("answer_obj:  ", answer_obj);
                 let count = this.amount(true);
@@ -117,6 +123,9 @@ export class Random {
                 res.push(kind);
                 res.push(plus_one);
                 res.push(plus_two);
+                /**
+                 * @property {list} [questions] - If the questions are also numbers, they can be reached from this property.
+                 */
                 this.questions = res;
             }
             console.log("res: ", res);

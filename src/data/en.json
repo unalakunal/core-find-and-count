@@ -342,7 +342,7 @@
         "step_score": 5,
         "limit_score": 0,
         "bar_length_constraint": 0.3,
-        "type": "find_next",
+        "type": "how_many",
         "hint_type": "hand",
         "announce_layout_time": 2000,
         "hint_hand_duration": 1000,
