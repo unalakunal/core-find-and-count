@@ -73,6 +73,16 @@
             "path": "audio/applause.mp3"
         },
         {
+            "name": "congratulations",
+            "type": "audio",
+            "path": "audio/congratulations.mp3"
+        },
+        {
+            "name": "finish",
+            "type": "audio",
+            "path": "audio/finish.mp3"
+        },
+        {
             "name": "balloon",
             "type": "audio",
             "path": "audio/balon.mp3"
@@ -161,6 +171,11 @@
             "name": "nine",
             "type": "image",
             "path": "img/number/nine.png"
+        },
+        {
+            "name": "test_sound",
+            "type": "audio",
+            "path": "audio/dokuzu_esle.mp3"
         }
     ],
     "items": [
@@ -338,7 +353,7 @@
     "game": {
         "questions": "items",
         "answers": "numbers",
-        "session_step": 10,
+        "session_step": 2,
         "step_score": 5,
         "limit_score": 0,
         "bar_length_constraint": 0.3,

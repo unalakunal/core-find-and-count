@@ -25,7 +25,7 @@ export default class Score {
     endStep() {
         this._totalScore += this._stepScore;
         this.game_step++;
-        let gameOver = (this.game_step == otsimo.kv.game.session_step);
+        let gameOver = (this.game_step >= otsimo.kv.game.session_step);
         return gameOver;
     }
 
