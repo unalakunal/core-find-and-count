@@ -1,5 +1,6 @@
 import Item from "./item"
 import Number from "./number"
+import {shuffle} from '../utils'
 
 /**
  * Creates a new Layout object with specifying the answers, questions and if it's a staged game.
@@ -180,7 +181,6 @@ export default class Layout extends Phaser.Group {
      * @method Layout.layoutQuestions
      */
     layoutQuestions() {
-        //TODO: center the y coordinate according to background
         let len = this.questions.length;
         /**
          * @property {list} [questionObjects] - The questions on layout, bound to gray background.

@@ -148,20 +148,24 @@ export default class Scene {
     */
     announce(item_type, y_time, delay) {
         if (otsimo.kv.game.type == "how_many") {
-            var txt = sprintf(otsimo.kv.announce_text_how_many, item_type, "s are there?");
+            if (otsimo.child.language == "en") {
+                var txt = sprintf(otsimo.kv.announce_text_how_many, item_type, "s are there?");
+            } else {
+                var txt = sprintf(otsimo.kv.announce_text_how_many, item_type);
+            }
         } else {
             var txt = otsimo.kv.announce_text_find_next;
         }
 
-        let text = otsimo.game.add.text(otsimo.game.world.centerX, otsimo.game.world.centerY * (-0.1), txt, otsimo.kv.announce_font);
+        let text = otsimo.game.add.text(otsimo.game.world.centerX, otsimo.game.world.centerY * (-0.1), txt, otsimo.kv.announce_text_style);
         text.anchor.set(0.5, 0.5);
         text.alpha = 0.1;
 
         // TODO: it's a test sound, change and delete it from keyvalues in production
-        let question_sound = otsimo.game.add.sound("test_sound", 1, false);
+        /*let question_sound = otsimo.game.add.sound("test_sound", 1, false);
         setTimeout(() => {
             question_sound.play();
-        }, delay);
+        }, delay);*/
 
         otsimo.game.add.tween(text).to({ alpha: 1 }, 100, "Linear", true, delay);
         let a = otsimo.game.add.tween(text).to({ y: otsimo.game.world.centerY }, 500, Phaser.Easing.Circular.Out, false, delay);

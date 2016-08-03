@@ -4,13 +4,13 @@
     "settings/hint_duration/title": "Hint Duration",
     "settings/hint_duration/description": "Hint duration",
     "loadingText": "Loading...",
-    "loadingFont": "60px Arial",
+    "loadingFont": "60px mfont",
     "loadingBackground": "#18B9F2",
     "loadingColor": "#fff",
-    "announce_text_how_many": "How many %s%s",
-    "announce_text_find_next": "What comes next?",
+    "announce_text_how_many": "Kaç tane %s var?",
+    "announce_text_find_next": "Sıradaki sayı hangisi?",
     "announce_text_time": 500,
-    "announce_style": {
+    "announce_text_style": {
         "strokeThickness": 4,
         "stroke": "#FFFFFF",
         "font": "65px mfont",

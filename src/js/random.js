@@ -154,7 +154,6 @@ export class Random {
     include(arr, member) {
         for (let i = 0; i < arr.length; i++) {
             if (arr[i] === member) {
-                // TODO: can't compare two objects
                 return true;
             }
         }
