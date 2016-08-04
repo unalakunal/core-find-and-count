@@ -188,7 +188,7 @@ export default class Layout extends Phaser.Group {
         this.questionObjects = [];
         let four_arr = [];
         if (otsimo.kv.game.type == "how_many") {
-            four_arr = ["zigzag", "square"];
+            four_arr = ["zigzag"];
             for (let i = 0; i < len; i++) {
                 let item = new Item({
                     game: otsimo.game,

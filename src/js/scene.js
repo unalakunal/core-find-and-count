@@ -161,10 +161,10 @@ export default class Scene {
         text.alpha = 0.1;
 
         // TODO: it's a test sound, change and delete it from keyvalues in production
-        /*let question_sound = otsimo.game.add.sound("test_sound", 1, false);
+        let question_sound = otsimo.game.add.sound(this.random.items[0].audio, 1, false);
         setTimeout(() => {
             question_sound.play();
-        }, delay);*/
+        }, delay);
 
         otsimo.game.add.tween(text).to({ alpha: 1 }, 100, "Linear", true, delay);
         let a = otsimo.game.add.tween(text).to({ y: otsimo.game.world.centerY }, 500, Phaser.Easing.Circular.Out, false, delay);

@@ -264,9 +264,124 @@
             "path": "img/number/nine.png"
         },
         {
-            "name": "white",
-            "type": "image",
-            "path": "img/number/white.png"
+            "name": "pear_audio",
+            "type": "audio",
+            "path": "audio/tr/soundk/kac_tane_armut_var.mp3"
+        },
+        {
+            "name": "quince_audio",
+            "type": "audio",
+            "path": "audio/tr/soundk/kac_tane_ayva_var.mp3"
+        },
+        {
+            "name": "walnut_audio",
+            "type": "audio",
+            "path": "audio/tr/soundk/kac_tane_ceviz_var.mp3"
+        },
+        {
+            "name": "plum_audio",
+            "type": "audio",
+            "path": "audio/tr/soundk/kac_tane_erik_var.mp3"
+        },
+        {
+            "name": "cherry_audio",
+            "type": "audio",
+            "path": "audio/tr/soundk/kac_tane_kiraz_var.mp3"
+        },
+        {
+            "name": "lemon_audio",
+            "type": "audio",
+            "path": "audio/tr/soundk/kac_tane_limon_var.mp3"
+        },
+        {
+            "name": "banana_audio",
+            "type": "audio",
+            "path": "audio/tr/soundk/kac_tane_muz_var.mp3"
+        },
+        {
+            "name": "circle_audio",
+            "type": "audio",
+            "path": "audio/tr/soundk/kac_tane_daire_var.mp3"
+        },
+        {
+            "name": "heart_audio",
+            "type": "audio",
+            "path": "audio/tr/soundk/kac_tane_kalp_var.mp3"
+        },
+        {
+            "name": "oval_audio",
+            "type": "audio",
+            "path": "audio/tr/soundk/kac_tane_oval_var.mp3"
+        },
+        {
+            "name": "triangle_audio",
+            "type": "audio",
+            "path": "audio/tr/soundk/kac_tane_ucgen_var.mp3"
+        },
+        {
+            "name": "pentagon_audio",
+            "type": "audio",
+            "path": "audio/tr/soundk/kac_tane_besgen_var.mp3"
+        },
+        {
+            "name": "rectangle_audio",
+            "type": "audio",
+            "path": "audio/tr/soundk/kac_tane_dikdortgen_var.mp3"
+        },
+        {
+            "name": "square_audio",
+            "type": "audio",
+            "path": "audio/tr/soundk/kac_tane_kare_var.mp3"
+        },
+        {
+            "name": "star_audio",
+            "type": "audio",
+            "path": "audio/tr/soundk/kac_tane_yildiz_var.mp3"
+        },
+        {
+            "name": "one_audio",
+            "type": "audio",
+            "path": "audio/tr/sound/bir.mp3"
+        },
+        {
+            "name": "two_audio",
+            "type": "audio",
+            "path": "audio/tr/sound/iki.mp3"
+        },
+        {
+            "name": "three_audio",
+            "type": "audio",
+            "path": "audio/tr/sound/uc.mp3"
+        },
+        {
+            "name": "four_audio",
+            "type": "audio",
+            "path": "audio/tr/sound/dort.mp3"
+        },
+        {
+            "name": "five_audio",
+            "type": "audio",
+            "path": "audio/tr/sound/bes.mp3"
+        },
+        {
+            "name": "six_audio",
+            "type": "audio",
+            "path": "audio/tr/sound/alti.mp3"
+        },
+        {
+            "name": "seven_audio",
+            "type": "audio",
+            "path": "audio/tr/sound/yedi.mp3"
+        },
+        {
+            "name": "eight_audio",
+            "type": "audio",
+            "path": "audio/tr/sound/sekiz.mp3"
+        },
+        {
+            "name": "nine_audio",
+            "type": "audio",
+            "path": "audio/tr/sound/dokuz.mp3"
         }
     ],
     "items": [
