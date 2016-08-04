@@ -38,17 +38,16 @@ export default class Scene {
             var questions = this.random.for("items");
             var answer = questions.length;
             var answers = this.random.for("numbers", answer);
-            //var item_type = this.random.items[0].id;
-            var item_type = questions[0].id;
+            var item_type = this.random.items[0].text;
         } else if (otsimo.kv.game.type == "compare") {
             var answers = this.random.for("numbers", answer);
-            var item_type = this.random.items[0].id;
+            var item_type = this.random.items[0].text;
             staged = false;
         } else if (otsimo.kv.game.type == "find_next") {
             var questions = this.random.for("numbers", false);
             var answer = questions[2].id + 1;
             var answers = this.random.for("numbers", answer);
-            var item_type = this.random.items[0].id;
+            var item_type = this.random.items[0].text;
         }
 
         let gray = otsimo.game.add.sprite(

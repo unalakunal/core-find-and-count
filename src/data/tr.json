@@ -3,7 +3,7 @@
     "settings/show_hint/description": "Show hint",
     "settings/hint_duration/title": "Hint Duration",
     "settings/hint_duration/description": "Hint duration",
-    "loadingText": "Loading...",
+    "loadingText": "Yükleniyor...",
     "loadingFont": "60px mfont",
     "loadingBackground": "#18B9F2",
     "loadingColor": "#fff",
@@ -144,34 +144,79 @@
             "path": "audio/click.mp3"
         },
         {
-            "name": "elephant",
+            "name": "pear",
             "type": "image",
-            "path": "img/item/elephant.png"
+            "path": "img/items/pear.png"
         },
         {
-            "name": "giraffe",
+            "name": "quince",
             "type": "image",
-            "path": "img/item/giraffe.png"
+            "path": "img/items/quince.png"
         },
         {
-            "name": "hippo",
+            "name": "walnut",
             "type": "image",
-            "path": "img/item/hippo.png"
+            "path": "img/items/walnut.png"
         },
         {
-            "name": "monkey",
+            "name": "plum",
             "type": "image",
-            "path": "img/item/monkey.png"
+            "path": "img/items/plum.png"
         },
         {
-            "name": "panda",
+            "name": "cherry",
             "type": "image",
-            "path": "img/item/panda.png"
+            "path": "img/items/cherry.png"
         },
         {
-            "name": "parrot",
+            "name": "lemon",
             "type": "image",
-            "path": "img/item/parrot.png"
+            "path": "img/items/lemon.png"
+        },
+        {
+            "name": "banana",
+            "type": "image",
+            "path": "img/items/banana.png"
+        },
+        {
+            "name": "circle",
+            "type": "image",
+            "path": "img/items/circle.png"
+        },
+        {
+            "name": "heart",
+            "type": "image",
+            "path": "img/items/heart.png"
+        },
+        {
+            "name": "oval",
+            "type": "image",
+            "path": "img/items/oval.png"
+        },
+        {
+            "name": "pentagon",
+            "type": "image",
+            "path": "img/items/pentagon.png"
+        },
+        {
+            "name": "rectangle",
+            "type": "image",
+            "path": "img/items/rectangle.png"
+        },
+        {
+            "name": "square",
+            "type": "image",
+            "path": "img/items/square.png"
+        },
+        {
+            "name": "star",
+            "type": "image",
+            "path": "img/items/star.png"
+        },
+        {
+            "name": "triangle",
+            "type": "image",
+            "path": "img/items/triangle.png"
         },
         {
             "name": "one",
@@ -226,64 +271,154 @@
     ],
     "items": [
         {
-            "id": "elephant",
+            "id": "pear",
             "kind": "item",
-            "audio": "elephant_audio",
-            "question": "elephant_question",
+            "audio": "pear_audio",
+            "question": "pear_question",
             "tint": "0x0000FF",
-            "text": "elephant",
-            "image": "elephant",
-            "outline": "elephant"
+            "text": "armut",
+            "image": "pear",
+            "outline": "pear"
         },
         {
-            "id": "giraffe",
+            "id": "quince",
             "kind": "item",
-            "audio": "elephant_audio",
-            "question": "elephant_question",
+            "audio": "quince_audio",
+            "question": "quince_question",
             "tint": "0x0000FF",
-            "text": "giraffe",
-            "image": "giraffe",
-            "outline": "giraffe"
+            "text": "ayva",
+            "image": "quince",
+            "outline": "quince"
         },
         {
-            "id": "hippo",
+            "id": "walnut",
             "kind": "item",
-            "audio": "elephant_audio",
-            "question": "elephant_question",
+            "audio": "walnut_audio",
+            "question": "walnut_question",
             "tint": "0x0000FF",
-            "text": "hippo",
-            "image": "hippo",
-            "outline": "hippo"
+            "text": "ceviz",
+            "image": "walnut",
+            "outline": "walnut"
         },
         {
-            "id": "monkey",
+            "id": "plum",
             "kind": "item",
-            "audio": "elephant_audio",
-            "question": "elephant_question",
+            "audio": "plum_audio",
+            "question": "plum_question",
             "tint": "0x0000FF",
-            "text": "monkey",
-            "image": "monkey",
-            "outline": "monkey"
+            "text": "erik",
+            "image": "plum",
+            "outline": "plum"
         },
         {
-            "id": "panda",
+            "id": "cherry",
             "kind": "item",
-            "audio": "elephant_audio",
-            "question": "elephant_question",
+            "audio": "cherry_audio",
+            "question": "cherry_question",
             "tint": "0x0000FF",
-            "text": "panda",
-            "image": "panda",
-            "outline": "panda"
+            "text": "kiraz",
+            "image": "cherry",
+            "outline": "cherry"
         },
         {
-            "id": "parrot",
+            "id": "lemon",
             "kind": "item",
-            "audio": "elephant_audio",
-            "question": "elephant_question",
+            "audio": "lemon_audio",
+            "question": "lemon_question",
             "tint": "0x0000FF",
-            "text": "parrot",
-            "image": "parrot",
-            "outline": "parrot"
+            "text": "limon",
+            "image": "lemon",
+            "outline": "lemon"
+        },
+        {
+            "id": "banana",
+            "kind": "item",
+            "audio": "banana_audio",
+            "question": "banana_question",
+            "tint": "0x0000FF",
+            "text": "muz",
+            "image": "banana",
+            "outline": "banana"
+        },
+        {
+            "id": "circle",
+            "kind": "item",
+            "audio": "circle_audio",
+            "question": "circle_question",
+            "tint": "0x0000FF",
+            "text": "çember",
+            "image": "circle",
+            "outline": "circle"
+        },
+        {
+            "id": "heart",
+            "kind": "item",
+            "audio": "heart_audio",
+            "question": "heart_question",
+            "tint": "0x0000FF",
+            "text": "kalp",
+            "image": "heart",
+            "outline": "heart"
+        },
+        {
+            "id": "oval",
+            "kind": "item",
+            "audio": "oval_audio",
+            "question": "oval_question",
+            "tint": "0x0000FF",
+            "text": "oval",
+            "image": "oval",
+            "outline": "oval"
+        },
+        {
+            "id": "pentagon",
+            "kind": "item",
+            "audio": "pentagon_audio",
+            "question": "pentagon_question",
+            "tint": "0x0000FF",
+            "text": "beşgen",
+            "image": "pentagon",
+            "outline": "pentagon"
+        },
+        {
+            "id": "rectangle",
+            "kind": "item",
+            "audio": "rectangle_audio",
+            "question": "rectangle_question",
+            "tint": "0x0000FF",
+            "text": "dikdörtgen",
+            "image": "rectangle",
+            "outline": "rectangle"
+        },
+        {
+            "id": "square",
+            "kind": "item",
+            "audio": "square_audio",
+            "question": "square_question",
+            "tint": "0x0000FF",
+            "text": "kare",
+            "image": "square",
+            "outline": "square"
+        },
+        {
+            "id": "star",
+            "kind": "item",
+            "audio": "star_audio",
+            "question": "star_question",
+            "tint": "0x0000FF",
+            "text": "yıldız",
+            "image": "star",
+            "outline": "star"
+        },
+        {
+            "id": "triangle",
+            "kind": "item",
+            "audio": "triangle_audio",
+            "question": "triangle_question",
+            "tint": "0x0000FF",
+            "text": "üçgen",
+            "image": "triangle",
+            "outline": "triangle"
         }
     ],
     "numbers": [
@@ -291,7 +426,6 @@
             "id": 1,
             "kind": "number",
             "audio": "one_audio",
-            "question": "one_question",
             "tint": "0x0000FF",
             "text": "one",
             "image": "one",
@@ -300,8 +434,7 @@
         {
             "id": 2,
             "kind": "number",
-            "audio": "one_audio",
-            "question": "two_question",
+            "audio": "two_audio",
             "tint": "0x0000FF",
             "text": "two",
             "image": "two",
@@ -310,8 +443,7 @@
         {
             "id": 3,
             "kind": "number",
-            "audio": "one_audio",
-            "question": "three_question",
+            "audio": "three_audio",
             "tint": "0x0000FF",
             "text": "three",
             "image": "three",
@@ -320,8 +452,7 @@
         {
             "id": 4,
             "kind": "number",
-            "audio": "one_audio",
-            "question": "four_question",
+            "audio": "four_audio",
             "tint": "0x0000FF",
             "text": "four",
             "image": "four",
@@ -330,8 +461,7 @@
         {
             "id": 5,
             "kind": "number",
-            "audio": "one_audio",
-            "question": "five_question",
+            "audio": "five_audio",
             "tint": "0x0000FF",
             "text": "five",
             "image": "five",
@@ -340,8 +470,7 @@
         {
             "id": 6,
             "kind": "number",
-            "audio": "one_audio",
-            "question": "six_question",
+            "audio": "six_audio",
             "tint": "0x0000FF",
             "text": "six",
             "image": "six",
@@ -350,8 +479,7 @@
         {
             "id": 7,
             "kind": "number",
-            "audio": "one_audio",
-            "question": "seven_question",
+            "audio": "seven_audio",
             "tint": "0x0000FF",
             "text": "seven",
             "image": "seven",
@@ -360,8 +488,7 @@
         {
             "id": 8,
             "kind": "number",
-            "audio": "one_audio",
-            "question": "eight_question",
+            "audio": "eight_audio",
             "tint": "0x0000FF",
             "text": "eight",
             "image": "eight",
@@ -370,8 +497,7 @@
         {
             "id": 9,
             "kind": "number",
-            "audio": "one_audio",
-            "question": "nine_question",
+            "audio": "nine_audio",
             "tint": "0x0000FF",
             "text": "nine",
             "image": "nine",
