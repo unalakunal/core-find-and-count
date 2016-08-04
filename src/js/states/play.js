@@ -10,7 +10,7 @@ export default class Play extends Phaser.State {
         this.session = session
         this.scene = scene
 
-        this.game.add.button(25, 25, 'back', this.backAction, this);
+        this.game.add.button(otsimo.game.width * 0.02, otsimo.game.height * 0.022, 'back', this.backAction, this);
         scene.init(0);
     }
 

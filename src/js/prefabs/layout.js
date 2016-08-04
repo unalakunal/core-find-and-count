@@ -196,8 +196,8 @@ export default class Layout extends Phaser.Group {
                     y: this.hiddenPos.y,
                     item: this.questions[i],
                     scale: {
-                        x: 0.3,
-                        y: 0.3
+                        x: 0.35,
+                        y: 0.35
                     }
                 });
                 item.anchor.set(0.5, 0.5);
@@ -213,8 +213,8 @@ export default class Layout extends Phaser.Group {
                     y: this.hiddenPos.y,
                     num: this.questions[i],
                     scale: {
-                        x: 0.9,
-                        y: 0.9
+                        x: 0.7,
+                        y: 0.7
                     }
                 });
                 num.anchor.set(0.5, 0.5);
@@ -270,8 +270,8 @@ export default class Layout extends Phaser.Group {
                 y: this.hiddenPos.y,
                 num: this.answers[i],
                 scale: {
-                    x: 0.8,
-                    y: 0.8
+                    x: 0.6,
+                    y: 0.6
                 }
             });
             num.anchor.set(0.5, 0.5);
