@@ -1,8 +1,16 @@
 {
-    "settings/show_hint/title": "Show Hint",
-    "settings/show_hint/description": "Show hint",
-    "settings/hint_duration/title": "Hint Duration",
-    "settings/hint_duration/description": "Hint duration",
+    "settings/difficulty/title": "Zorluk",
+    "settings/difficulty/description": "Oyunun zorluk ayarı",
+    "settings/difficulty/keys/easy/title": "Kolay",
+    "settings/difficulty/keys/easy/description": "Kolay",
+    "settings/difficulty/keys/medium/title": "Orta",
+    "settings/difficulty/keys/medium/description": "Orta",
+    "settings/difficulty/keys/hard/title": "Zor",
+    "settings/difficulty/keys/hard/description": "Zor",
+    "settings/show_hint/title": "İpucu Göster",
+    "settings/show_hint/description": "Oyunun içindeki ipuçlarını açar, kapar.",
+    "settings/hint_duration/title": "İpucu Süresi",
+    "settings/hint_duration/description": "Oyunun içindeki ipuçlarının süresini değiştirir.",
     "loadingText": "Yükleniyor...",
     "loadingFont": "60px mfont",
     "loadingBackground": "#F49AC2",
@@ -84,11 +92,6 @@
             "name": "dotted",
             "type": "image",
             "path": "img/dotted_empty.png"
-        },
-        {
-            "name": "white_box",
-            "type": "image",
-            "path": "img/white_box.png"
         },
         {
             "name": "hand",
@@ -341,6 +344,11 @@
             "path": "audio/tr/soundk/kac_tane_yildiz_var.mp3"
         },
         {
+            "name": "find_next_audio",
+            "type": "audio",
+            "path": "audio/tr/soundk/siradaki_sayi_hangisi.mp3"
+        },
+        {
             "name": "one_audio",
             "type": "audio",
             "path": "audio/tr/sound/bir.mp3"
@@ -463,7 +471,7 @@
             "audio": "circle_audio",
             "question": "circle_question",
             "tint": "0x0000FF",
-            "text": "çember",
+            "text": "daire",
             "image": "circle",
             "outline": "circle"
         },
@@ -642,11 +650,11 @@
     "game": {
         "questions": "items",
         "answers": "numbers",
-        "session_step": 2,
+        "session_step": 10,
         "step_score": 5,
         "limit_score": 0,
         "bar_length_constraint": 0.3,
-        "type": "how_many",
+        "type": "find_next",
         "hint_type": "hand",
         "announce_layout_time": 2000,
         "hint_hand_duration": 1000,

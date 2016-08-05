@@ -152,19 +152,18 @@ export default class Scene {
             } else {
                 var txt = sprintf(otsimo.kv.announce_text_how_many, item_type);
             }
+            var question_sound = otsimo.game.add.sound(this.random.items[0].audio, 1, false);
         } else {
+            var question_sound = otsimo.game.add.sound("find_next_audio", 1, false);
             var txt = otsimo.kv.announce_text_find_next;
         }
+        setTimeout(() => {
+            question_sound.play();
+        }, delay);
 
         let text = otsimo.game.add.text(otsimo.game.world.centerX, otsimo.game.world.centerY * (-0.1), txt, otsimo.kv.announce_text_style);
         text.anchor.set(0.5, 0.5);
         text.alpha = 0.1;
-
-        // TODO: it's a test sound, change and delete it from keyvalues in production
-        let question_sound = otsimo.game.add.sound(this.random.items[0].audio, 1, false);
-        setTimeout(() => {
-            question_sound.play();
-        }, delay);
 
         otsimo.game.add.tween(text).to({ alpha: 1 }, 100, "Linear", true, delay);
         let a = otsimo.game.add.tween(text).to({ y: otsimo.game.world.centerY }, 500, Phaser.Easing.Circular.Out, false, delay);
@@ -187,7 +186,7 @@ export default class Scene {
         setTimeout(() => {
             this.layout.move(this.layout.visiblePos.x, this.layout.visiblePos.y, otsimo.kv.layout.show_layout_duration, delay);
         }, otsimo.kv.game.announce_layout_time);
-        console.log("announce hint call");
+        otsimo.game.world.bringToTop(this.layout);
         this.hint.call(otsimo.kv.game.announce_layout_time + otsimo.kv.layout.show_layout_duration + otsimo.kv.layout.relayout_duration + delay);
     }
 }

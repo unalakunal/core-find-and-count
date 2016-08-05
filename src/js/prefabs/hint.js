@@ -18,10 +18,10 @@ export default class Hint {
         if (!otsimo.settings.show_hint) {
             return;
         }
-        console.log("hint called with answer: ", this.answer);
+        //console.log("hint called with answer: ", this.answer);
         this.removeTimer();
         this.timer = setTimeout(this.create.bind(this), delay + (otsimo.settings.hint_duration * 1000));
-        console.log("created timer with number: ", this.timer);
+        //console.log("created timer with number: ", this.timer);
         this.timerArr.push(this.timer);
     }
 
@@ -41,7 +41,7 @@ export default class Hint {
     }
 
     kill() {
-        console.log("hint killed");
+        //console.log("hint killed");
         switch (otsimo.kv.game.hint_type) {
             case ("jump"):
                 this.killTweenIn();
@@ -61,7 +61,7 @@ export default class Hint {
             this.timer = undefined;
         }
         for (let i of this.timerArr) {
-            console.log("clearing timeout with number: ", i);
+            //console.log("clearing timeout with number: ", i);
             clearTimeout(i);
         }
         this.timerArr = [];
@@ -108,9 +108,9 @@ export default class Hint {
 
     killArrow() {
         if (this.arrow) {
-            console.log("kill arrow", this.arrow);
+            //console.log("kill arrow", this.arrow);
             this.arrow.destroy();
-            console.log("destroyed: ", this.arrow);
+            //console.log("destroyed: ", this.arrow);
             this.arrow = undefined;
         }
     }
