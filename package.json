@@ -1,14 +1,14 @@
 {
-  "name": "otsimo-game-template",
+  "name": "otsimo-find-and-count",
   "version": "1.0.0",
   "description": "",
   "repository": {
     "type": "git",
-    "url": "git@bitbucket.org:otsimo/learn-numbers.git"
+    "url": "git@github.com:otsimogames/core-find-and-count.git"
   },
   "author": "",
   "license": "ISC",
-  "homepage": "git@bitbucket.org:otsimo/learn-numbers.git",
+  "homepage": "https://github.com/otsimogames/core-find-and-count",
   "dependencies": {
     "otsimo": "^1.0.0",
     "phaser": "~2.4.4",
