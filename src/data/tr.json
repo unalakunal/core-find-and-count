@@ -124,12 +124,12 @@
             "path": "audio/applause.mp3"
         },
         {
-            "name": "congratulations",
+            "name": "victorySound",
             "type": "audio",
             "path": "audio/congratulations.mp3"
         },
         {
-            "name": "finish",
+            "name": "finishSound",
             "type": "audio",
             "path": "audio/finish.mp3"
         },
@@ -647,14 +647,63 @@
         "above_space": 0.1,
         "bar_length_constant": 0.25
     },
+    "ending_scene": {
+        "victory_sound": "victorySound",
+        "duration": 1000,
+        "finish_sound": "finishSound",
+        "text": {
+            "text": "Tebrikler",
+            "sound": "congSound",
+            "style": {
+                "strokeThickness": 18,
+                "stroke": "#FFFFFF",
+                "font": "98px mfont",
+                "fill": "#C43939",
+                "align": "center",
+                "maxLines": 2,
+                "wordWrap": true,
+                "wordWrapWidth": 960,
+                "boundsAlignH": "center",
+                "boundsAlignV": "top"
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            },
+            "x": {
+                "multiplier": 0.5,
+                "constant": 0
+            },
+            "y": {
+                "multiplier": 0.3,
+                "constant": 0
+            }
+        },
+        "button": {
+            "image": "playButton",
+            "delay": 3000,
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            },
+            "x": {
+                "multiplier": 0.5,
+                "constant": 0
+            },
+            "y": {
+                "multiplier": 0.7,
+                "constant": 0
+            }
+        }
+    },
     "game": {
         "questions": "items",
         "answers": "numbers",
-        "session_step": 10,
+        "session_step": 2,
         "step_score": 5,
         "limit_score": 0,
         "bar_length_constraint": 0.3,
-        "type": "find_next",
+        "type": "how_many",
         "hint_type": "hand",
         "announce_layout_time": 2000,
         "hint_hand_duration": 1000,

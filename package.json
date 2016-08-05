@@ -1,13 +1,13 @@
 {
   "name": "otsimo-find-and-count-game",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Otsimo core game for number count and finding next games.",
   "repository": {
     "type": "git",
     "url": "git@github.com:otsimogames/core-find-and-count.git"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "Ünal Akünal <unal@otsimo.com>",
+  "license": "GPL-V3",
   "homepage": "https://github.com/otsimogames/core-find-and-count",
   "dependencies": {
     "otsimo": "^1.0.0",

@@ -200,6 +200,10 @@ export default class Layout extends Phaser.Group {
                         y: 0.35
                     }
                 });
+                if (len * item.width > otsimo.game.width * (1 - otsimo.kv.layout.side_space_constant_question)) {
+                    item.scale.x = 0.25;
+                    item.scale.y = 0.25;
+                }
                 item.anchor.set(0.5, 0.5);
                 item.inputEnabled = false;
                 this.questionObjects.push(item);
