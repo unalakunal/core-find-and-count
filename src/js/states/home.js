@@ -5,13 +5,12 @@ import {gameVisibleName, calculateConstraint} from '../utils'
 export default class Home extends Phaser.State {
 
     create() {
+        this.stopSounds();
         if (otsimo.kv.home_background_color) {
             this.game.stage.backgroundColor = otsimo.kv.home_background_color;
-            console.log("asd: ", otsimo.kv.home_background_color);
         }
         if (otsimo.kv.background_image) {
             let back = this.game.add.image(this.game.world.centerX, this.game.world.centerY, otsimo.kv.background_image)
-            console.log("asd: ", otsimo.kv.background_image);            
             back.anchor.set(0.5, 0.5);
         }
 
@@ -34,7 +33,19 @@ export default class Home extends Phaser.State {
         if (otsimo.currentMusic) {
             otsimo.currentMusic.volume = otsimo.kv.game_music.volume_home_screen;
         }
+    }
 
+    stopSounds() {
+        let sounds = this.game.sound._sounds;
+        sounds = sounds.filter(s => {
+            if (s.key != "backmusic") {
+                return true;
+            }
+            return false;
+        });
+        for (let i = 0; i < sounds.length; i++) {
+            sounds[i].stop();
+        }
     }
 
     playAction(button) {
@@ -46,7 +57,7 @@ export default class Home extends Phaser.State {
 
     quitGame() {
         if (otsimo.clickSound) {
-            otsimo.clickSound.play()
+            otsimo.clickSound.play();
         }
         otsimo.quitgame();
     }

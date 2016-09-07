@@ -33,6 +33,10 @@ export default class Scene {
     init(delay) {
         this.score.initStep();
         let staged = true;
+        let currentState = otsimo.game.state.getCurrentState().key;
+        if (currentState != "Play") {
+            return;
+        }
         if (otsimo.kv.game.type == "how_many") {
             // get random number of items to screen
             var questions = this.random.for("items");
@@ -146,6 +150,12 @@ export default class Scene {
      * @param {number} [delay] - Delay time passed to the announce tweens.
     */
     announce(item_type, y_time, delay) {
+        let currentState = otsimo.game.state.getCurrentState().key;
+        console.log("#announce currentState: ", currentState);
+        if (currentState != "Play") {
+            console.log("currentState: ", currentState);
+            return;
+        }
         if (otsimo.kv.game.type == "how_many") {
             if (otsimo.child.language == "en") {
                 var txt = sprintf(otsimo.kv.announce_text_how_many, item_type, "s are there?");
@@ -158,6 +168,12 @@ export default class Scene {
             var txt = otsimo.kv.announce_text_find_next;
         }
         setTimeout(() => {
+            currentState = otsimo.game.state.getCurrentState().key;
+            console.log("#announce currentState after delay: ", currentState);
+            if (currentState != "Play") {
+                console.log("currentState: ", currentState);
+                return;
+            }
             question_sound.play();
         }, delay);
 

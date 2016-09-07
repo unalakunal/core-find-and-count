@@ -27,6 +27,10 @@ export default class Hint {
 
     create() {
         this.score.decrement();
+        let currentState = otsimo.game.state.getCurrentState().key;         
+        if (currentState != "Play") {
+            return;
+        }
         switch (otsimo.kv.game.hint_type) {
             case ("jump"):
                 this.jump();

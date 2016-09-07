@@ -699,7 +699,7 @@
     "game": {
         "questions": "items",
         "answers": "numbers",
-        "session_step": 2,
+        "session_step": 5,
         "step_score": 5,
         "limit_score": 0,
         "bar_length_constraint": 0.3,
