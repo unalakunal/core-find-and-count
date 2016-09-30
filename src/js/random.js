@@ -107,6 +107,7 @@ export class Random {
                     }
                     res.push(kind);
                 }
+                res = this.shuffle(res);
             } else {
                 // question for numbers (game type == find_next)
                 let count = 3;
