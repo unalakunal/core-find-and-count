@@ -124,7 +124,7 @@ export default class Scene {
                 isTrue: true,
                 obj: undefined
             });
-            delay = delay * 2;
+            delay = delay * 1.75;
             this.session.correctInput(this.random.answer, delay);
         } else {
             this.layout.relayout({
