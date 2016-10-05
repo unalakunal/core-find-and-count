@@ -11,7 +11,7 @@ export default class Hint {
     }
 
     color() {
-        this.arrow.tint = otsimo.kv.game.hint_color;
+        //this.arrow.tint = otsimo.kv.game.hint_color;
     }
 
     call(delay) {

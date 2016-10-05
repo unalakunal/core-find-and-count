@@ -159,7 +159,7 @@ export default class Scene {
         }
         if (otsimo.kv.game.type == "how_many") {
             if (otsimo.child.language == "en") {
-                var txt = sprintf(otsimo.kv.announce_text_how_many, item_type, "s are there?");
+                var txt = sprintf(otsimo.kv.announce_text_how_many, item_type, "s?");
             } else {
                 var txt = sprintf(otsimo.kv.announce_text_how_many, item_type);
             }
