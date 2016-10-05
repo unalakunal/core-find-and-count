@@ -152,6 +152,7 @@ export default class Scene {
     announce(item_type, y_time, delay) {
         let currentState = otsimo.game.state.getCurrentState().key;
         console.log("#announce currentState: ", currentState);
+        let tts = false;
         if (currentState != "Play") {
             console.log("currentState: ", currentState);
             return;
@@ -161,6 +162,9 @@ export default class Scene {
                 var txt = sprintf(otsimo.kv.announce_text_how_many, item_type, "s are there?");
             } else {
                 var txt = sprintf(otsimo.kv.announce_text_how_many, item_type);
+            }
+            if (this.random.items[0].tts === true) {
+                tts = true;
             }
             var question_sound = otsimo.game.add.sound(this.random.items[0].audio, 1, false);
         } else {
@@ -174,7 +178,8 @@ export default class Scene {
                 console.log("currentState: ", currentState);
                 return;
             }
-            question_sound.play();
+            otsimo.tts.speak(txt)
+            tts ? otsimo.tts.speak(txt) : question_sound.play();
         }, delay);
 
         let text = otsimo.game.add.text(otsimo.game.world.centerX, otsimo.game.world.centerY * (-0.1), txt, otsimo.kv.announce_text_style);

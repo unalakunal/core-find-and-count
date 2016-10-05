@@ -22,7 +22,7 @@
     "metadata": [
         {
             "language": "tr",
-            "visible_name": "Core Find and Count",
+            "visible_name": "Core Find and Count - TR",
             "summary": "a short description",
             "description": "an awesome game, this is long description",
             "keywords": [
@@ -30,8 +30,23 @@
             ],
             "logo": "i18n/en/template-logo.png",
             "icon": "i18n/en/template-icon.png",
-            "images": [
+            "images": [],
+            "assets": [
+                "img/en",
+                "audio/en"
+            ]
+        },
+        {
+            "language": "en",
+            "visible_name": "Core Find and Count - EN",
+            "summary": "a short description",
+            "description": "an awesome game, this is long description",
+            "keywords": [
+                "game"
             ],
+            "logo": "i18n/en/template-logo.png",
+            "icon": "i18n/en/template-icon.png",
+            "images": [],
             "assets": [
                 "img/en",
                 "audio/en"

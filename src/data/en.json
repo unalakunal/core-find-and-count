@@ -6,15 +6,16 @@
     "loadingText": "Loading...",
     "loadingFont": "60px mfont",
     "loadingBackground": "#F49AC2",
-    "loadingColor": "#fff",
+    "loadingColor": "#C43939",
     "backgroundColor": "#F49AC2",
     "announce_text_how_many": "How many %s%s",
     "announce_text_find_next": "What comes next?",
     "announce_text_time": 500,
-    "announce_style": {
+    "announce_text_style": {
         "strokeThickness": 4,
         "stroke": "#FFFFFF",
-        "font": "98px mfont",
+        "fill": "#C43939",
+        "font": "65px mfont",
         "align": "center"
     },
     "name_shadow": {
@@ -41,7 +42,7 @@
         "strokeThickness": 18,
         "stroke": "#FFFFFF",
         "font": "98px mfont",
-        "fill": "#00FF22",
+        "fill": "#C43939",
         "align": "center",
         "maxLines": 2,
         "wordWrap": true,
@@ -83,11 +84,6 @@
             "name": "dotted",
             "type": "image",
             "path": "img/dotted_empty.png"
-        },
-        {
-            "name": "white_box",
-            "type": "image",
-            "path": "img/white_box.png"
         },
         {
             "name": "hand",
@@ -145,34 +141,79 @@
             "path": "audio/click.mp3"
         },
         {
-            "name": "elephant",
+            "name": "pear",
             "type": "image",
-            "path": "img/item/elephant.png"
+            "path": "img/items/pear.png"
         },
         {
-            "name": "giraffe",
+            "name": "quince",
             "type": "image",
-            "path": "img/item/giraffe.png"
+            "path": "img/items/quince.png"
         },
         {
-            "name": "hippo",
+            "name": "walnut",
             "type": "image",
-            "path": "img/item/hippo.png"
+            "path": "img/items/walnut.png"
         },
         {
-            "name": "monkey",
+            "name": "plum",
             "type": "image",
-            "path": "img/item/monkey.png"
+            "path": "img/items/plum.png"
         },
         {
-            "name": "panda",
+            "name": "cherry",
             "type": "image",
-            "path": "img/item/panda.png"
+            "path": "img/items/cherry.png"
         },
         {
-            "name": "parrot",
+            "name": "lemon",
             "type": "image",
-            "path": "img/item/parrot.png"
+            "path": "img/items/lemon.png"
+        },
+        {
+            "name": "banana",
+            "type": "image",
+            "path": "img/items/banana.png"
+        },
+        {
+            "name": "circle",
+            "type": "image",
+            "path": "img/items/circle.png"
+        },
+        {
+            "name": "heart",
+            "type": "image",
+            "path": "img/items/heart.png"
+        },
+        {
+            "name": "oval",
+            "type": "image",
+            "path": "img/items/oval.png"
+        },
+        {
+            "name": "pentagon",
+            "type": "image",
+            "path": "img/items/pentagon.png"
+        },
+        {
+            "name": "rectangle",
+            "type": "image",
+            "path": "img/items/rectangle.png"
+        },
+        {
+            "name": "square",
+            "type": "image",
+            "path": "img/items/square.png"
+        },
+        {
+            "name": "star",
+            "type": "image",
+            "path": "img/items/star.png"
+        },
+        {
+            "name": "triangle",
+            "type": "image",
+            "path": "img/items/triangle.png"
         },
         {
             "name": "one",
@@ -218,73 +259,173 @@
             "name": "nine",
             "type": "image",
             "path": "img/number/nine.png"
-        },
-        {
-            "name": "white",
-            "type": "image",
-            "path": "img/number/white.png"
         }
     ],
     "items": [
         {
-            "id": "elephant",
+            "id": "pear",
             "kind": "item",
-            "audio": "elephant_audio",
-            "question": "elephant_question",
+            "audio": "pear_audio",
+            "question": "pear_question",
             "tint": "0x0000FF",
-            "text": "elephant",
-            "image": "elephant",
-            "outline": "elephant"
+            "text": "pear",
+            "image": "pear",
+            "outline": "pear",
+            "tts": true
         },
         {
-            "id": "giraffe",
+            "id": "quince",
             "kind": "item",
-            "audio": "elephant_audio",
-            "question": "elephant_question",
+            "audio": "quince_audio",
+            "question": "quince_question",
             "tint": "0x0000FF",
-            "text": "giraffe",
-            "image": "giraffe",
-            "outline": "giraffe"
+            "text": "quince",
+            "image": "quince",
+            "outline": "quince",
+            "tts": true
         },
         {
-            "id": "hippo",
+            "id": "walnut",
             "kind": "item",
-            "audio": "elephant_audio",
-            "question": "elephant_question",
+            "audio": "walnut_audio",
+            "question": "walnut_question",
             "tint": "0x0000FF",
-            "text": "hippo",
-            "image": "hippo",
-            "outline": "hippo"
+            "text": "walnut",
+            "image": "walnut",
+            "outline": "walnut",
+            "tts": true
         },
         {
-            "id": "monkey",
+            "id": "plum",
             "kind": "item",
-            "audio": "elephant_audio",
-            "question": "elephant_question",
+            "audio": "plum_audio",
+            "question": "plum_question",
             "tint": "0x0000FF",
-            "text": "monkey",
-            "image": "monkey",
-            "outline": "monkey"
+            "text": "plum",
+            "image": "plum",
+            "outline": "plum",
+            "tts": true
         },
         {
-            "id": "panda",
+            "id": "cherry",
             "kind": "item",
-            "audio": "elephant_audio",
-            "question": "elephant_question",
+            "audio": "cherry_audio",
+            "question": "cherry_question",
             "tint": "0x0000FF",
-            "text": "panda",
-            "image": "panda",
-            "outline": "panda"
+            "text": "cherry",
+            "image": "cherry",
+            "outline": "cherry",
+            "tts": true
         },
         {
-            "id": "parrot",
+            "id": "lemon",
             "kind": "item",
-            "audio": "elephant_audio",
-            "question": "elephant_question",
+            "audio": "lemon_audio",
+            "question": "lemon_question",
             "tint": "0x0000FF",
-            "text": "parrot",
-            "image": "parrot",
-            "outline": "parrot"
+            "text": "lemon",
+            "image": "lemon",
+            "outline": "lemon",
+            "tts": true
+        },
+        {
+            "id": "banana",
+            "kind": "item",
+            "audio": "banana_audio",
+            "question": "banana_question",
+            "tint": "0x0000FF",
+            "text": "banana",
+            "image": "banana",
+            "outline": "banana",
+            "tts": true
+        },
+        {
+            "id": "circle",
+            "kind": "item",
+            "audio": "circle_audio",
+            "question": "circle_question",
+            "tint": "0x0000FF",
+            "text": "circle",
+            "image": "circle",
+            "outline": "circle",
+            "tts": true
+        },
+        {
+            "id": "heart",
+            "kind": "item",
+            "audio": "heart_audio",
+            "question": "heart_question",
+            "tint": "0x0000FF",
+            "text": "heart",
+            "image": "heart",
+            "outline": "heart",
+            "tts": true
+        },
+        {
+            "id": "oval",
+            "kind": "item",
+            "audio": "oval_audio",
+            "question": "oval_question",
+            "tint": "0x0000FF",
+            "text": "oval",
+            "image": "oval",
+            "outline": "oval",
+            "tts": true
+        },
+        {
+            "id": "pentagon",
+            "kind": "item",
+            "audio": "pentagon_audio",
+            "question": "pentagon_question",
+            "tint": "0x0000FF",
+            "text": "pentagon",
+            "image": "pentagon",
+            "outline": "pentagon",
+            "tts": true
+        },
+        {
+            "id": "rectangle",
+            "kind": "item",
+            "audio": "rectangle_audio",
+            "question": "rectangle_question",
+            "tint": "0x0000FF",
+            "text": "rectangle",
+            "image": "rectangle",
+            "outline": "rectangle",
+            "tts": true
+        },
+        {
+            "id": "square",
+            "kind": "item",
+            "audio": "square_audio",
+            "question": "square_question",
+            "tint": "0x0000FF",
+            "text": "square",
+            "image": "square",
+            "outline": "square",
+            "tts": true
+        },
+        {
+            "id": "star",
+            "kind": "item",
+            "audio": "star_audio",
+            "question": "star_question",
+            "tint": "0x0000FF",
+            "text": "star",
+            "image": "star",
+            "outline": "star",
+            "tts": true
+        },
+        {
+            "id": "triangle",
+            "kind": "item",
+            "audio": "triangle_audio",
+            "question": "triangle_question",
+            "tint": "0x0000FF",
+            "text": "triangle",
+            "image": "triangle",
+            "outline": "triangle",
+            "tts": true
         }
     ],
     "numbers": [
@@ -296,7 +437,8 @@
             "tint": "0x0000FF",
             "text": "one",
             "image": "one",
-            "outline": "one"
+            "outline": "one",
+            "tts": true
         },
         {
             "id": 2,
@@ -306,7 +448,8 @@
             "tint": "0x0000FF",
             "text": "two",
             "image": "two",
-            "outline": "two"
+            "outline": "two",
+            "tts": true
         },
         {
             "id": 3,
@@ -316,7 +459,8 @@
             "tint": "0x0000FF",
             "text": "three",
             "image": "three",
-            "outline": "one"
+            "outline": "one",
+            "tts": true
         },
         {
             "id": 4,
@@ -326,7 +470,8 @@
             "tint": "0x0000FF",
             "text": "four",
             "image": "four",
-            "outline": "one"
+            "outline": "one",
+            "tts": true
         },
         {
             "id": 5,
@@ -336,7 +481,8 @@
             "tint": "0x0000FF",
             "text": "five",
             "image": "five",
-            "outline": "one"
+            "outline": "one",
+            "tts": true
         },
         {
             "id": 6,
@@ -346,7 +492,8 @@
             "tint": "0x0000FF",
             "text": "six",
             "image": "six",
-            "outline": "one"
+            "outline": "one",
+            "tts": true
         },
         {
             "id": 7,
@@ -356,7 +503,8 @@
             "tint": "0x0000FF",
             "text": "seven",
             "image": "seven",
-            "outline": "one"
+            "outline": "one",
+            "tts": true
         },
         {
             "id": 8,
@@ -366,7 +514,8 @@
             "tint": "0x0000FF",
             "text": "eight",
             "image": "eight",
-            "outline": "one"
+            "outline": "one",
+            "tts": true
         },
         {
             "id": 9,
@@ -376,7 +525,8 @@
             "tint": "0x0000FF",
             "text": "nine",
             "image": "nine",
-            "outline": "one"
+            "outline": "one",
+            "tts": true
         }
     ],
     "layout": {
@@ -411,7 +561,7 @@
                 "strokeThickness": 18,
                 "stroke": "#FFFFFF",
                 "font": "98px mfont",
-                "fill": "#00FF22",
+                "fill": "#C43939",
                 "align": "center",
                 "maxLines": 2,
                 "wordWrap": true,
@@ -450,6 +600,7 @@
         }
     },
     "game": {
+        "init_tts": true,
         "questions": "items",
         "answers": "numbers",
         "session_step": 10,

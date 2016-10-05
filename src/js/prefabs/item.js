@@ -34,12 +34,20 @@ export default class Item extends Phaser.Sprite {
     }
 
     playSound() {
-        this.game.sound.play(this.item.audio);
+        if (this.item.tts === true) {
+            otsimo.tts.speak(this.item.audio);
+        } else {
+            this.game.sound.play(this.item.audio);
+        }
     }
 
     playQuestion() {
         if (typeof this.item.question !== "undefined") {
-            this.game.sound.play(this.item.question);
+            if (this.item.tts === true) {
+                otsimo.tts.speak(this.item.question);
+            } else {
+                this.game.sound.play(this.item.question);
+            }
         }
     }
 
