@@ -178,7 +178,6 @@ export default class Scene {
                 console.log("currentState: ", currentState);
                 return;
             }
-            otsimo.tts.speak(txt)
             tts ? otsimo.tts.speak(txt) : question_sound.play();
         }, delay);
 
