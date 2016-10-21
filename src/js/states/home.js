@@ -13,7 +13,6 @@ export default class Home extends Phaser.State {
             let back = this.game.add.image(this.game.world.centerX, this.game.world.centerY, otsimo.kv.background_image)
             back.anchor.set(0.5, 0.5);
         }
-
         let cp = calculateConstraint(otsimo.kv.homePlayButton || defaultPlayButton);
         let home = this.game.add.button(cp.x, cp.y, 'playButton', this.playAction, this, 2, 1, 0);
         home.anchor.set(cp.anchor.x, cp.anchor.y);

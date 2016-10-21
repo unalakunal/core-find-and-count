@@ -66,6 +66,11 @@
     },
     "preload": [
         {
+            "name": "background",
+            "type": "image",
+            "path": "img/background.png"
+        },
+        {
             "name": "playButton",
             "type": "image",
             "path": "img/en/play.png"

@@ -8,7 +8,10 @@ export default class Over extends Phaser.State {
         if (otsimo.currentMusic) {
             otsimo.currentMusic.volume = otsimo.kv.game_music.volume_over_screen;
         }
-
+        if (otsimo.kv.background_image) {
+            let back = this.game.add.image(this.game.world.centerX, this.game.world.centerY, otsimo.kv.background_image)
+            back.anchor.set(0.5, 0.5);
+        }
         this.game.add.button(25, 35, 'back', this.backAction, this);
 
         //calculate text and button 

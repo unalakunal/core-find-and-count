@@ -74,6 +74,11 @@
     },
     "preload": [
         {
+            "name": "background",
+            "type": "image",
+            "path": "img/background.png"
+        },
+        {
             "name": "playButton",
             "type": "image",
             "path": "img/en/play.png"
@@ -697,6 +702,7 @@
         }
     },
     "game": {
+        "init_tts": false,
         "questions": "items",
         "answers": "numbers",
         "session_step": 5,

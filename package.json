@@ -1,6 +1,6 @@
 {
   "name": "otsimo-find-and-count-game",
-  "version": "1.1.1",
+  "version": "1.1.4",
   "description": "Otsimo core game for number count and finding next games.",
   "repository": {
     "type": "git",
