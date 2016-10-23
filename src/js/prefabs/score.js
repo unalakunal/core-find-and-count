@@ -35,13 +35,17 @@ export default class Score {
         }
     }
 
-    createPayload({itemID, itemKind, isSuccess}) {
+    createPayload({isSuccess, itemID, itemKind, hint_count, wrongAnswerStep, ID}) {
         let now = Date.now();
         let payload = {
             item: itemID,
             kind: itemKind,
             time: now - this.stepStartTime,
-            delta: now - this.previousInput
+            delta: now - this.previousInput,
+            hint_count: hint_count,
+            wrongAnswerStep: wrongAnswerStep,
+            difficulty: otsimo.settings.difficulty,
+            ID: ID
         };
         this.previousInput = now;
 

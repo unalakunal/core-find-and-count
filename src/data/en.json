@@ -606,6 +606,12 @@
     },
     "game": {
         "init_tts": true,
+        "tts_voices": [
+            "com.apple.ttsbundle.Samantha-compact"
+        ],
+        "easy_size": 2,
+        "medium_size": 3,
+        "hard_size": 4,
         "questions": "items",
         "answers": "numbers",
         "session_step": 10,

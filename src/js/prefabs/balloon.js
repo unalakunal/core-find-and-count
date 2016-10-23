@@ -1,7 +1,7 @@
-import {randomColor} from "../randomColor"
+import { randomColor } from "../randomColor"
 
 export default class Balloon extends Phaser.Group {
-    constructor({game, x, y, color}) {
+    constructor({game, x, y, color, counter}) {
         super(game);
 
         this.x = x;
@@ -15,6 +15,7 @@ export default class Balloon extends Phaser.Group {
         body.inputEnabled = true
         body.events.onInputDown.add(this.bodyTouched, this)
         this.bodySprite = body
+        this.counter = counter;
     }
 
     bodyTouched(obj, pointer) {
@@ -30,6 +31,7 @@ export default class Balloon extends Phaser.Group {
             a.tint = c;
         }, this, true, this.bodySprite.tint);
         this.destroy(true);
+        this.counter.add(1);
         if (otsimo.popSound) {
             otsimo.popSound.play();
         }
@@ -56,14 +58,15 @@ export default class Balloon extends Phaser.Group {
             (6000 + (4000 * Math.random())),
             "Linear", true, 400 * Math.random())
 
-        tween.onComplete.add(function() {
+        tween.onComplete.add(function () {
             this.destroy(true)
         }, this)
     }
 
-    static random() {
+    static random(counter) {
         let colors = randomColor(otsimo.kv.game.balloon_options)
-        for (let c of colors) {
+        for (let i = 0; i < colors.length; i++) {
+            let c = colors[i];
             let x = 50 + (Math.random() * otsimo.game.width) * 0.8;
             let y = otsimo.game.height + (Math.random() * 200);
             let color = parseInt(c.replace("#", "0x"), 16);
@@ -72,7 +75,9 @@ export default class Balloon extends Phaser.Group {
                 game: otsimo.game,
                 x: x,
                 y: y,
-                color: color
+                color: color,
+                popSound: popSound,
+                counter: counter
             });
 
             balloon.randomScale();

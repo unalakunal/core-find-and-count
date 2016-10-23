@@ -125,7 +125,7 @@ export default class Scene {
                 obj: undefined
             });
             delay = delay * 1.75;
-            this.session.correctInput(this.random.answer, delay);
+            this.session.correctInput(this.random.answer, delay, this.hint.step);
         } else {
             this.layout.relayout({
                 delay: 0,
@@ -133,7 +133,7 @@ export default class Scene {
                 isTrue: false,
                 obj: obj
             });
-            this.session.wrongInput(obj.num, this.random.answer);
+            this.session.wrongInput(obj.num, this.random.answer, this.hint.step);
             console.log("wrong answer hint call");
             this.hint.call(otsimo.kv.layout.relayout_duration);
         }
