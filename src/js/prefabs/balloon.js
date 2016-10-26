@@ -63,7 +63,13 @@ export default class Balloon extends Phaser.Group {
         }, this)
     }
 
+    // TODO: documentation
     static random(counter) {
+        let popSound = null;
+        if (otsimo.kv.game.balloon_sound) {
+            popSound = otsimo.game.add.audio(otsimo.kv.game.balloon_sound);
+        }
+        let balloons = [];
         let colors = randomColor(otsimo.kv.game.balloon_options)
         for (let i = 0; i < colors.length; i++) {
             let c = colors[i];
@@ -80,8 +86,24 @@ export default class Balloon extends Phaser.Group {
                 counter: counter
             });
 
+            balloons.push(balloon);
+
             balloon.randomScale();
             balloon.moveRandomly();
         }
+        console.log("balloon colors: ", colors.length);
+        return balloons;
+    }
+
+    static balloonsActive(balloons) {
+        //let XLIMIT = ;
+        //let YLIMIT = ;
+        for (let i = 0; i < balloons.length; i++) {
+            let balloon = balloons[i];
+            if (balloon.y > 0) {
+                return true;
+            }            
+        }
+        return false;
     }
 }

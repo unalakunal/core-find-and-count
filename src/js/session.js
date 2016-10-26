@@ -60,9 +60,9 @@ export default class Session {
             total_score: total_score,
             duration: delta,
             total_failure: total_failure,
-            total_success: total_success,
             steps: steps
         }
+        otsimo.customevent("game:session:end", payload);
         console.log("end session, post to analytics")
     }
 
@@ -73,7 +73,7 @@ export default class Session {
         console.log("start step");
     }
 
-    wrongInput(item, amount, step, hintStep) {
+    wrongInput(item, amount, hintStep) {
         this.incrementHint(hintStep)
         this.wrongAnswerStep += 1;
         this.wrongAnswerTotal += 1;
@@ -102,6 +102,7 @@ export default class Session {
         });
         if (gameOver) {
             console.log("session over");
+            this.end();
             setTimeout(() => {
                 this.game.state.start('Over');
             }, otsimo.kv.layout.relayout_duration + delay);

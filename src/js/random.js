@@ -85,7 +85,7 @@ export class Random {
             //dealing with numbers
             if (answer) {
                 // answer for numbers
-                console.log("answer for numbers, where numbers are: ", this.numbers);
+                //console.log("answer for numbers, where numbers are: ", this.numbers);
                 let answer_obj = this.numbers.filter(o => {
                     if (o.id == answer) {
                         return true;
@@ -96,9 +96,9 @@ export class Random {
                  * @property {list} [answers] - Answers list, needed to be reached from scene.
                  */
                 this.answer = answer_obj;
-                console.log("answer_obj:  ", answer_obj);
+                //console.log("answer_obj:  ", answer_obj);
                 let count = this.amount(true);
-                console.log("answers count: ", count);
+                //console.log("answers count: ", count);
                 res[0] = answer_obj;
                 for (let i = 1; i < count; i++) {
                     let kind = this.forKind(this.numbers);
@@ -129,7 +129,7 @@ export class Random {
                  */
                 this.questions = res;
             }
-            console.log("res: ", res);
+            //console.log("res: ", res);
         }
         return res;
     }

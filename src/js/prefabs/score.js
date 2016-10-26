@@ -37,6 +37,9 @@ export default class Score {
 
     createPayload({isSuccess, itemID, itemKind, hint_count, wrongAnswerStep, ID}) {
         let now = Date.now();
+        if (!hint_count) {
+            hint_count = 0;
+        }
         let payload = {
             item: itemID,
             kind: itemKind,

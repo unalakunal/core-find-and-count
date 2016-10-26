@@ -151,7 +151,6 @@ export default class Scene {
     */
     announce(item_type, y_time, delay) {
         let currentState = otsimo.game.state.getCurrentState().key;
-        console.log("#announce currentState: ", currentState);
         let tts = otsimo.kv.game.init_tts;
         if (currentState != "Play") {
             console.log("currentState: ", currentState);
@@ -170,7 +169,6 @@ export default class Scene {
         }
         setTimeout(() => {
             currentState = otsimo.game.state.getCurrentState().key;
-            console.log("#announce currentState after delay: ", currentState);
             if (currentState != "Play") {
                 console.log("currentState: ", currentState);
                 return;
