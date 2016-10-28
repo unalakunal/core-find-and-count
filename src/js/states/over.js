@@ -35,7 +35,7 @@ export default class Over extends Phaser.State {
             let back = this.game.add.image(this.game.world.centerX, this.game.world.centerY, otsimo.kv.background_image)
             back.anchor.set(0.5, 0.5);
         }
-        this.game.add.button(25, 35, 'back', this.backAction, this);
+        this.game.add.button(otsimo.game.width * 0.02, otsimo.game.height * 0.022, 'back', this.backAction, this);
 
         //calculate text and button 
         let tc = calculateConstraint(otsimo.kv.ending_scene.text);

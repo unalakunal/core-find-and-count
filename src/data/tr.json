@@ -27,10 +27,10 @@
         "align": "center"
     },
     "name_shadow": {
-        "x": 16,
-        "y": 16,
+        "x": 4,
+        "y": 4,
         "color": "rgba(0,0,0,0.5)",
-        "blur": 15
+        "blur": 4
     },
     "gameNameLayout": {
         "anchor": {
@@ -42,7 +42,7 @@
             "constant": 0
         },
         "y": {
-            "multiplier": 0.3,
+            "multiplier": 0.35,
             "constant": 0
         }
     },
@@ -69,6 +69,20 @@
         },
         "y": {
             "multiplier": 0.7,
+            "constant": 0
+        }
+    },
+    "back_btn_constraint": {
+        "anchor": {
+            "x": 0,
+            "y": 0
+        },
+        "x": {
+            "multiplier": 0.02,
+            "constant": 0
+        },
+        "y": {
+            "multiplier": 0.022,
             "constant": 0
         }
     },
@@ -709,7 +723,7 @@
         "step_score": 5,
         "limit_score": 0,
         "bar_length_constraint": 0.3,
-        "type": "find_next",
+        "type": "how_many",
         "hint_type": "hand",
         "announce_layout_time": 2000,
         "hint_hand_duration": 1000,

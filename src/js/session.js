@@ -109,6 +109,7 @@ export default class Session {
             return;
         }
         let scene = new Scene({
+            game: this.game,
             session: this,
             score: this.score
         });

@@ -5,7 +5,7 @@ import Balloon from '../prefabs/balloon'
 export default class Play extends Phaser.State {
     create() {
         let session = new Session({ game: this.game, state: this });
-        let scene = new Scene({ session: session, score: session.score });
+        let scene = new Scene({game: this.game, session: session, score: session.score });
         if (otsimo.kv.background_image) {
             let back = this.game.add.image(this.game.world.centerX, this.game.world.centerY, otsimo.kv.background_image)
             back.anchor.set(0.5, 0.5);

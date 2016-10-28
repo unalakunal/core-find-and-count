@@ -91,7 +91,6 @@ export default class Balloon extends Phaser.Group {
             balloon.randomScale();
             balloon.moveRandomly();
         }
-        console.log("balloon colors: ", colors.length);
         return balloons;
     }
 

@@ -2,7 +2,7 @@ import Item from "./prefabs/item"
 import Number from "./prefabs/number"
 import Hint from "./prefabs/hint"
 import Layout from "./prefabs/layout"
-import {Random} from "./random"
+import { Random } from "./random"
 
 /**
  * Creates a new scene in the session. Deals with layout object.
@@ -11,7 +11,8 @@ import {Random} from "./random"
  * @param {object} - The session that this scene belongs to.
  */
 export default class Scene {
-    constructor({session, score}) {
+    constructor({game, session, score}) {
+        this.game = game;
         this.session = session;
         /**
          * @property {object} [random] - The Random objects that contains items and numbers according to that game type.
@@ -54,11 +55,7 @@ export default class Scene {
             var item_type = this.random.items[0].text;
         }
 
-        let gray = otsimo.game.add.sprite(
-            otsimo.game.width * 1.2,
-            otsimo.game.height * otsimo.kv.layout.above_space,
-            'gray'
-        );
+        let gray = otsimo.game.add.tileSprite(otsimo.game.width * 1.2, otsimo.game.height * otsimo.kv.layout.above_space, 1500, 300, "gray");
 
         let layout = new Layout({
             game: otsimo.game,
@@ -179,7 +176,7 @@ export default class Scene {
                 console.log("tts triggered");
             } else {
                 question_sound.play();
-                console.log("tts not called");                
+                console.log("tts not called");
             }
         }, delay);
 

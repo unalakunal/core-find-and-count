@@ -2,6 +2,8 @@ import Item from "./item"
 import Number from "./number"
 import {shuffle} from '../utils'
 
+// TODO: fix layout functions to differentiate between item heights as necessary, widen the gray background if needed.
+
 /**
  * Creates a new Layout object with specifying the answers, questions and if it's a staged game.
  * Layout class is not aware of item and number difference. It just knows answers and questions.
@@ -101,7 +103,7 @@ export default class Layout extends Phaser.Group {
      */
     setBackground() {
         this.gray.alpha = 0.2;
-        this.gray.scale.y = 0.52;
+        this.gray.scale.y = 0.61;
         this.tapeParent.add(this.gray);
         this.tapeParent.x = this.gray.x;
         this.tapeParent.y = this.gray.y;
@@ -119,7 +121,7 @@ export default class Layout extends Phaser.Group {
         let w = this.questionObjects[0].width;
         let start_x = center_x - (len * w) * 0.5;
         start_x += this.questionObjects[0].width * 0.5;
-        let start_y = otsimo.game.height * otsimo.kv.layout.above_space + this.gray.height * 0.5 - this.questionObjects[0].height * 0.5;
+        let start_y = otsimo.game.height * otsimo.kv.layout.above_space + this.gray.height * 0.61 * 0.5 - this.questionObjects[0].height * 0.5;
         for (let i = 0; i < len; i++) {
             let item = this.questionObjects[i];
             let xk = start_x + item.width * i;
@@ -146,7 +148,8 @@ export default class Layout extends Phaser.Group {
         if (len == 1) {
             start_x = center_x;
         }
-        let start_y = otsimo.game.height * otsimo.kv.layout.above_space + this.gray.height * 0.5;
+        console.log("h:", this.gray.height);
+        let start_y = otsimo.game.height * otsimo.kv.layout.above_space + (this.gray.height * 0.6 * 0.5);
         for (let i = 0; i < len; i++) {
             if (otsimo.kv.game.type == "find_next") {
                 start_x = center_x - 0.25 * w - (len * w) * 0.5;
