@@ -113,7 +113,6 @@ export default class Session {
             session: this,
             score: this.score
         });
-        this.score.endStep();
         scene.init(delay);
     }
 
@@ -133,6 +132,6 @@ export default class Session {
         game.debug.text("total score: " + this.score.total, 2, 28, "#00ff00");
         game.debug.text("wrongAnswerTotal: " + this.wrongAnswerTotal, 2, 42, "#00ff00");
         game.debug.text("wrongAnswerStep: " + this.wrongAnswerStep, 2, 54, "#00ff00");
-        game.debug.text("stepScore: " + this.score.step, 2, 90, "#00ff00");
+        game.debug.text("stepScore: " + this.score.step , 2, 90, "#00ff00");
     }
 }
