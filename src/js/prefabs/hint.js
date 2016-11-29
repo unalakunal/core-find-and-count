@@ -1,40 +1,33 @@
-import {randomColor} from "../randomColor"
+import { randomColor } from "../randomColor"
 
 export default class Hint {
     constructor({game, answer, score}) {
         this.game = game;
         this.answer = answer;
         this.score = score;
+        this.timer = undefined;
         this.arrow = undefined;
         this.timerArr = [];
         this.step = 0;
     }
 
-    color() {
-        //this.arrow.tint = otsimo.kv.game.hint_color;
-    }
-
     call(delay) {
-        if (!otsimo.settings.show_hint) {
+        let currentState = otsimo.game.state.getCurrentState().key;        
+        if (!otsimo.settings.show_hint || currentState != "Play") {
             return;
         }
-        //console.log("hint called with answer: ", this.answer);
         this.removeTimer();
-        this.timer = setTimeout(this.create.bind(this), delay + (otsimo.settings.hint_duration * 1000));
-        //console.log("created timer with number: ", this.timer);
+        this.timer = otsimo.game.time.events.add(delay + (otsimo.settings.hint_duration * 1000), this.create, this);
         this.timerArr.push(this.timer);
     }
 
     create() {
-        this.score.decrement();
-        let currentState = otsimo.game.state.getCurrentState().key;         
+        console.log("hint create");
+        let currentState = otsimo.game.state.getCurrentState().key;
         if (currentState != "Play") {
             return;
         }
         switch (otsimo.kv.game.hint_type) {
-            case ("jump"):
-                this.jump();
-                break;
             case ("hand"):
                 this.hand();
                 break;
@@ -60,15 +53,12 @@ export default class Hint {
     }
 
     removeTimer() {
+        otsimo.game.time.events.stop(false);
         if (this.timer) {
-            clearTimeout(this.timer);
+            otsimo.game.time.events.remove(this.timer);
             this.timer = undefined;
         }
-        for (let i of this.timerArr) {
-            //console.log("clearing timeout with number: ", i);
-            clearTimeout(i);
-        }
-        this.timerArr = [];
+        otsimo.game.time.events.start();            
     }
 
     incrementStep() {
@@ -76,6 +66,7 @@ export default class Hint {
     }
 
     hand() {
+        this.score.decrement();        
         this.incrementStep();
         if (this.step > 3 && this.arrow) {
             return;
@@ -89,7 +80,6 @@ export default class Hint {
 
     handTween() {
         this.arrow = otsimo.game.add.sprite(this.answer.x, this.answer.y, 'hand');
-        this.color();
         this.arrow.anchor.set(0.4, 0);
         let t = otsimo.game.add.tween(this.arrow.scale).to({ x: 0.66, y: 0.66 }, otsimo.kv.game.hint_hand_duration, Phaser.Easing.Cubic.Out, false);
         let t2 = otsimo.game.add.tween(this.arrow)
@@ -106,15 +96,9 @@ export default class Hint {
         this.answer.tweenArray = this.tweenArr;
     }
 
-    jump() {
-        // TODO
-    }
-
     killArrow() {
         if (this.arrow) {
-            //console.log("kill arrow", this.arrow);
-            this.arrow.destroy();
-            //console.log("destroyed: ", this.arrow);
+            this.arrow.kill();
             this.arrow = undefined;
         }
     }
