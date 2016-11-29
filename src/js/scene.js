@@ -105,6 +105,10 @@ export default class Scene {
         obj.inputEnabled = false;
         if (correctInput) {
             //if the answer is true
+            for(let i = 0; i < this.layout.numbers.length; i++) {
+                this.layout.numbers[i].inputEnabled = false;
+            }
+
             let slot = this.layout.questionObjects[this.layout.questionObjects.length - 1];
             let delay = obj.correct({
                 slot: slot,
@@ -112,6 +116,7 @@ export default class Scene {
                 delay: obj.highlight()
             });
             obj.playSound();
+
             if (otsimo.correctSound) {
                 otsimo.correctSound.play(null, null, 0.5);
             }
