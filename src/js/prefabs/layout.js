@@ -1,6 +1,6 @@
 import Item from "./item"
 import Number from "./number"
-import {shuffle} from '../utils'
+import { shuffle } from '../utils'
 
 // TODO: fix layout functions to differentiate between item heights as necessary, widen the gray background if needed.
 

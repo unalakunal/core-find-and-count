@@ -114,6 +114,7 @@ export default class Session {
             score: this.score
         });
         scene.init(delay);
+        this.startStep();
     }
 
     incrementHint(tableHintStep) {
