@@ -55,7 +55,7 @@ export default class Scene {
             var item_type = this.random.items[0].text;
         }
 
-        let gray = otsimo.game.add.tileSprite(otsimo.game.width * 1.2, otsimo.game.height * otsimo.kv.layout.above_space, 1500, 300, "gray");
+        let gray = otsimo.game.add.tileSprite(otsimo.game.width * 1.2, otsimo.game.height * otsimo.kv.layout.above_space, 1500, 340, "gray");
 
         let layout = new Layout({
             game: otsimo.game,

@@ -663,7 +663,7 @@
             "y": 0.5
         },
         "width": 0.7,
-        "above_space": 0.1,
+        "above_space": 0.096,
         "bar_length_constant": 0.25
     },
     "ending_scene": {
